@@ -1,3 +1,21 @@
+
+<div align="center">
+
+<img src="docs/assets/uconversor-logo.png"
+     alt="UConversor - Universal Conversor"
+     width="220">
+
+# UConversor
+
+### Universal Conversor
+
+**Conversión automática de unidades con enfoque en simplicidad, rendimiento y trazabilidad científica.**
+
+> Escribe una cantidad con su unidad. UConversor identifica qué representa y genera automáticamente las conversiones compatibles.
+
+</div>
+
+
 # 🌐 UConversor
 
 ::: {align="center"}
