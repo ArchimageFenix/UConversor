@@ -39,6 +39,13 @@ escribe directamente una expresión como:
 1sol
 ```
 
+
+<p align="center">
+  <img src="docs/assets/screenshots/1.png"
+       alt="Interfaz principal de UConversor"
+       width="800">
+</p>
+
 UConversor analiza la expresión, reconoce la unidad, determina su
 **familia** y su **magnitud**, valida que exista una relación científica
 admitida y genera las conversiones compatibles disponibles en su
@@ -112,6 +119,13 @@ aliases explícitos para símbolos difíciles de escribir.
 > ⚠️ Las mayúsculas y minúsculas pueden tener significado científico.
 > UConversor no trata indiscriminadamente `m`, `M`, `mV`, `MV`, `B` y
 > `b` como equivalentes.
+
+
+<p align="center">
+  <img src="docs/assets/screenshots/2.png"
+       alt="Interfaz principal de UConversor"
+       width="800">
+</p>
 
 ------------------------------------------------------------------------
 
@@ -260,6 +274,12 @@ La versión actual contiene catálogos relacionados con distintas áreas:
 
 El catálogo está pensado para crecer sin convertir el núcleo en una
 colección de casos especiales.
+
+<p align="center">
+  <img src="docs/assets/screenshots/3.png"
+       alt="Interfaz principal de UConversor"
+       width="800">
+</p>
 
 ------------------------------------------------------------------------
 
