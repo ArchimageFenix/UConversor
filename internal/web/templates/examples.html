@@ -1,0 +1,709 @@
+{{define "examples"}}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Ejemplos · UConversor</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/components.css"
+    >
+</head>
+
+<body>
+
+    {{template "header" .}}
+
+    <main class="page">
+
+        <section class="examples-page">
+
+            <!--
+                File: examples.html
+
+                Responsibility:
+                    Mostrar las unidades disponibles en UConversor
+                    y ofrecer ejemplos comunes de conversión.
+
+                Receives:
+                    Los grupos de unidades proporcionados por
+                    ExamplesViewModel.
+
+                Produces:
+                    La vista web de unidades y ejemplos prácticos.
+
+                Previous logical stage:
+                    examples_viewmodel.go / render.go.
+
+                Next logical stage:
+                    Consulta visual del usuario y uso del conversor.
+
+                Important restrictions:
+                    - No realiza conversiones.
+                    - No modifica el catálogo.
+                    - No contiene lógica del motor.
+                    - Los ejemplos son únicamente contenido Web.
+            -->
+
+            <!-- =====================================================
+                 UNIDADES DISPONIBLES
+                 ===================================================== -->
+
+            <div class="examples-page__intro">
+
+                <div class="eyebrow">
+                    📘 Unidades disponibles
+                </div>
+
+                <h1 class="hero-title">
+                    Ejemplos y
+                    <span>unidades compatibles</span>
+                </h1>
+
+                <p class="hero-copy">
+                    Consulta las unidades que UConversor reconoce actualmente.
+                    La información mostrada en esta página se obtiene directamente
+                    del registro interno de unidades soportadas.
+                </p>
+
+            </div>
+
+            <div class="examples-page__groups">
+
+                {{range .Groups}}
+
+                <section class="examples-family">
+
+                    <h2 class="examples-family__title">
+                        {{.Family}}
+                    </h2>
+
+                    {{range .Magnitudes}}
+
+                    <div class="examples-magnitude">
+
+                        <h3 class="examples-magnitude__title">
+                            {{.Magnitude}}
+                        </h3>
+
+                        <div class="examples-units">
+
+                            {{range .Units}}
+
+                            <article class="examples-unit">
+
+                                <div class="examples-unit__name">
+                                    {{.Name}}
+                                </div>
+
+                                <code class="examples-unit__symbol">
+                                    {{.Symbol}}
+                                </code>
+
+                            </article>
+
+                            {{end}}
+
+                        </div>
+
+                    </div>
+
+                    {{end}}
+
+                </section>
+
+                {{else}}
+
+                <section class="examples-empty">
+
+                    <h2>
+                        No hay unidades disponibles
+                    </h2>
+
+                    <p>
+                        El registro de unidades no contiene definiciones
+                        disponibles para mostrar.
+                    </p>
+
+                </section>
+
+                {{end}}
+
+            </div>
+
+
+            <!-- =====================================================
+                 EJEMPLOS PRÁCTICOS
+                 ===================================================== -->
+
+            <section class="practical-examples">
+
+                <div class="practical-examples__intro">
+
+                    <div class="eyebrow">
+                        💡 Ejemplos prácticos
+                    </div>
+
+                    <h2 class="practical-examples__title">
+                        Prueba algunas conversiones
+                    </h2>
+
+                    <p class="practical-examples__copy">
+                        Selecciona un ejemplo para ver el ejercicio completo.
+                    </p>
+
+                </div>
+
+
+                <!-- =============================================
+                     CONVERSIONES COTIDIANAS
+                     ============================================= -->
+
+                <section class="example-category">
+
+                    <h3 class="example-category__title">
+                        Conversiones cotidianas
+                    </h3>
+
+                    <div class="example-list">
+
+
+                        <!-- Velocidad -->
+
+                        <details class="example-list-item">
+
+                            <summary class="example-list-item__summary">
+
+                                <span class="example-list-item__icon">
+                                    🚗
+                                </span>
+
+                                <span class="example-list-item__heading">
+
+                                    <span class="example-list-item__title">
+                                        Velocidad de automóvil
+                                    </span>
+
+                                    <span class="example-list-item__subtitle">
+                                        Kilómetros por hora a metros por segundo
+                                    </span>
+
+                                </span>
+
+                                <code class="example-list-item__value">
+                                    90km/h
+                                </code>
+
+                                <span class="example-list-item__arrow">
+                                    ›
+                                </span>
+
+                            </summary>
+
+                            <div class="example-list-item__body">
+
+                                <p>
+                                    Un automóvil circula a
+                                    <strong>90 kilómetros por hora</strong>.
+                                </p>
+
+                                <p>
+                                    ¿A cuántos metros por segundo equivale
+                                    esta velocidad?
+                                </p>
+
+                                <!--
+                                    Microvisualización:
+                                    Representa visualmente el concepto de velocidad del automóvil.
+                                    No calcula ni modifica la conversión.
+                                    La animación es únicamente educativa/presentacional.
+                                -->
+                                <div class="speed-visual" aria-hidden="true">
+
+                                    <div class="speed-visual__labels">
+                                        <span>90 km/h</span>
+                                        <span>25 m/s</span>
+                                    </div>
+
+                                    <div class="speed-visual__road">
+                                        <span class="speed-visual__car">🚗</span>
+                                        <span class="speed-visual__destination"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="example-answer">
+
+                                    <span class="example-answer__label">
+                                        Escribe en UConversor
+                                    </span>
+
+                                    <code class="example-answer__input">
+                                        90km/h
+                                    </code>
+
+                                    <span class="example-answer__result">
+                                        25 m/s
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- Temperatura -->
+
+                        <details class="example-list-item">
+
+                            <summary class="example-list-item__summary">
+
+                                <span class="example-list-item__icon">
+                                    🌡️
+                                </span>
+
+                                <span class="example-list-item__heading">
+
+                                    <span class="example-list-item__title">
+                                        Temperatura
+                                    </span>
+
+                                    <span class="example-list-item__subtitle">
+                                        Fahrenheit a Celsius
+                                    </span>
+
+                                </span>
+
+                                <code class="example-list-item__value">
+                                    86°F
+                                </code>
+
+                                <span class="example-list-item__arrow">
+                                    ›
+                                </span>
+
+                            </summary>
+
+                            <div class="example-list-item__body">
+
+                                <p>
+                                    Un termómetro registra una temperatura
+                                    de <strong>86 °F</strong>.
+                                </p>
+
+                                <p>
+                                    ¿Cuál es su equivalente en grados Celsius?
+                                </p>
+
+                                <div class="example-answer">
+
+                                    <span class="example-answer__label">
+                                        Escribe en UConversor
+                                    </span>
+
+                                    <code class="example-answer__input">
+                                        86°F
+                                    </code>
+
+                                    <span class="example-answer__result">
+                                        30 °C
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- Longitud -->
+
+                        <details class="example-list-item">
+
+                            <summary class="example-list-item__summary">
+
+                                <span class="example-list-item__icon">
+                                    📏
+                                </span>
+
+                                <span class="example-list-item__heading">
+
+                                    <span class="example-list-item__title">
+                                        Distancia
+                                    </span>
+
+                                    <span class="example-list-item__subtitle">
+                                        Kilómetros a metros
+                                    </span>
+
+                                </span>
+
+                                <code class="example-list-item__value">
+                                    5km
+                                </code>
+
+                                <span class="example-list-item__arrow">
+                                    ›
+                                </span>
+
+                            </summary>
+
+                            <div class="example-list-item__body">
+
+                                <p>
+                                    Una ruta tiene una longitud de
+                                    <strong>5 kilómetros</strong>.
+                                </p>
+
+                                <p>
+                                    ¿Cuántos metros representa esa distancia?
+                                </p>
+
+                                <div class="example-answer">
+
+                                    <span class="example-answer__label">
+                                        Escribe en UConversor
+                                    </span>
+
+                                    <code class="example-answer__input">
+                                        5km
+                                    </code>
+
+                                    <span class="example-answer__result">
+                                        5000 m
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     DATOS Y TECNOLOGÍA
+                     ============================================= -->
+
+                <section class="example-category">
+
+                    <h3 class="example-category__title">
+                        Datos y tecnología
+                    </h3>
+
+                    <div class="example-list">
+
+
+                        <!-- Internet -->
+
+                        <details class="example-list-item">
+
+                            <summary class="example-list-item__summary">
+
+                                <span class="example-list-item__icon">
+                                    🌐
+                                </span>
+
+                                <span class="example-list-item__heading">
+
+                                    <span class="example-list-item__title">
+                                        Velocidad de Internet
+                                    </span>
+
+                                    <span class="example-list-item__subtitle">
+                                        Megabits a megabytes por segundo
+                                    </span>
+
+                                </span>
+
+                                <code class="example-list-item__value">
+                                    300Mbps
+                                </code>
+
+                                <span class="example-list-item__arrow">
+                                    ›
+                                </span>
+
+                            </summary>
+
+                            <div class="example-list-item__body">
+
+                                <p>
+                                    Una conexión de Internet ofrece una velocidad
+                                    de <strong>300 Mbps</strong>.
+                                </p>
+
+                                <p>
+                                    ¿Cuál es su velocidad máxima teórica
+                                    expresada en MB/s?
+                                </p>
+
+                                <div class="example-answer">
+
+                                    <span class="example-answer__label">
+                                        Escribe en UConversor
+                                    </span>
+
+                                    <code class="example-answer__input">
+                                        300Mbps
+                                    </code>
+
+                                    <span class="example-answer__result">
+                                        37.5 MB/s
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- Almacenamiento -->
+
+                        <details class="example-list-item">
+
+                            <summary class="example-list-item__summary">
+
+                                <span class="example-list-item__icon">
+                                    💾
+                                </span>
+
+                                <span class="example-list-item__heading">
+
+                                    <span class="example-list-item__title">
+                                        Almacenamiento digital
+                                    </span>
+
+                                    <span class="example-list-item__subtitle">
+                                        Gigabytes y unidades compatibles
+                                    </span>
+
+                                </span>
+
+                                <code class="example-list-item__value">
+                                    1GB
+                                </code>
+
+                                <span class="example-list-item__arrow">
+                                    ›
+                                </span>
+
+                            </summary>
+
+                            <div class="example-list-item__body">
+
+                                <p>
+                                    Un archivo ocupa
+                                    <strong>1 gigabyte</strong> de almacenamiento.
+                                </p>
+
+                                <p>
+                                    Consulta sus equivalencias en las demás
+                                    unidades de almacenamiento reconocidas.
+                                </p>
+
+                                <div class="example-answer">
+
+                                    <span class="example-answer__label">
+                                        Escribe en UConversor
+                                    </span>
+
+                                    <code class="example-answer__input">
+                                        1GB
+                                    </code>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     ELECTRICIDAD Y FÍSICA
+                     ============================================= -->
+
+                <section class="example-category">
+
+                    <h3 class="example-category__title">
+                        Electricidad y física
+                    </h3>
+
+                    <div class="example-list">
+
+
+                        <!-- Resistencia -->
+
+                        <details class="example-list-item">
+
+                            <summary class="example-list-item__summary">
+
+                                <span class="example-list-item__icon">
+                                    ⚡
+                                </span>
+
+                                <span class="example-list-item__heading">
+
+                                    <span class="example-list-item__title">
+                                        Resistencia eléctrica
+                                    </span>
+
+                                    <span class="example-list-item__subtitle">
+                                        Ohmios a kiloohmios
+                                    </span>
+
+                                </span>
+
+                                <code class="example-list-item__value">
+                                    2200Ω
+                                </code>
+
+                                <span class="example-list-item__arrow">
+                                    ›
+                                </span>
+
+                            </summary>
+
+                            <div class="example-list-item__body">
+
+                                <p>
+                                    Una resistencia eléctrica tiene un valor
+                                    de <strong>2200 Ω</strong>.
+                                </p>
+
+                                <p>
+                                    ¿Cuál es su valor expresado en kiloohmios?
+                                </p>
+
+                                <div class="example-answer">
+
+                                    <span class="example-answer__label">
+                                        Escribe en UConversor
+                                    </span>
+
+                                    <code class="example-answer__input">
+                                        2200Ω
+                                    </code>
+
+                                    <span class="example-answer__result">
+                                        2.2 kΩ
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- Presión -->
+
+                        <details class="example-list-item">
+
+                            <summary class="example-list-item__summary">
+
+                                <span class="example-list-item__icon">
+                                    🌍
+                                </span>
+
+                                <span class="example-list-item__heading">
+
+                                    <span class="example-list-item__title">
+                                        Presión atmosférica
+                                    </span>
+
+                                    <span class="example-list-item__subtitle">
+                                        Pascales a kilopascales
+                                    </span>
+
+                                </span>
+
+                                <code class="example-list-item__value">
+                                    101325Pa
+                                </code>
+
+                                <span class="example-list-item__arrow">
+                                    ›
+                                </span>
+
+                            </summary>
+
+                            <div class="example-list-item__body">
+
+                                <p>
+                                    La presión atmosférica estándar es aproximadamente
+                                    <strong>101325 Pa</strong>.
+                                </p>
+
+                                <p>
+                                    ¿Cuál es su equivalente en kilopascales?
+                                </p>
+
+
+                                
+
+</div>
+
+                                <div class="example-answer">
+
+                                    <span class="example-answer__label">
+                                        Escribe en UConversor
+                                    </span>
+
+                                    <code class="example-answer__input">
+                                        101325Pa
+                                    </code>
+
+                                    <span class="example-answer__result">
+                                        101.325 kPa
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    {{template "footer" .}}
+
+</body>
+
+</html>
+{{end}}

@@ -1,0 +1,31 @@
+{{define "content"}}
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <div class="eyebrow">
+            ⚡ Ligero · dinámico · extensible
+        </div>
+
+        <h1 class="hero-title">
+            Convierte con
+            <span>simplicidad</span>
+        </h1>
+
+        <p class="hero-copy">
+            Introduce un valor y su unidad.
+            UConversor identifica automáticamente la magnitud
+            y presenta todas las conversiones compatibles.
+        </p>
+
+        {{template "converter" .}}
+
+    </div>
+
+</section>
+
+{{template "results" .}}
+{{template "features" .}}
+
+{{end}}

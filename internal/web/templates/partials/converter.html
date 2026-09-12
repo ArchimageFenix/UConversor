@@ -1,0 +1,97 @@
+{{define "converter"}}
+
+<form
+    class="converter-card"
+    method="post"
+    action="/convert"
+>
+
+    <div class="input-wrap">
+
+        <span class="input-icon">
+            ⌁
+        </span>
+
+        <input
+            id="measureInput"
+            class="converter-form__input"
+            name="expression"
+            type="text"
+            value="{{.Input}}"
+            autocomplete="off"
+            placeholder="Ej. 24mph, 1GiB, 2200ohm..."
+            aria-label="Valor y unidad de medida"
+        >
+
+        <button
+            class="clear-button"
+            type="button"
+            aria-label="Limpiar"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <button
+        class="converter-form__button"
+        type="submit"
+    >
+        ✦ Convertir
+    </button>
+
+</form>
+
+<div class="helper-text">
+    Introduce un valor junto con su unidad.
+    UConversor identificará automáticamente la magnitud.
+</div>
+
+<div
+    class="examples"
+    id="examples"
+>
+    <button
+        class="example-chip"
+        type="button"
+    >
+        24mph
+    </button>
+
+    <button
+        class="example-chip"
+        type="button"
+    >
+        5km
+    </button>
+
+    <button
+        class="example-chip"
+        type="button"
+    >
+        180deg
+    </button>
+
+    <button
+        class="example-chip"
+        type="button"
+    >
+        2200ohm
+    </button>
+
+    <button
+        class="example-chip"
+        type="button"
+    >
+        1GiB
+    </button>
+
+    <button
+        class="example-chip"
+        type="button"
+    >
+        100N
+    </button>
+</div>
+
+{{end}}

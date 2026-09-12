@@ -1,0 +1,56 @@
+{{define "header"}}
+
+<header class="topbar">
+
+    <div class="topbar__content">
+
+        <a
+            class="brand"
+            href="/"
+            aria-label="UConversor - Inicio"
+        >
+            <span class="brand-mark">
+                U
+            </span>
+
+            <span class="brand-text">
+                UConversor
+
+                <small>
+                    Conversión automática de unidades
+                </small>
+            </span>
+        </a>
+
+        <nav
+            class="nav"
+            aria-label="Navegación principal"
+        >
+            <a
+                {{if ne .ActivePage "examples"}}class="active"{{end}}
+                href="/"
+            >
+                Inicio
+            </a>
+
+            <a
+                {{if eq .ActivePage "examples"}}class="active"{{end}}
+                href="/examples"
+            >
+                Ejemplos
+            </a>
+
+            <a href="/#resultPanel">
+                Resultado
+            </a>
+
+            <a href="/#about">
+                Acerca de
+            </a>
+        </nav>
+
+    </div>
+
+</header>
+
+{{end}}

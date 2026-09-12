@@ -1,0 +1,57 @@
+# =========================
+# UConversor - .gitignore
+# =========================
+
+# Binarios generados por Go
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Archivos de test/coverage
+*.test
+*.out
+coverage.out
+
+# Directorios de compilación
+/bin/
+/build/
+/dist/
+
+# Dependencias vendorizadas si algún día se generan
+/vendor/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.bak
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Archivos locales de entorno
+.env
+.env.*
+*.local
+
+# Certificados y claves
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Copias o artefactos locales
+*.zip

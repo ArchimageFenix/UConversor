@@ -1,0 +1,135 @@
+{{define "results"}}
+<section class="content" id="resultPanel">
+    <section class="panel">
+
+        <div class="panel-head">
+            <div class="panel-title">
+                ◉ Resultado
+            </div>
+
+            <div class="status">
+                UConversor
+            </div>
+        </div>
+
+        {{if .HasError}}
+
+            <div class="result-error">
+                <div class="result-error__icon">
+                    !
+                </div>
+
+                <div class="result-error__content">
+                    <h2 class="result-error__title">
+                        {{.Error.Title}}
+                    </h2>
+
+                    <p class="result-error__message">
+                        {{.Error.Message}}
+                    </p>
+                </div>
+            </div>
+
+        {{else if .HasResult}}
+
+            <div class="result-summary">
+                <div class="result-summary__main">
+
+                    <div class="result-summary__label">
+                        Entrada reconocida
+                    </div>
+
+                    <div class="result-summary__value">
+                        {{.Result.InputValue}}
+                        <span class="result-summary__unit">
+                            {{.Result.InputSymbol}}
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="result-summary__meta">
+
+                    <div class="result-meta">
+                        <span class="result-meta__label">
+                            Familia
+                        </span>
+
+                        <strong class="result-meta__value">
+                            {{.Result.Family}}
+                        </strong>
+                    </div>
+
+                    <div class="result-meta">
+                        <span class="result-meta__label">
+                            Magnitud
+                        </span>
+
+                        <strong class="result-meta__value">
+                            {{.Result.Magnitude}}
+                        </strong>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="result-grid">
+
+                {{range .Result.Values}}
+
+                    <article
+                        class="result-card{{if .IsOrigin}} result-card--origin{{end}}"
+                    >
+
+                        <div class="result-card__head">
+
+                            <div class="result-card__name">
+                                {{.Name}}
+                            </div>
+
+                            {{if .IsOrigin}}
+                                <div class="result-card__badge">
+                                    Original
+                                </div>
+                            {{end}}
+
+                        </div>
+
+                        <div class="result-card__value">
+                            {{.Value}}
+                        </div>
+
+                        <div class="result-card__symbol">
+                            {{.Symbol}}
+                        </div>
+
+                    </article>
+
+                {{end}}
+
+            </div>
+
+        {{else}}
+
+            <div class="result-placeholder">
+
+                <div class="result-placeholder__icon">
+                    ⇄
+                </div>
+
+                <h2>
+                    Tu conversión aparecerá aquí
+                </h2>
+
+                <p>
+                    Introduce un valor y una unidad para obtener
+                    todas las conversiones compatibles.
+                </p>
+
+            </div>
+
+        {{end}}
+
+    </section>
+</section>
+{{end}}
