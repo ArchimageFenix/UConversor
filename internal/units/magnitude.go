@@ -19,6 +19,7 @@ const (
 	MagnitudePower       Magnitude = "Potencia"
 	MagnitudeTemperature Magnitude = "Temperatura"
 	MagnitudePressure    Magnitude = "Presión"
+	MagnitudeVolume      Magnitude = "Volumen"
 	MagnitudeEnergy      Magnitude = "Energía"
 	MagnitudeForce       Magnitude = "Fuerza"
 	MagnitudeData        Magnitude = "Almacenamiento de datos"

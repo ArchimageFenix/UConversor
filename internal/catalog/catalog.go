@@ -21,5 +21,6 @@ func All() []units.Unit {
 	all = append(all, AngleUnits()...)
 	all = append(all, TimeUnits()...)
 	all = append(all, DataRateUnits()...)
+	all = append(all, VolumeUnits()...)
 	return all
 }
