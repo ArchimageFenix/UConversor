@@ -678,38 +678,53 @@ No debe contener fórmulas de conversión ni lógica científica específica.
 
 ---
 
-## 9.11 Interfaz CLI actual y evolución web futura
+## 9.11 Interfaces CLI y Web actuales
 
-La primera versión será una aplicación de línea de comandos.
-
-La CLI debe actuar únicamente como capa de entrada y salida.
+UConversor dispone de interfaces desacopladas que reutilizan la misma capa de aplicación y el mismo núcleo científico. La CLI continúa siendo válida y la interfaz web ya forma parte de la implementación actual.
 
 ```text
-CLI
- ↓
-APP
- ↓
-NÚCLEO DE CONVERSIÓN
+CLI ─┐
+     ├→ APP → NÚCLEO DE CONVERSIÓN
+WEB ─┘
 ```
 
-El núcleo no debe depender de `fmt.Scan`, `os.Stdin`, salida de consola u otras decisiones propias de la CLI.
+El núcleo no debe depender de HTTP, HTML, plantillas, CSS ni decisiones propias de una interfaz concreta. La Web actúa como adaptador de presentación: recibe HTTP, delega operaciones de dominio en `app.App`, crea modelos de vista y renderiza plantillas.
 
-Esto permitirá incorporar en el futuro una interfaz web con servidor reutilizando el mismo núcleo:
+### 9.11.1 Vistas web independientes
+
+La interfaz web crecerá lateralmente mediante rutas y vistas independientes, preservando Inicio. Rutas de esta etapa:
 
 ```text
-             ┌── CLI
-             │
-Usuario ─────┤
-             │
-             └── Web Server   (futuro)
-                    │
-                    ↓
-                   APP
-                    ↓
-          NÚCLEO DE CONVERSIÓN
+/                  → Inicio
+/examples          → Ejemplos / unidades soportadas
+/#resultPanel      → Resultado dentro de Inicio
+/#about            → Acerca de dentro de Inicio
 ```
 
-La implementación del servidor web no forma parte prioritaria de la primera versión y no debe condicionar innecesariamente el desarrollo inicial.
+Los ejemplos rápidos del convertidor permanecen en Inicio. `/examples` será una vista documental y de descubrimiento alimentada por las unidades realmente registradas, nunca por una segunda lista manual en HTML.
+
+```text
+catalog/* → catalog.All() → units.Registry → app.App → ExamplesViewModel → /examples
+```
+
+El `Registry` continúa siendo la autoridad sobre las unidades soportadas. Podrá exponer una consulta de solo lectura que devuelva una copia de las unidades registradas; `App` expondrá esa información a las interfaces, evitando que Web dependa directamente de los detalles internos del registro.
+
+Regla de dependencia: `Web → App → Registry → Catalog`. Se prohíbe duplicar el catálogo en HTML o hacer que Web lea directamente los archivos científicos del catálogo.
+
+### 9.11.2 Plantillas web
+
+Las plantillas se cargan conjuntamente mediante `template.ParseFS`; por ello, vistas independientes no deben competir redefiniendo un mismo template global `content`. Las páginas usarán templates raíz con nombres propios y reutilizarán parciales comunes como `header` y `footer`.
+
+`PageViewModel` permanece orientado a Inicio/conversión. Ejemplos utilizará un modelo separado (`ExamplesViewModel`). No se introducirá una SPA, router JavaScript ni flags globales de página cuando una vista independiente sea suficiente.
+
+Navegación común:
+
+```text
+Inicio      → /
+Ejemplos    → /examples
+Resultado   → /#resultPanel
+Acerca de   → /#about
+```
 
 ---
 
@@ -771,77 +786,73 @@ Escriba 'h' para consultar la ayuda.
 La sugerencia no permite que la entrada desconocida avance hacia el validador científico ni hacia el motor.
 
 ---
-## 10. Estructura prevista de carpetas y archivos
+## 10. Estructura actual de carpetas y archivos
 
-El proyecto se implementará inicialmente en Go y su primera interfaz será CLI.
+UConversor está implementado en Go y dispone actualmente de dos interfaces funcionales: CLI y Web. Ambas reutilizan la misma capa `App` y el mismo núcleo de conversión.
 
-La estructura base será:
+La estructura relevante actual es:
 
 ```text
-unit-converter/
+UConversor/
 │
 ├── ARCHITECTURE.md
 ├── go.mod
 │
 ├── cmd/
-│   └── converter/
-│       └── main.go
+│   ├── converter/
+│   │   └── main.go              # punto de entrada CLI
+│   └── web/
+│       └── main.go              # punto de entrada Web
 │
 ├── internal/
 │   ├── app/
-│   │   └── app.go
-│   │
+│   │   └── app.go               # orquestación compartida
 │   ├── input/
 │   │   ├── parser.go
 │   │   └── normalizer.go
-│   │
 │   ├── units/
 │   │   ├── registry.go
 │   │   ├── unit.go
 │   │   ├── magnitude.go
 │   │   └── family.go
-│   │
 │   ├── conversion/
 │   │   ├── engine.go
 │   │   ├── formula.go
 │   │   └── validator.go
-│   │
 │   ├── catalog/
-│   │   ├── length.go
-│   │   ├── mass.go
-│   │   ├── speed.go
-│   │   ├── electronics.go
-│   │   └── physics.go
-│   │
+│   │   └── ...                  # catálogos por magnitud/familia
 │   ├── output/
 │   │   ├── formatter.go
 │   │   ├── console.go
 │   │   └── help/
 │   │       ├── content.go
 │   │       └── viewer.go
-│   │
-│   └── model/
-│       ├── request.go
-│       ├── result.go
-│       └── source.go
+│   ├── model/
+│   │   ├── request.go
+│   │   ├── result.go
+│   │   └── source.go
+│   └── web/
+│       ├── handlers.go
+│       ├── server.go
+│       ├── render.go
+│       ├── templates.go
+│       ├── viewmodel.go
+│       ├── examples_viewmodel.go
+│       └── ...                  # recursos/vistas Web asociados
 │
 ├── tests/
-│   ├── parser_test.go
-│   ├── conversion_test.go
-│   └── scientific_validation_test.go
-│
 └── docs/
-    └── sources/
-        └── README.md
 ```
 
-La estructura seguirá convenciones idiomáticas de Go y podrá refinarse durante el diseño detallado, siempre manteniendo responsabilidades separadas y un `main.go` mínimo.
+La estructura sigue convenciones idiomáticas de Go y mantiene puntos de entrada mínimos. `cmd/converter` inicia la CLI y `cmd/web` inicia el servidor Web. Ninguno de los dos debe duplicar lógica científica.
 
-La CLI será la interfaz inicial. Una futura interfaz web con servidor está prevista como evolución posterior, pero no forma parte prioritaria de esta primera implementación. El núcleo de conversión deberá permanecer desacoplado de la CLI para que pueda reutilizarse posteriormente desde un servidor web sin reescribir la lógica científica ni el motor de conversión.
+La Web fue contemplada originalmente como una evolución posterior de la CLI. Esa evolución ya fue implementada: hoy ambas interfaces son operativas y reutilizan `internal/app` y el mismo núcleo de conversión. Esta nota conserva la historia de la decisión sin describir la Web como una capacidad futura.
 
 ---
 
 ## 11. Secuencia lógica entre módulos
+
+### 11.1 Flujo CLI
 
 ```text
 cmd/converter/main.go
@@ -882,6 +893,36 @@ conversion/engine
 ```
 
 El camino `h → output/help` es exclusivamente de interfaz y nunca entra al pipeline científico. Las expresiones de conversión continúan utilizando el flujo normal de la aplicación.
+
+### 11.2 Flujo Web
+
+```text
+cmd/web/main.go
+      ↓
+internal/web/server.go
+      ↓
+HTTP / rutas
+   ┌──┴─────────────────────────┐
+   │                            │
+Conversión                  /examples
+   │                            │
+   ↓                            ↓
+handler                    handler
+   │                            │
+   ↓                            ↓
+App.Convert()             App.SupportedUnits()
+   │                            │
+   ↓                            ↓
+Registry / Validator /    Registry
+Engine                         │
+   │                            ↓
+   ↓                      ExamplesViewModel
+ResultViewModel                 │
+   │                            ↓
+   └──────────────→ HTML / navegador
+```
+
+La interfaz Web es una capa de presentación operativa. No contiene fórmulas científicas ni mantiene un catálogo paralelo. Las rutas Web dependen de `App`; `App` conserva la frontera con el núcleo y el `Registry`.
 ---
 
 ## 12. Regla obligatoria para cada archivo de código
@@ -1125,7 +1166,7 @@ La facilidad de uso no debe conseguirse sacrificando rigor científico.
 
 # Estado actual del diseño
 
-**Estado del documento: ARQUITECTURA DEFINITIVA DE LA VERSIÓN INICIAL (CLI).**
+**Estado del documento: ARQUITECTURA ACTUAL — CLI + WEB FUNCIONALES.**
 
 Cualquier cambio posterior que altere responsabilidades, flujo, catálogo, estructura o reglas de procesamiento deberá reflejarse mediante una actualización explícita de este documento.
 
@@ -1162,6 +1203,13 @@ Cualquier cambio posterior que altere responsabilidades, flujo, catálogo, estru
 - Las entradas desconocidas sugieren `h` sin alterar el rechazo temprano.
 - La documentación detallada de uso y convenciones se mantendrá fuera de la consola principal.
 
+- Servidor web integrado sobre la misma capa `App` y núcleo científico.
+- Página principal `/` preservada como vista de conversión.
+- Vista independiente `/examples` definida para descubrir unidades soportadas.
+- `/examples` obtiene datos mediante `App → Registry`, sin listas HTML duplicadas.
+- Navegación común: `/`, `/examples`, `/#resultPanel`, `/#about`.
+- Vistas web independientes reutilizan parciales y mantienen modelos de vista separados.
+
 ## Pendiente / decisiones aún abiertas
 
 - Ampliación futura de la lista de unidades y magnitudes.
@@ -1172,28 +1220,36 @@ Cualquier cambio posterior que altere responsabilidades, flujo, catálogo, estru
 - Completar pruebas automáticas específicas para nuevas unidades, aliases, notación científica y sistema de ayuda.
 - Definir los controles exactos de navegación del Help Viewer durante su implementación.
 
+---
 
-### Familia Ángulos
+## 21. Web operativa: página Ejemplos
 
-La familia Ángulos representa medidas de ángulo plano.
+La incorporación de `/examples` fue una ampliación lateral y no una modificación del motor. Actualmente forma parte de la interfaz Web operativa y hace visible el conocimiento ya registrado por UConversor.
 
-- Familia: `Ángulos`
-- Magnitud: `Ángulo plano`
-- Unidad de referencia interna: radián (`rad`)
-- Estrategia: transformación lineal.
-- El motor genérico de conversión no requiere modificaciones.
-- Las relaciones basadas en π se expresan mediante el campo `Scale`.
+Responsabilidades actuales:
 
-Relaciones principales:
+- `units/registry.go`: consulta segura de todas las unidades registradas, sin exponer el slice interno.
+- `app/app.go`: operación de aplicación para consultar unidades soportadas.
+- `internal/web/examples_viewmodel.go`: adaptación de `units.Unit` a estructuras de presentación.
+- `internal/web/handlers.go`: handler GET del recurso `/examples`.
+- `internal/web/server.go`: registro de la ruta.
+- `internal/web/render.go` y `templates.go`: soporte de vistas independientes sin colisión de nombres de template.
+- `templates/examples.html`: contenido propio de Ejemplos.
+- `templates/partials/header.html`: navegación común actualizada.
 
-- 1 rad = 1 rad
-- 1° = π / 180 rad
-- 1 gon = π / 200 rad
-- 1 rev = 2π rad
+El catálogo científico, parser, validador, motor y flujo `App.Convert()` no deben modificarse para implementar esta vista.
 
-Esta familia valida que el motor puede trabajar también con factores
-irracionales derivados de constantes matemáticas sin introducir lógica
-especial en `engine.go`.
+Flujos Web:
+
+```text
+Conversión:
+Browser → handler → App.Convert() → Registry/Validator/Engine → ResultViewModel → HTML
+
+Ejemplos:
+Browser → /examples → handler → App.SupportedUnits() → Registry → ExamplesViewModel → HTML
+```
+
+Regla de extensibilidad: una nueva unidad correctamente añadida al catálogo y registrada debe poder aparecer en `/examples` sin modificar manualmente el HTML.
 
 ---
 
@@ -1218,88 +1274,3 @@ EVOLUCIÓN / MANTENIMIENTO
 ```
 
 Ninguna implementación deberá adelantarse a las decisiones arquitectónicas necesarias.
-
-
-
-### Recursos web embebidos
-
-Las plantillas HTML y los recursos estáticos de UConversor Web se mantendrán
-en archivos separados por responsabilidad para facilitar su mantenimiento.
-
-Durante la compilación serán incorporados al ejecutable mediante `go:embed`.
-
-Esto permite:
-
-- conservar una estructura web modular;
-- evitar un archivo HTML monolítico;
-- no depender de carpetas externas durante la ejecución;
-- mantener la posibilidad de distribuir UConversor como un único binario.
-
-La modularidad de los archivos fuente no implica múltiples archivos requeridos
-por el usuario final.
-
-### Separación entre servidor HTTP y handlers
-
-La capa web separará explícitamente la infraestructura HTTP de la
-coordinación de las solicitudes.
-
-`server.go` será responsable únicamente de:
-
-- crear y configurar `http.Server`;
-- registrar las rutas HTTP;
-- servir los recursos estáticos;
-- conectar las rutas con sus handlers.
-
-`handlers.go` será responsable de:
-
-- recibir las solicitudes HTTP;
-- obtener los datos enviados por el navegador;
-- invocar la capa de aplicación mediante `app.App`;
-- transformar el resultado de la aplicación en datos de presentación;
-- seleccionar la respuesta HTTP apropiada;
-- renderizar las plantillas.
-
-Los handlers no podrán:
-
-- implementar fórmulas;
-- reconocer unidades por cuenta propia;
-- duplicar reglas del catálogo;
-- realizar conversiones científicas.
-
-La dependencia con `app.App` pertenecerá al componente `Handler`, no a
-`Server`.
-
-Flujo:
-
-cmd/web/main.go
-    │
-    ├── crea app.App
-    │
-    └── crea capa web
-            │
-            ▼
-        server.go
-        infraestructura HTTP
-            │
-            ▼
-        handlers.go
-        coordinación HTTP
-            │
-            ▼
-          app.App
-            │
-            ▼
-    núcleo de UConversor
-
-    La interfaz web soportará vistas independientes.
-
-La página principal permanece en /.
-
-Las vistas adicionales pueden añadirse lateralmente mediante
-rutas y templates independientes.
-
-Los elementos visuales comunes como navegación, identidad y
-pie de página deben reutilizarse mediante templates parciales.
-
-Las nuevas vistas no deben obligar a modificar la lógica
-científica ni la estructura interna de Inicio.
