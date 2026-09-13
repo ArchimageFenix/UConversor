@@ -45,7 +45,7 @@ func formatWebValue(value float64) string {
 		return fmt.Sprintf("%.4e", value)
 	}
 
-	formatted := strconv.FormatFloat(value, 'f', 2, 64)
+	formatted := strconv.FormatFloat(value, 'f', 3, 64)
 
 	formatted = strings.TrimRight(formatted, "0")
 	formatted = strings.TrimRight(formatted, ".")
