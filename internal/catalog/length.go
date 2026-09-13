@@ -35,6 +35,14 @@ func LengthUnits() []units.Unit {
 		Notes:     "NASA: 1 light-year = 9.46053 × 10^12 km",
 	}
 
+	iau := model.Source{
+		Kind:      model.SourceExact,
+		Authority: "IAU",
+		Reference: "IAU 2012 Resolution B2 – Re-definition of the astronomical unit of length",
+		URL:       "https://www.iau.org/static/resolutions/IAU2012_English.pdf",
+		Notes:     "1 au = 149 597 870 700 m exactly",
+	}
+
 	return []units.Unit{
 		{
 			Name:      "milímetro",
@@ -120,6 +128,17 @@ func LengthUnits() []units.Unit {
 			Scale:     9.46053e15,
 			Kind:      units.TransformLinear,
 			Source:    nasa,
+		},
+
+		{
+			Name:      "unidad astronómica",
+			Symbol:    "au",
+			Aliases:   []string{"ua", "UA"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     149597870700,
+			Kind:      units.TransformLinear,
+			Source:    iau,
 		},
 	}
 }
