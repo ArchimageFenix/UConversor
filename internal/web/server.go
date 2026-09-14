@@ -67,6 +67,7 @@ type Server struct {
 func NewServer(
 	address string,
 	handler *Handler,
+	config SecurityConfig,
 ) (*Server, error) {
 	staticFS, err := fs.Sub(
 		assets,
@@ -90,8 +91,14 @@ func NewServer(
 	)
 
 	server.httpServer = &http.Server{
-		Addr:    address,
-		Handler: mux,
+		Addr: address,
+		Handler: loggingMiddleware(
+			securityHeadersMiddleware(mux),
+		),
+		ReadHeaderTimeout: config.HTTP.Timeouts.ReadHeader,
+		ReadTimeout:       config.HTTP.Timeouts.Read,
+		WriteTimeout:      config.HTTP.Timeouts.Write,
+		IdleTimeout:       config.HTTP.Timeouts.Idle,
 	}
 
 	return server, nil
@@ -143,6 +150,11 @@ func (s *Server) registerRoutes(
 	mux.HandleFunc(
 		"/convert",
 		handler.handleConvert,
+	)
+
+	mux.HandleFunc(
+		"/health",
+		handler.handleHealth,
 	)
 
 	mux.Handle(

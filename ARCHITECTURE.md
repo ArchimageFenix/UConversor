@@ -1166,7 +1166,7 @@ La facilidad de uso no debe conseguirse sacrificando rigor científico.
 
 # Estado actual del diseño
 
-**Estado del documento: ARQUITECTURA ACTUAL — CLI + WEB FUNCIONALES.**
+**Estado del documento: ARQUITECTURA ACTUAL — CLI + WEB FUNCIONALES; DEPLOY PÚBLICO SEGURO EN RENDER DISEÑADO Y PENDIENTE DE IMPLEMENTACIÓN.**
 
 Cualquier cambio posterior que altere responsabilidades, flujo, catálogo, estructura o reglas de procesamiento deberá reflejarse mediante una actualización explícita de este documento.
 
@@ -1250,6 +1250,522 @@ Browser → /examples → handler → App.SupportedUnits() → Registry → Exam
 ```
 
 Regla de extensibilidad: una nueva unidad correctamente añadida al catálogo y registrada debe poder aparecer en `/examples` sin modificar manualmente el HTML.
+
+---
+
+## 22. Despliegue público en Render y seguridad Web lateral
+
+La publicación de UConversor en Internet mediante Render se considera una **ampliación lateral de infraestructura Web**. No modifica el propósito del programa ni la lógica científica de conversión.
+
+La responsabilidad de esta ampliación termina antes de `app.App`: una solicitud puede ser admitida o rechazada por razones HTTP o de seguridad, pero una vez admitida debe recorrer el mismo flujo de conversión ya existente.
+
+```text
+Internet
+   ↓
+Cloudflare / Render
+   ↓
+Proxy HTTPS de Render
+   ↓
+Capa HTTP defensiva de UConversor
+   ↓
+Handlers Web
+   ↓
+App
+   ↓
+Registry / Validator / Engine
+```
+
+### 22.1 Invariante principal
+
+La seguridad del despliegue Web **no debe modificar ni introducir dependencias en el núcleo científico**.
+
+Quedan fuera de esta ampliación:
+
+```text
+internal/input/*
+internal/units/*
+internal/catalog/*
+internal/conversion/*
+internal/model/*
+```
+
+`internal/app` conserva su responsabilidad de orquestación. No debe recibir timeouts HTTP, límites de tamaño, cabeceras de seguridad, logging de infraestructura ni configuración específica de Render.
+
+Una solicitud rechazada por la capa HTTP defensiva debe finalizar antes de alcanzar `App`.
+
+### 22.2 Frontera de responsabilidades con Render
+
+Durante este despliegue se delegan a Render y a su infraestructura frontal las responsabilidades que la plataforma ya proporciona:
+
+- terminación TLS/HTTPS;
+- certificado y renovación asociados al servicio;
+- proxy frontal;
+- protección DDoS de borde provista por Render/Cloudflare.
+
+UConversor **no debe duplicar estas funciones** incorporando certificados, terminación TLS propia ni lógica DDoS de red dentro del programa.
+
+La aplicación seguirá utilizando su servidor HTTP interno detrás del proxy de Render.
+
+La seguridad que sí pertenece a UConversor se concentra en el comportamiento HTTP que depende de la propia aplicación:
+
+- timeouts;
+- tamaño máximo de solicitudes;
+- métodos HTTP permitidos;
+- cabeceras defensivas;
+- logging técnico;
+- endpoint de salud;
+- validación de configuración.
+
+### 22.3 Configuración de escucha para despliegue
+
+El punto de entrada `cmd/web/main.go` será responsable de obtener el puerto de escucha.
+
+```text
+PORT definido en el entorno
+        ↓
+usar ":" + PORT
+
+PORT no definido
+        ↓
+usar :8080 como valor local por defecto
+```
+
+La dirección resultante deberá permitir que el proceso escuche en todas las interfaces necesarias para el entorno de ejecución, equivalente a:
+
+```text
+0.0.0.0:<puerto>
+```
+
+`internal/web/server.go` continuará recibiendo la dirección ya resuelta desde el punto de entrada y no deberá conocer reglas específicas de Render.
+
+La variable `PORT` es una configuración del entorno de despliegue y **no deberá ser reemplazada por `security.yaml`**.
+
+### 22.4 Seguridad HTTP como responsabilidad transversal Web
+
+La primera versión pública aplicará únicamente protecciones cuya necesidad y comportamiento puedan justificarse sin depender de identificar al cliente por dirección IP.
+
+Flujo conceptual:
+
+```text
+Solicitud HTTP
+   ↓
+timeouts de servidor
+   ↓
+límite de tamaño de solicitud
+   ↓
+control de método HTTP
+   ↓
+cabeceras defensivas
+   ↓
+logging técnico
+   ↓
+Handler
+   ↓
+App
+```
+
+El orden exacto interno podrá ajustarse durante la implementación si existe una razón técnica, manteniendo la regla de que las protecciones ocurren antes del núcleo científico cuando corresponda.
+
+### 22.5 Bloqueo IP/CIDR
+
+El bloqueo por IP o CIDR **queda fuera de la primera versión pública**.
+
+Motivos:
+
+- UConversor se ejecutará detrás de la infraestructura proxy de Render;
+- no existe actualmente una necesidad funcional concreta que justifique restringir redes específicas;
+- una política de bloqueo basada en IP requiere una política explícita y validada de confianza de proxies;
+- introducirla antes de comprobar esa necesidad aumentaría complejidad sin beneficio demostrado.
+
+Por tanto:
+
+```text
+CIDR
+→ no forma parte de la implementación V1 del despliegue público
+```
+
+Si en el futuro aparece una necesidad real de bloqueo geográfico, operativo o administrativo, deberá abrirse una nueva revisión de arquitectura antes de implementarlo.
+
+### 22.6 Rate limiting
+
+Render recomienda considerar rate limiting a nivel de aplicación para reducir abuso de endpoints que parecen tráfico HTTP legítimo.
+
+Sin embargo, el **rate limiting por IP queda pendiente de validación técnica** antes de formar parte de UConversor.
+
+Razón:
+
+```text
+Cliente
+   ↓
+Cloudflare / Render
+   ↓
+headers de proxy
+   ↓
+UConversor
+```
+
+Antes de usar la identidad IP como base de una decisión de seguridad se deberá verificar, en un despliegue de prueba, qué valores recibe realmente UConversor mediante:
+
+- `RemoteAddr`;
+- `X-Forwarded-For`;
+- `CF-Ray`.
+
+Solo después de validar la política de proxy podrá diseñarse un limitador por cliente.
+
+No se implementará un limitador global únicamente para sustituir esta validación, porque un límite global podría permitir que un único actor agote la cuota disponible para todos los usuarios.
+
+Estado:
+
+```text
+Rate limiting por IP
+→ recomendado como defensa
+→ pendiente de validación del entorno proxy
+→ no obligatorio para el primer deploy
+```
+
+Si en el futuro UConversor utiliza múltiples instancias, cualquier limitador que dependa de contadores compartidos deberá revisar su almacenamiento y coordinación.
+
+### 22.7 Archivo YAML de configuración Web
+
+La política configurable de la capa HTTP se almacenará en un archivo YAML **de solo lectura para la aplicación**.
+
+Ruta prevista:
+
+```text
+config/security.yaml
+```
+
+Principio:
+
+```text
+Código Go
+   ↓
+implementa CÓMO se aplican las protecciones
+
+security.yaml
+   ↓
+define QUÉ política no secreta se aplica
+```
+
+La aplicación podrá leer y validar el YAML durante el arranque, pero no deberá ofrecer rutas Web, comandos o procesos automáticos capaces de modificarlo.
+
+El YAML podrá definir inicialmente:
+
+- límites de tamaño de solicitud;
+- timeouts HTTP;
+- habilitación de logging técnico;
+- parámetros de cabeceras defensivas cuando resulte apropiado;
+- otros valores no secretos propios de la exposición Web.
+
+No deberá incluir:
+
+- `PORT` como sustituto de la variable de entorno;
+- secretos;
+- contraseñas;
+- tokens;
+- claves privadas;
+- listas CIDR en esta primera versión;
+- parámetros activos de rate limiting mientras esa defensa permanezca pendiente.
+
+Esquema conceptual inicial:
+
+```yaml
+http:
+  max_body_bytes: 4096
+
+  timeouts:
+    read_header: 5s
+    read: 10s
+    write: 15s
+    idle: 60s
+
+security:
+  headers:
+    enabled: true
+
+logging:
+  enabled: true
+```
+
+Los valores anteriores son una propuesta inicial y deberán confirmarse durante la implementación y las pruebas.
+
+### 22.8 Fallo seguro de configuración
+
+La configuración deberá validarse completamente antes de iniciar el servidor público.
+
+Deben producir un error claro de arranque, en lugar de degradar silenciosamente la protección:
+
+- YAML sintácticamente inválido;
+- duración de timeout inválida;
+- límite de tamaño inválido;
+- parámetros incompatibles con el esquema soportado.
+
+La aplicación no debe afirmar que una protección está activa cuando su configuración no pudo cargarse o validarse.
+
+La política exacta ante ausencia completa de `security.yaml` deberá definirse antes de implementar el loader. Si se establece un fallback, deberá ser explícito, documentado y seguro.
+
+### 22.9 Timeouts y consumo de recursos
+
+`internal/web/server.go` podrá configurar límites propios de `http.Server`, incluyendo cuando corresponda:
+
+- `ReadHeaderTimeout`;
+- `ReadTimeout`;
+- `WriteTimeout`;
+- `IdleTimeout`.
+
+Estos límites protegen recursos del proceso frente a conexiones lentas, incompletas o abandonadas y no deben modificar resultados de conversión.
+
+Los valores se deberán ajustar de manera que una solicitud normal de UConversor disponga de margen suficiente sin mantener recursos abiertos indefinidamente.
+
+### 22.10 Límite de entrada HTTP
+
+La capa Web deberá limitar el tamaño máximo de una solicitud antes de procesar su contenido completo.
+
+UConversor recibe expresiones pequeñas, por ejemplo:
+
+```text
+15km
+32°F
+1.5GB
+1000mL
+```
+
+Por tanto, no existe una necesidad normal de aceptar cuerpos de tamaño elevado.
+
+Una solicitud que exceda el límite configurado debe ser rechazada antes de alcanzar `App`.
+
+El límite exacto será configurable y deberá probarse con solicitudes válidas e inválidas.
+
+### 22.11 Métodos HTTP permitidos
+
+Cada ruta debe aceptar únicamente los métodos requeridos por su función.
+
+Estado previsto:
+
+```text
+GET  /           → permitido
+GET  /examples   → permitido
+POST /convert    → permitido
+GET  /health     → permitido
+```
+
+Un método no admitido deberá responder con:
+
+```text
+405 Method Not Allowed
+```
+
+y no ejecutar lógica de conversión.
+
+### 22.12 Cabeceras HTTP defensivas
+
+La Web podrá emitir cabeceras defensivas apropiadas para el contenido realmente servido.
+
+Como base se podrán considerar, cuando sean compatibles con la interfaz existente:
+
+```text
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+```
+
+Una `Content-Security-Policy` estricta **no deberá incorporarse sin revisar primero las plantillas, estilos, scripts y recursos actuales**, porque una política incorrecta podría romper la interfaz legítima.
+
+Estado:
+
+```text
+headers básicos
+→ previstos para V1
+
+CSP estricta
+→ pendiente de inspección de templates/assets
+```
+
+### 22.13 Logging técnico y trazabilidad de Render
+
+El logging técnico deberá registrar únicamente información útil para operación y diagnóstico.
+
+Campos candidatos:
+
+```text
+timestamp
+método HTTP
+ruta
+status HTTP
+duración
+CF-Ray, si está presente
+```
+
+Render recomienda conservar `CF-Ray` en los logs cuando se encuentre disponible, porque permite correlacionar solicitudes a través de su infraestructura frontal.
+
+No deberán registrarse indiscriminadamente:
+
+- cuerpos completos de solicitud;
+- cookies;
+- tokens;
+- credenciales;
+- cabeceras completas;
+- datos sin utilidad operativa.
+
+Mientras la política de IP real permanezca sin validar, el logging no deberá presentar una dirección como "IP real del cliente" sin haber establecido antes una política de confianza explícita.
+
+### 22.14 Health check
+
+Se define una ruta mínima de salud:
+
+```text
+GET /health
+→ 200 OK
+```
+
+Su responsabilidad será confirmar que el proceso HTTP está operativo y responde con rapidez.
+
+No debe:
+
+- ejecutar conversiones;
+- consultar el catálogo científico;
+- utilizar `App.Convert()`;
+- convertir el health check en una prueba funcional del núcleo.
+
+El endpoint deberá ser apto para configurarse como Health Check Path en Render.
+
+### 22.15 Persistencia y naturaleza efímera del entorno
+
+El despliegue gratuito de Render puede reiniciar, suspender o reconstruir la instancia. Por ello, la capa Web no debe depender de modificar archivos locales en tiempo de ejecución para conservar estado operativo.
+
+Esto refuerza la decisión de que:
+
+```text
+config/security.yaml
+→ configuración de solo lectura
+```
+
+Cualquier configuración persistente que en el futuro necesite cambiar dinámicamente deberá diseñarse mediante un mecanismo apropiado y no suponiendo persistencia local del filesystem del servicio.
+
+### 22.16 Estructura prevista de esta ampliación
+
+La estructura exacta se definirá durante implementación aplicando la regla de mínima separación necesaria.
+
+Base prevista:
+
+```text
+UConversor/
+├── config/
+│   └── security.yaml          # política Web no secreta, solo lectura
+│
+├── cmd/
+│   └── web/
+│       └── main.go            # composición + resolución de PORT
+│
+└── internal/
+    └── web/
+        ├── server.go          # servidor HTTP y timeouts
+        ├── handlers.go        # métodos/rutas existentes
+        ├── middleware.go      # protecciones HTTP transversales, si se justifica
+        └── ...
+```
+
+No se crean por ahora módulos de:
+
+```text
+clientip.go
+cidrblock.go
+rate_limiter.go
+```
+
+porque esas responsabilidades no forman parte de la primera implementación aprobada.
+
+Si la carga/validación de YAML justifica una responsabilidad propia, podrá añadirse un módulo de configuración Web sin introducir dependencias en el núcleo científico.
+
+### 22.17 Pruebas obligatorias antes del deploy público
+
+Antes del primer deploy público deberán comprobarse como mínimo:
+
+```text
+PORT ausente                  → escucha local en 8080
+PORT definido                 → escucha en el puerto suministrado
+binding                       → accesible como servicio Render
+GET /                         → funciona
+GET /examples                 → funciona
+POST /convert válido          → conserva resultados actuales
+método no permitido           → 405
+solicitud demasiado grande    → rechazo antes de App
+timeouts configurados         → servidor aplica límites previstos
+headers defensivos            → presentes donde corresponda
+logging                       → no expone cuerpos ni secretos
+CF-Ray presente               → se registra cuando Render lo suministra
+GET /health                   → 200 sin usar núcleo científico
+YAML inválido                 → error claro de configuración
+go test ./...                 → sin regresiones
+```
+
+También deberán repetirse conversiones funcionales conocidas para comprobar que la capa Web defensiva no modifica resultados científicos.
+
+Durante un despliegue de prueba se podrá observar de forma controlada:
+
+```text
+RemoteAddr
+X-Forwarded-For
+CF-Ray
+```
+
+con el único propósito de comprender el entorno proxy. Esa observación no autoriza por sí sola a implementar bloqueo CIDR o rate limiting por IP; cualquier decisión posterior deberá documentarse primero.
+
+### 22.18 Consideraciones del plan gratuito de Render
+
+El plan gratuito puede suspender el servicio después de un periodo de inactividad y provocar un arranque en frío en la siguiente solicitud.
+
+Esto es una característica operativa del entorno y no deberá confundirse con un fallo del núcleo de UConversor.
+
+También debe asumirse que el servicio gratuito no ofrece las mismas garantías operativas que un entorno de producción de pago. Esta limitación pertenece al despliegue y no cambia el propósito ni la arquitectura científica del programa.
+
+### 22.19 Regla de evolución de la seguridad Web
+
+```text
+protección justificada de la interfaz pública
+               +
+ninguna duplicación del motor
+               +
+ninguna lógica HTTP dentro del núcleo
+               +
+configuración de política separada del código
+               +
+no implementar defensas sin necesidad o validación técnica
+```
+
+La publicación en Render puede evolucionar o sustituirse por otra plataforma en el futuro sin obligar a redefinir el propósito ni el núcleo científico de UConversor.
+
+Principio operativo:
+
+**Render protege la infraestructura que conoce; UConversor protege el comportamiento HTTP que solo la aplicación conoce.**
+
+### 22.20 Estado de esta ampliación
+
+**Estado: DISEÑADA / PENDIENTE DE IMPLEMENTACIÓN.**
+
+Para la primera implementación quedan aprobados:
+
+```text
+PORT + fallback local
+timeouts HTTP
+límite de body
+métodos HTTP explícitos
+headers defensivos básicos
+logging técnico + CF-Ray
+/health
+security.yaml de solo lectura
+validación segura de configuración
+```
+
+Quedan expresamente fuera o pendientes:
+
+```text
+bloqueo IP/CIDR              → fuera de V1
+rate limiting por IP         → pendiente de validación del proxy
+CSP estricta                 → pendiente de revisión de templates/assets
+TLS propio en Go             → no se implementa; delegado a Render
+```
+
+Esta actualización autoriza la siguiente etapa metodológica: diseñar el esquema definitivo de `security.yaml`, identificar los cambios mínimos en `cmd/web/main.go` e `internal/web`, implementar modularmente y ejecutar las pruebas antes del deploy público.
 
 ---
 

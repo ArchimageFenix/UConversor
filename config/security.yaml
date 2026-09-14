@@ -1,0 +1,15 @@
+http:
+  max_body_bytes: 4096
+
+  timeouts:
+    read_header: 5s
+    read: 10s
+    write: 15s
+    idle: 60s
+
+security:
+  headers:
+    enabled: true
+
+logging:
+  enabled: true

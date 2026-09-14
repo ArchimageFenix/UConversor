@@ -3,15 +3,18 @@
 // Responsibility:
 //   - Handle HTTP requests from the browser.
 //   - Coordinate requests with the UConversor application layer.
+//   - Apply request-level HTTP limits defined by Web security configuration.
 //   - Prepare presentation data for HTML templates.
 //
 // Receives:
 //   - HTTP requests.
 //   - Application service.
 //   - Parsed HTML templates.
+//   - Validated Web security configuration.
 //
 // Produces:
 //   - Rendered HTML responses.
+//   - Controlled HTTP protocol errors for invalid or oversized requests.
 //
 // Previous logical stage:
 //   - server.go routing.
@@ -28,9 +31,12 @@
 //   - Template rendering must be delegated to render.go.
 //   - Internal errors and HTTP status codes must not be exposed
 //     directly to the user.
+//   - Oversized HTTP request bodies must be rejected before
+//     reaching app.Convert().
 package web
 
 import (
+	"errors"
 	"html/template"
 	"net/http"
 	"strings"
@@ -47,9 +53,12 @@ import (
 //   - error classification to errors.go;
 //   - presentation adaptation to viewmodel.go;
 //   - HTML rendering to render.go.
+//
+// It also applies request-level limits defined by SecurityConfig.
 type Handler struct {
 	templates   *template.Template
 	application *app.App
+	config      SecurityConfig
 }
 
 // NewHandler creates a configured web request handler.
@@ -57,6 +66,7 @@ type Handler struct {
 // Receives:
 //   - Parsed HTML templates.
 //   - UConversor application service.
+//   - Validated Web security configuration.
 //
 // Produces:
 //   - Handler ready to be registered by server.go.
@@ -64,14 +74,17 @@ type Handler struct {
 // Important restrictions:
 //   - Does not create the application service.
 //   - Does not load templates from disk or embedded assets.
+//   - Does not load or validate security.yaml directly.
 //   - Dependency construction belongs to cmd/web/main.go.
 func NewHandler(
 	templates *template.Template,
 	application *app.App,
+	config SecurityConfig,
 ) *Handler {
 	return &Handler{
 		templates:   templates,
 		application: application,
+		config:      config,
 	}
 }
 
@@ -184,6 +197,8 @@ func (h *Handler) handleExamples(
 //   - A PageViewModel containing either:
 //   - a conversion result, or
 //   - a controlled presentation error.
+//   - HTTP 413 when the request body exceeds the configured limit.
+//   - HTTP 400 when the form cannot be parsed.
 //
 // Previous logical stage:
 //   - server.go route registration.
@@ -202,6 +217,7 @@ func (h *Handler) handleExamples(
 //   - Must preserve the user's original expression in the form.
 //   - HTTP status codes are protocol information only and must not
 //     be rendered visually to the user.
+//   - Request size must be validated before calling app.Convert().
 func (h *Handler) handleConvert(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -220,7 +236,33 @@ func (h *Handler) handleConvert(
 		return
 	}
 
-	expression := r.FormValue("expression")
+	r.Body = http.MaxBytesReader(
+		w,
+		r.Body,
+		h.config.HTTP.MaxBodyBytes,
+	)
+
+	if err := r.ParseForm(); err != nil {
+		var maxBytesError *http.MaxBytesError
+
+		if errors.As(err, &maxBytesError) {
+			http.Error(
+				w,
+				"Payload Too Large",
+				http.StatusRequestEntityTooLarge,
+			)
+			return
+		}
+
+		http.Error(
+			w,
+			"Solicitud inválida",
+			http.StatusBadRequest,
+		)
+		return
+	}
+
+	expression := r.Form.Get("expression")
 
 	// The original text is preserved for presentation.
 	// TrimSpace is used only to detect an empty browser submission.
@@ -273,5 +315,57 @@ func (h *Handler) handleConvert(
 		w,
 		http.StatusOK,
 		viewModel,
+	)
+}
+
+// handleHealth reports whether the Web HTTP service is alive.
+//
+// Receives:
+//   - GET request for "/health".
+//
+// Produces:
+//   - HTTP 200 with a minimal plain-text response.
+//
+// Previous logical stage:
+//   - server.go route registration.
+//
+// Next logical stage:
+//   - HTTP client or Render health-check system.
+//
+// Important restrictions:
+//   - Must not perform conversions.
+//   - Must not query the catalog.
+//   - Must not call app.Convert().
+//   - Must remain lightweight.
+//   - Only GET is accepted for this route.
+func (h *Handler) handleHealth(
+	w http.ResponseWriter,
+	r *http.Request,
+) {
+	if r.URL.Path != "/health" {
+		http.NotFound(w, r)
+		return
+	}
+
+	if r.Method != http.MethodGet {
+		http.Error(
+			w,
+			"Method Not Allowed",
+			http.StatusMethodNotAllowed,
+		)
+		return
+	}
+
+	w.Header().Set(
+		"Content-Type",
+		"text/plain; charset=utf-8",
+	)
+
+	w.WriteHeader(
+		http.StatusOK,
+	)
+
+	_, _ = w.Write(
+		[]byte("OK"),
 	)
 }
