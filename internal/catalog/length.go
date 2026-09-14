@@ -43,6 +43,22 @@ func LengthUnits() []units.Unit {
 		Notes:     "1 au = 149 597 870 700 m exactly",
 	}
 
+	iauParsec := model.Source{
+		Kind:      model.SourceExact,
+		Authority: "IAU",
+		Reference: "IAU 2015 Resolution B2 – Recommended Zero Points for the Absolute and Apparent Bolometric Magnitude Scales",
+		URL:       "https://www.iau.org/static/resolutions/IAU2015_English.pdf",
+		Notes:     "The parsec is defined exactly as (648000/π) au.",
+	}
+
+	bipmLight := model.Source{
+		Kind:      model.SourceExact,
+		Authority: "BIPM",
+		Reference: "SI Base Unit: metre",
+		URL:       "https://www.bipm.org/en/si-base-units/metre",
+		Notes:     "The speed of light in vacuum is exactly 299792458 m/s.",
+	}
+
 	return []units.Unit{
 		{
 			Name:      "milímetro",
@@ -139,6 +155,87 @@ func LengthUnits() []units.Unit {
 			Scale:     149597870700,
 			Kind:      units.TransformLinear,
 			Source:    iau,
+		},
+
+		{
+			Name:      "parsec",
+			Symbol:    "pc",
+			Aliases:   []string{"parsec", "parsecs"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     3.0856775814913673e16,
+			Kind:      units.TransformLinear,
+			Source:    iauParsec,
+		},
+		{
+			Name:      "kiloparsec",
+			Symbol:    "kpc",
+			Aliases:   []string{"kiloparsec", "kiloparsecs"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     3.0856775814913673e19,
+			Kind:      units.TransformLinear,
+			Source:    iauParsec,
+		},
+		{
+			Name:      "megaparsec",
+			Symbol:    "Mpc",
+			Aliases:   []string{"megaparsec", "megaparsecs"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     3.0856775814913673e22,
+			Kind:      units.TransformLinear,
+			Source:    iauParsec,
+		},
+		{
+			Name:      "gigaparsec",
+			Symbol:    "Gpc",
+			Aliases:   []string{"gigaparsec", "gigaparsecs"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     3.0856775814913673e25,
+			Kind:      units.TransformLinear,
+			Source:    iauParsec,
+		},
+		{
+			Name:      "segundo-luz",
+			Symbol:    "ls",
+			Aliases:   []string{"light-second", "lightsecond", "segundo luz"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     299792458,
+			Kind:      units.TransformLinear,
+			Source:    bipmLight,
+		},
+		{
+			Name:      "minuto-luz",
+			Symbol:    "lmin",
+			Aliases:   []string{"light-minute", "lightminute", "minuto luz"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     17987547480,
+			Kind:      units.TransformLinear,
+			Source:    bipmLight,
+		},
+		{
+			Name:      "hora-luz",
+			Symbol:    "lh",
+			Aliases:   []string{"light-hour", "lighthour", "hora luz"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     1079252848800,
+			Kind:      units.TransformLinear,
+			Source:    bipmLight,
+		},
+		{
+			Name:      "día-luz",
+			Symbol:    "ld",
+			Aliases:   []string{"light-day", "lightday", "dia luz", "día luz"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     25902068371200,
+			Kind:      units.TransformLinear,
+			Source:    bipmLight,
 		},
 	}
 }

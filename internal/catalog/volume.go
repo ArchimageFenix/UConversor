@@ -41,6 +41,22 @@ func VolumeUnits() []units.Unit {
 		Notes:     "Reference for exact relationships derived from the international inch and foot.",
 	}
 
+	nistLiquid := model.Source{
+		Kind:      model.SourceExact,
+		Authority: "NIST",
+		Reference: "NIST Handbook 133, Appendix E - General Tables of Units of Measurement",
+		URL:       "https://www.nist.gov/system/files/documents/2023/02/10/2023%20NIST%20Handbook%20133.pdf",
+		Notes:     "Exact U.S. liquid-volume relationships: 1 gal = 231 in³ = 4 qt = 8 pt = 128 fl oz.",
+	}
+
+	ukGov := model.Source{
+		Kind:      model.SourceOfficial,
+		Authority: "UK Government",
+		Reference: "Weights and Measures Act 1985, Schedule 1, Part IV",
+		URL:       "https://www.legislation.gov.uk/ukpga/1985/72/schedule/1",
+		Notes:     "Official imperial capacity definition: 1 imperial gallon = 4.54609 cubic decimetres.",
+	}
+
 	zero := 0.0
 
 	return []units.Unit{
@@ -141,6 +157,62 @@ func VolumeUnits() []units.Unit {
 			Kind:      units.TransformLinear,
 			MinValue:  &zero,
 			Source:    nist,
+		},
+
+		{
+			Name:      "galón estadounidense",
+			Symbol:    "US gal",
+			Aliases:   []string{"usgal", "galón US", "galon US"},
+			Family:    units.FamilyPhysics,
+			Magnitude: units.MagnitudeVolume,
+			Scale:     0.003785411784,
+			Kind:      units.TransformLinear,
+			MinValue:  &zero,
+			Source:    nistLiquid,
+		},
+		{
+			Name:      "cuarto líquido estadounidense",
+			Symbol:    "US qt",
+			Aliases:   []string{"usqt", "quart US"},
+			Family:    units.FamilyPhysics,
+			Magnitude: units.MagnitudeVolume,
+			Scale:     0.000946352946,
+			Kind:      units.TransformLinear,
+			MinValue:  &zero,
+			Source:    nistLiquid,
+		},
+		{
+			Name:      "pinta líquida estadounidense",
+			Symbol:    "US pt",
+			Aliases:   []string{"uspt", "pint US"},
+			Family:    units.FamilyPhysics,
+			Magnitude: units.MagnitudeVolume,
+			Scale:     0.000473176473,
+			Kind:      units.TransformLinear,
+			MinValue:  &zero,
+			Source:    nistLiquid,
+		},
+		{
+			Name:      "onza líquida estadounidense",
+			Symbol:    "US fl oz",
+			Aliases:   []string{"usfloz", "fl oz US"},
+			Family:    units.FamilyPhysics,
+			Magnitude: units.MagnitudeVolume,
+			Scale:     0.0000295735295625,
+			Kind:      units.TransformLinear,
+			MinValue:  &zero,
+			Source:    nistLiquid,
+		},
+		{
+			Name:      "galón imperial",
+			Symbol:    "imp gal",
+			Aliases:   []string{"impgal", "UK gal", "ukgal"},
+			Family:    units.FamilyPhysics,
+			Magnitude: units.MagnitudeVolume,
+			Scale:     0.00454609,
+			Kind:      units.TransformLinear,
+			MinValue:  &zero,
+			Source:    ukGov,
 		},
 	}
 }
