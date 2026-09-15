@@ -637,6 +637,17 @@
     gap: 14px;
 }
 
+/* En escritorio se concede más espacio horizontal a cada resultado. */
+@media (min-width: 1024px) {
+    .result-grid {
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(250px, 1fr)
+            );
+    }
+}
+
 .result-card {
     min-width: 0;
     padding: 18px;
