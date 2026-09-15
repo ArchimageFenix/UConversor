@@ -1,0 +1,257 @@
+/*
+ * File: family-length.css
+ *
+ * Responsibility:
+ *   Define the thematic illustration for the
+ *   Longitud / distancia family.
+ *
+ * Receives:
+ *   Shared family visual structure from family-visual-base.css
+ *   and length illustration markup from the Web template.
+ *
+ * Produces:
+ *   The visual representation used for the length family.
+ *
+ * Previous logical stage:
+ *   family-visual-base.css.
+ *
+ * Next logical stage:
+ *   Browser presentation.
+ *
+ * Important restrictions:
+ *   - Presentation only.
+ *   - Must not calculate or interpret length values.
+ *   - Must not modify conversion behavior.
+ *   - Changes in this file must affect only the length illustration.
+ */
+
+/* ---------- Length / distance ---------- */
+
+.family-visual--length {
+    isolation: isolate;
+}
+
+.length-visual__glow {
+    position: absolute;
+    z-index: -1;
+
+    width: 74px;
+    height: 74px;
+
+    left: 21px;
+    top: 8px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(66, 149, 255, 0.25),
+            rgba(66, 149, 255, 0) 70%
+        );
+}
+
+.length-visual__orbit {
+    position: absolute;
+
+    left: 50%;
+    top: 46%;
+
+    border: 1.5px solid rgba(61, 132, 218, 0.48);
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-14deg);
+}
+
+.length-visual__orbit--outer {
+    width: 104px;
+    height: 54px;
+}
+
+.length-visual__orbit--inner {
+    width: 76px;
+    height: 38px;
+
+    border-color: rgba(61, 132, 218, 0.27);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(18deg);
+}
+
+.length-visual__planet {
+    position: absolute;
+
+    left: 42px;
+    top: 24px;
+
+    width: 34px;
+    height: 34px;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #82c6ff 0%,
+            #4c9eef 48%,
+            #246bc3 100%
+        );
+
+    box-shadow:
+        0 5px 12px rgba(35, 104, 181, 0.23);
+}
+
+.length-visual__planet::after {
+    content: "";
+
+    position: absolute;
+
+    width: 31px;
+    height: 12px;
+
+    left: -5px;
+    top: 18px;
+
+    border-radius: 50%;
+
+    background: rgba(217, 239, 255, 0.45);
+
+    transform: rotate(-22deg);
+}
+
+.length-visual__planet-shine {
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
+    left: 7px;
+    top: 6px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.62);
+}
+
+.length-visual__point {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border: 2px solid white;
+    border-radius: 50%;
+
+    background: #257bd5;
+
+    box-shadow:
+        0 2px 7px rgba(28, 94, 167, 0.28);
+}
+
+.length-visual__point--a {
+    left: 7px;
+    top: 42px;
+}
+
+.length-visual__point--b {
+    right: 7px;
+    top: 37px;
+}
+
+
+/* Decorative stars */
+
+.length-visual__star {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #4a91df;
+
+    box-shadow:
+        0 0 7px rgba(74, 145, 223, 0.5);
+}
+
+.length-visual__star--a {
+    left: 25px;
+    top: 12px;
+}
+
+.length-visual__star--b {
+    right: 18px;
+    top: 15px;
+
+    width: 3px;
+    height: 3px;
+}
+
+.length-visual__star--c {
+    right: 30px;
+    top: 66px;
+
+    width: 3px;
+    height: 3px;
+}
+
+
+/* Measurement element */
+
+.length-visual__measure {
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    bottom: 12px;
+
+    height: 18px;
+}
+
+.length-visual__measure-line {
+    position: absolute;
+
+    left: 4px;
+    right: 4px;
+    top: 8px;
+
+    height: 2px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(50, 126, 213, 0.35),
+            rgba(35, 113, 202, 0.9),
+            rgba(50, 126, 213, 0.35)
+        );
+}
+
+.length-visual__measure-start,
+.length-visual__measure-end {
+    position: absolute;
+
+    top: 4px;
+
+    width: 2px;
+    height: 10px;
+
+    border-radius: 999px;
+
+    background: #327ed5;
+}
+
+.length-visual__measure-start {
+    left: 4px;
+}
+
+.length-visual__measure-end {
+    right: 4px;
+}

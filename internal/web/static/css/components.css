@@ -553,6 +553,7 @@
 
 .result-summary__main {
     min-width: 0;
+    flex: 1;
 }
 
 .result-summary__label {
@@ -621,6 +622,27 @@
     font-size: 0.92rem;
     font-weight: 800;
 }
+
+/* ---------- Family visual ---------- */
+
+
+
+
+.family-visual {
+    position: relative;
+
+    width: 118px;
+    height: 104px;
+
+    flex: none;
+}
+
+
+
+
+/* ---------- Generic visual ---------- */
+
+
 
 /* ---------- Result cards ---------- */
 
@@ -812,13 +834,15 @@
 
 /* ---------- Result responsive ---------- */
 
+/* ---------- Result responsive ---------- */
+
 @media (max-width: 760px) {
 
     .result-summary {
         align-items: stretch;
         flex-direction: column;
-    }
-
+    }  
+    
     .result-summary__meta {
         width: 100%;
     }
@@ -836,7 +860,6 @@
             );
     }
 }
-
 @media (max-width: 520px) {
 
     .result-summary {

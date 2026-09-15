@@ -26,5 +26,5 @@ import "embed"
 
 // assets contains all HTML templates and static web resources.
 //
-//go:embed templates/*.html templates/partials/*.html static/css/*.css
+//go:embed templates/*.html templates/partials/*.html static/css/*.css static/css/visuals/*.css
 var assets embed.FS

@@ -41,12 +41,12 @@ type PageViewModel struct {
 // ResultViewModel represents one successful conversion
 // prepared for HTML presentation.
 type ResultViewModel struct {
-	Family    string
-	Magnitude string
-
-	InputName   string
-	InputSymbol string
-	InputValue  string
+	Family       string
+	Magnitude    string
+	VisualFamily string
+	InputName    string
+	InputSymbol  string
+	InputValue   string
 
 	Values []ConvertedValueViewModel
 }
@@ -93,11 +93,36 @@ func NewResultViewModel(
 	}
 
 	return ResultViewModel{
-		Family:      result.Family,
-		Magnitude:   result.Magnitude,
-		InputName:   result.Input.Name,
-		InputSymbol: result.Input.Symbol,
-		InputValue:  formatWebValue(result.Input.Value),
-		Values:      values,
+		Family:       result.Family,
+		Magnitude:    result.Magnitude,
+		VisualFamily: visualFamily(result.Family, result.Magnitude),
+		InputName:    result.Input.Name,
+		InputSymbol:  result.Input.Symbol,
+		InputValue:   formatWebValue(result.Input.Value),
+		Values:       values,
+	}
+}
+
+// visualFamily maps an already classified scientific result
+// to a stable visual identifier used exclusively by the Web presentation.
+//
+// Family and magnitude are received from the domain result.
+// This function does not determine or modify their scientific classification.
+func visualFamily(family, magnitude string) string {
+	switch {
+	case family == "Longitud / distancia":
+		return "length"
+
+	case family == "Física" && magnitude == "Temperatura":
+		return "temperature"
+
+	case family == "Física" && magnitude == "Presión":
+		return "pressure"
+
+	case family == "Física" && magnitude == "Energía":
+		return "energy"
+
+	default:
+		return "generic"
 	}
 }

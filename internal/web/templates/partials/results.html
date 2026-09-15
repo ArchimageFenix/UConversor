@@ -1,6 +1,37 @@
+{{/*
+    File: results.html
+
+    Responsibility:
+      Render the conversion result area of the UConversor Web interface.
+
+    Receives:
+      PageViewModel produced by the Web presentation layer.
+
+    Produces:
+      Result summary, family illustration, metadata and converted values.
+
+    Previous logical stage:
+      viewmodel.go / Web handlers.
+
+    Next logical stage:
+      Browser presentation and family-specific CSS modules.
+
+    Important restrictions:
+      - Presentation only.
+      - Must not perform unit conversions.
+      - Must not classify scientific data.
+      - VisualFamily only selects a presentation component.
+      - Scientific information comes already classified by the domain layer.
+*/}}
+
 {{define "results"}}
+
 <section class="content" id="resultPanel">
     <section class="panel">
+
+        <!-- =========================================================
+             RESULT PANEL HEADER
+             ========================================================= -->
 
         <div class="panel-head">
             <div class="panel-title">
@@ -12,14 +43,21 @@
             </div>
         </div>
 
+
+        <!-- =========================================================
+             ERROR STATE
+             ========================================================= -->
+
         {{if .HasError}}
 
             <div class="result-error">
+
                 <div class="result-error__icon">
                     !
                 </div>
 
                 <div class="result-error__content">
+
                     <h2 class="result-error__title">
                         {{.Error.Title}}
                     </h2>
@@ -27,12 +65,427 @@
                     <p class="result-error__message">
                         {{.Error.Message}}
                     </p>
+
                 </div>
             </div>
+
+
+        <!-- =========================================================
+             SUCCESSFUL CONVERSION
+             ========================================================= -->
 
         {{else if .HasResult}}
 
             <div class="result-summary">
+
+
+                <!-- =================================================
+                     FAMILY VISUAL AREA
+
+                     VisualFamily determines which presentation
+                     illustration is rendered.
+
+                     Current visual routes:
+
+                       length
+                         → Length / distance illustration
+                         → CSS: visuals/family-length.css
+
+                       temperature
+                         → Temperature illustration
+                         → CSS: visuals/family-temperature.css
+
+                       generic
+                         → Generic fallback illustration
+                         → CSS: visuals/family-visual-base.css
+
+                     Shared visual container:
+                         → CSS: visuals/family-visual-base.css
+                     ================================================= -->
+
+                <div
+                    class="result-summary__visual"
+                    data-visual-family="{{.Result.VisualFamily}}"
+                    aria-hidden="true"
+                >
+
+
+                    <!-- =============================================
+                         VISUAL: LENGTH / DISTANCE
+
+                         Identifier:
+                           VisualFamily = "length"
+
+                         Drawing:
+                           Planet + orbital paths + reference points
+                           + stars + measurement line.
+
+                         Specific CSS:
+                           visuals/family-length.css
+                         ============================================= -->
+
+                    {{if eq .Result.VisualFamily "length"}}
+
+                        <div class="family-visual family-visual--length">
+
+                            <!-- Atmospheric/background glow -->
+                            <div class="length-visual__glow"></div>
+
+                            <!-- Orbital/reference ellipses -->
+                            <div
+                                class="length-visual__orbit length-visual__orbit--outer"
+                            ></div>
+
+                            <div
+                                class="length-visual__orbit length-visual__orbit--inner"
+                            ></div>
+
+                            <!-- Central planet -->
+                            <div class="length-visual__planet">
+
+                                <!-- Planet light reflection -->
+                                <div class="length-visual__planet-shine"></div>
+
+                            </div>
+
+                            <!-- Distance reference points -->
+                            <div
+                                class="length-visual__point length-visual__point--a"
+                            ></div>
+
+                            <div
+                                class="length-visual__point length-visual__point--b"
+                            ></div>
+
+                            <!-- Decorative spatial reference stars -->
+                            <div
+                                class="length-visual__star length-visual__star--a"
+                            ></div>
+
+                            <div
+                                class="length-visual__star length-visual__star--b"
+                            ></div>
+
+                            <div
+                                class="length-visual__star length-visual__star--c"
+                            ></div>
+
+                            <!-- Measurement representation -->
+                            <div class="length-visual__measure">
+
+                                <span
+                                    class="length-visual__measure-line"
+                                ></span>
+
+                                <span
+                                    class="length-visual__measure-start"
+                                ></span>
+
+                                <span
+                                    class="length-visual__measure-end"
+                                ></span>
+
+                            </div>
+
+                        </div>
+
+
+                    <!-- =============================================
+                         VISUAL: TEMPERATURE
+
+                         Identifier:
+                           VisualFamily = "temperature"
+
+                         Scientific result currently represented:
+                           Family    = Física
+                           Magnitude = Temperatura
+
+                         Drawing:
+                           Thermometer + liquid column + bulb
+                           + scale + thermal particles.
+
+                         Specific CSS:
+                           visuals/family-temperature.css
+
+                         IMPORTANT:
+                           This markup represents presentation only.
+                           It does not calculate or interpret temperature.
+                         ============================================= -->
+
+                    {{else if eq .Result.VisualFamily "temperature"}}
+
+                        <div class="family-visual family-visual--temperature">
+
+
+                            <!-- Soft thermal background glow -->
+                            <div class="temperature-visual__glow"></div>
+
+
+                            <!-- =====================================
+                                 THERMOMETER BODY
+                                 ===================================== -->
+
+                            <div class="temperature-visual__thermometer">
+
+
+                                <!-- Vertical thermometer tube -->
+                                <div class="temperature-visual__tube">
+
+                                    <!-- Temperature liquid column -->
+                                    <div
+                                        class="temperature-visual__mercury"
+                                    ></div>
+
+                                    <!-- Glass/light reflection -->
+                                    <div
+                                        class="temperature-visual__shine"
+                                    ></div>
+
+                                </div>
+
+
+                                <!-- Lower thermometer bulb -->
+                                <div class="temperature-visual__bulb">
+
+                                    <!-- Bulb light reflection -->
+                                    <div
+                                        class="temperature-visual__bulb-shine"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- =====================================
+                                 TEMPERATURE SCALE
+
+                                 Decorative scale accompanying the
+                                 thermometer. It does not represent
+                                 numeric conversion values.
+                                 ===================================== -->
+
+                            <div class="temperature-visual__scale">
+
+                                <span
+                                    class="temperature-visual__mark temperature-visual__mark--1"
+                                ></span>
+
+                                <span
+                                    class="temperature-visual__mark temperature-visual__mark--2"
+                                ></span>
+
+                                <span
+                                    class="temperature-visual__mark temperature-visual__mark--3"
+                                ></span>
+
+                                <span
+                                    class="temperature-visual__mark temperature-visual__mark--4"
+                                ></span>
+
+                                <span
+                                    class="temperature-visual__mark temperature-visual__mark--5"
+                                ></span>
+
+                            </div>
+
+
+                            <!-- =====================================
+                                 THERMAL PARTICLES
+
+                                 Decorative elements that give the
+                                 temperature illustration visual depth.
+                                 ===================================== -->
+
+                            <div
+                                class="temperature-visual__particle temperature-visual__particle--a"
+                            ></div>
+
+                            <div
+                                class="temperature-visual__particle temperature-visual__particle--b"
+                            ></div>
+
+                            <div
+                                class="temperature-visual__particle temperature-visual__particle--c"
+                            ></div>
+
+                        </div>
+
+
+
+{{else if eq .Result.VisualFamily "pressure"}}
+
+    <!--
+        VISUAL: PRESSURE
+
+        Responsibility:
+          Represent Física / Presión.
+
+        Receives:
+          VisualFamily = "pressure".
+
+        Produces:
+          HTML structure for the pressure gauge illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-pressure.css.
+
+        Important restrictions:
+          Presentation only.
+          The needle position is decorative.
+          This markup does not interpret pressure values.
+    -->
+
+    <div class="family-visual family-visual--pressure">
+
+        <!-- Esfera principal del manómetro -->
+        <div class="pressure-visual__gauge">
+
+            <div class="pressure-visual__dial">
+
+                <!-- Marcas de la escala -->
+                <span class="pressure-visual__mark pressure-visual__mark--1"></span>
+                <span class="pressure-visual__mark pressure-visual__mark--2"></span>
+                <span class="pressure-visual__mark pressure-visual__mark--3"></span>
+                <span class="pressure-visual__mark pressure-visual__mark--4"></span>
+                <span class="pressure-visual__mark pressure-visual__mark--5"></span>
+
+                <!-- Aguja -->
+                <div class="pressure-visual__needle"></div>
+
+                <!-- Centro de la aguja -->
+                <div class="pressure-visual__hub"></div>
+
+            </div>
+
+            <!-- Conector inferior -->
+            <div class="pressure-visual__connector"></div>
+
+        </div>
+
+        <!-- Partículas decorativas -->
+        <div class="pressure-visual__particle pressure-visual__particle--a"></div>
+        <div class="pressure-visual__particle pressure-visual__particle--b"></div>
+        <div class="pressure-visual__particle pressure-visual__particle--c"></div>
+
+    </div>
+                
+
+
+{{else if eq .Result.VisualFamily "energy"}}
+
+    <!-- =============================================
+         VISUAL: ENERGY
+
+         Identifier:
+           VisualFamily = "energy"
+
+         Scientific result represented:
+           Family    = Física
+           Magnitude = Energía
+
+         Responsibility:
+           Represent Física / Energía in the Web
+           presentation layer.
+
+         Receives:
+           VisualFamily = "energy".
+
+         Produces:
+           HTML structure used by family-energy.css.
+
+         Previous logical stage:
+           visualFamily() in viewmodel.go.
+
+         Next logical stage:
+           visuals/family-energy.css.
+
+         Drawing:
+           Luminous energy core + stylized lightning
+           bolt + orbital particles.
+
+         Important restrictions:
+           - Presentation only.
+           - Does not represent the numerical energy value.
+           - Particles and lightning are decorative.
+           - Must not calculate or interpret energy.
+         ============================================= -->
+
+    <div class="family-visual family-visual--energy">
+
+        <!-- Resplandor del núcleo -->
+        <div class="energy-visual__glow"></div>
+
+        <!-- Núcleo energético principal -->
+        <div class="energy-visual__core">
+
+            <!-- Rayo estilizado -->
+            <div class="energy-visual__bolt"></div>
+
+            <!-- Reflejo del núcleo -->
+            <div class="energy-visual__shine"></div>
+
+        </div>
+
+        <!-- Órbitas decorativas -->
+        <div class="energy-visual__orbit energy-visual__orbit--outer"></div>
+        <div class="energy-visual__orbit energy-visual__orbit--inner"></div>
+
+        <!-- Partículas energéticas -->
+        <div class="energy-visual__particle energy-visual__particle--a"></div>
+        <div class="energy-visual__particle energy-visual__particle--b"></div>
+        <div class="energy-visual__particle energy-visual__particle--c"></div>
+
+    </div>
+
+
+
+
+
+
+
+
+                    <!-- =============================================
+                         VISUAL: GENERIC FALLBACK
+
+                         Used whenever VisualFamily does not yet have
+                         a dedicated family illustration.
+
+                         Specific CSS:
+                           visuals/family-visual-base.css
+
+                         A missing dedicated illustration must never
+                         affect conversion behavior.
+                         ============================================= -->
+
+                    {{else}}
+
+                        <div class="family-visual family-visual--generic">
+
+                            <!-- Generic outer reference ring -->
+                            <div class="generic-visual__ring"></div>
+
+                            <!-- Generic central element -->
+                            <div class="generic-visual__core"></div>
+
+                        </div>
+
+                    {{end}}
+
+                </div>
+
+
+                <!-- =================================================
+                     RECOGNIZED INPUT
+
+                     Example:
+                       25 °C
+                       40 pc
+                     ================================================= -->
+
                 <div class="result-summary__main">
 
                     <div class="result-summary__label">
@@ -40,17 +493,31 @@
                     </div>
 
                     <div class="result-summary__value">
+
                         {{.Result.InputValue}}
+
                         <span class="result-summary__unit">
                             {{.Result.InputSymbol}}
                         </span>
+
                     </div>
 
                 </div>
 
+
+                <!-- =================================================
+                     SCIENTIFIC RESULT METADATA
+
+                     These values come from the domain result.
+                     The template only displays them.
+                     ================================================= -->
+
                 <div class="result-summary__meta">
 
+                    <!-- Scientific family -->
+
                     <div class="result-meta">
+
                         <span class="result-meta__label">
                             Familia
                         </span>
@@ -58,9 +525,14 @@
                         <strong class="result-meta__value">
                             {{.Result.Family}}
                         </strong>
+
                     </div>
 
+
+                    <!-- Physical magnitude -->
+
                     <div class="result-meta">
+
                         <span class="result-meta__label">
                             Magnitud
                         </span>
@@ -68,10 +540,17 @@
                         <strong class="result-meta__value">
                             {{.Result.Magnitude}}
                         </strong>
+
                     </div>
 
                 </div>
+
             </div>
+
+
+            <!-- =====================================================
+                 CONVERSION RESULT CARDS
+                 ===================================================== -->
 
             <div class="result-grid">
 
@@ -88,16 +567,24 @@
                             </div>
 
                             {{if .IsOrigin}}
+
                                 <div class="result-card__badge">
                                     Original
                                 </div>
+
                             {{end}}
 
                         </div>
 
+
+                        <!-- Converted numeric value -->
+
                         <div class="result-card__value">
                             {{.Value}}
                         </div>
+
+
+                        <!-- Unit symbol -->
 
                         <div class="result-card__symbol">
                             {{.Symbol}}
@@ -108,6 +595,11 @@
                 {{end}}
 
             </div>
+
+
+        <!-- =========================================================
+             EMPTY / INITIAL STATE
+             ========================================================= -->
 
         {{else}}
 
@@ -132,4 +624,5 @@
 
     </section>
 </section>
+
 {{end}}

@@ -1,0 +1,252 @@
+/*
+ * File: family-energy.css
+ *
+ * Responsibility:
+ *   Define the thematic illustration for the
+ *   Física / Energía result.
+ *
+ * Receives:
+ *   Shared family visual structure from family-visual-base.css
+ *   and energy illustration markup from results.html.
+ *
+ * Produces:
+ *   A stylized energy representation used when
+ *   VisualFamily is "energy".
+ *
+ * Previous logical stage:
+ *   family-visual-base.css and results.html.
+ *
+ * Next logical stage:
+ *   Browser presentation.
+ *
+ * Important restrictions:
+ *   - Presentation only.
+ *   - Must not calculate or interpret energy values.
+ *   - Lightning, particles and orbital elements are decorative.
+ *   - Must not modify other family illustrations.
+ *   - Changes in this file must affect only the
+ *     energy illustration.
+ */
+
+
+/* =========================================================
+   ENERGY VISUAL CONTAINER
+   ========================================================= */
+
+.family-visual--energy {
+    position: relative;
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+   Decorative illumination surrounding the energy core.
+   ========================================================= */
+
+.energy-visual__glow {
+    position: absolute;
+
+    left: 25px;
+    top: 10px;
+
+    width: 78px;
+    height: 78px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 205, 76, 0.28) 0%,
+            rgba(255, 220, 115, 0.14) 48%,
+            rgba(255, 255, 255, 0) 72%
+        );
+}
+
+
+/* =========================================================
+   ENERGY CORE
+   Main luminous body of the illustration.
+   ========================================================= */
+
+.energy-visual__core {
+    position: absolute;
+
+    left: 40px;
+    top: 22px;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 38% 32%,
+            #fffbd9 0%,
+            #ffe580 22%,
+            #ffc94d 50%,
+            #f29b38 100%
+        );
+
+    border: 3px solid rgba(231, 159, 49, 0.70);
+
+    box-shadow:
+        0 0 12px rgba(255, 191, 61, 0.42),
+        0 0 24px rgba(255, 204, 89, 0.20),
+        inset 0 0 8px rgba(255, 255, 255, 0.65);
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   CORE SHINE
+   Gives the energy sphere additional visual depth.
+   ========================================================= */
+
+.energy-visual__shine {
+    position: absolute;
+
+    left: 10px;
+    top: 8px;
+
+    width: 15px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.70);
+
+    transform: rotate(-28deg);
+}
+
+
+/* =========================================================
+   LIGHTNING BOLT
+   Stylized decorative representation of energy.
+   ========================================================= */
+
+.energy-visual__bolt {
+    position: absolute;
+
+    left: 17px;
+    top: 8px;
+
+    width: 19px;
+    height: 34px;
+
+    background:
+        linear-gradient(
+            160deg,
+            #ffffff 0%,
+            #fff8ba 45%,
+            #ffe058 100%
+        );
+
+    clip-path: polygon(
+        58% 0%,
+        18% 48%,
+        47% 48%,
+        31% 100%,
+        84% 38%,
+        55% 38%
+    );
+
+    filter:
+        drop-shadow(
+            0 2px 2px rgba(173, 116, 23, 0.25)
+        );
+
+    z-index: 4;
+}
+
+
+/* =========================================================
+   ORBITAL PATHS
+   Decorative movement around the central energy core.
+   ========================================================= */
+
+.energy-visual__orbit {
+    position: absolute;
+
+    left: 25px;
+    top: 30px;
+
+    width: 82px;
+    height: 40px;
+
+    border: 2px solid rgba(76, 143, 199, 0.48);
+    border-radius: 50%;
+
+    z-index: 2;
+}
+
+.energy-visual__orbit--outer {
+    transform: rotate(-18deg);
+}
+
+.energy-visual__orbit--inner {
+    width: 72px;
+    height: 34px;
+
+    left: 30px;
+    top: 33px;
+
+    border-color: rgba(244, 174, 55, 0.48);
+
+    transform: rotate(28deg);
+}
+
+
+/* =========================================================
+   ENERGY PARTICLES
+   Decorative particles around the core.
+   ========================================================= */
+
+.energy-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    z-index: 5;
+}
+
+.energy-visual__particle--a {
+    left: 21px;
+    top: 31px;
+
+    width: 7px;
+    height: 7px;
+
+    background: #f6b84d;
+
+    box-shadow:
+        0 0 7px rgba(246, 184, 77, 0.45);
+}
+
+.energy-visual__particle--b {
+    right: 15px;
+    top: 38px;
+
+    width: 6px;
+    height: 6px;
+
+    background: #5da5dc;
+
+    box-shadow:
+        0 0 7px rgba(93, 165, 220, 0.40);
+}
+
+.energy-visual__particle--c {
+    left: 37px;
+    bottom: 14px;
+
+    width: 5px;
+    height: 5px;
+
+    background: #ffd56a;
+
+    box-shadow:
+        0 0 6px rgba(255, 213, 106, 0.45);
+}

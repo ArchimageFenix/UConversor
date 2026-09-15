@@ -1790,3 +1790,63 @@ EVOLUCIÓN / MANTENIMIENTO
 ```
 
 Ninguna implementación deberá adelantarse a las decisiones arquitectónicas necesarias.
+
+
+
+# Otras  Mejoras
+### Ilustraciones temáticas por familia en la interfaz Web
+
+La interfaz Web puede asociar a cada familia de conversión una
+representación visual temática destinada exclusivamente a presentación.
+
+Estas representaciones:
+
+- serán ilustraciones de tamaño medio o grande, no iconos funcionales;
+- utilizarán un lenguaje visual común y coherente con UConversor;
+- podrán construirse mediante HTML/CSS y, cuando la complejidad visual
+  lo justifique, mediante Canvas 2D;
+- serán adaptables al diseño responsive;
+- no deberán modificar, interpretar ni duplicar información científica;
+- no formarán parte del catálogo, Registry, Validator ni Engine.
+
+La selección de la representación visual se realizará en la capa Web.
+
+El `ResultViewModel` podrá proporcionar un identificador visual estable
+derivado de la familia del resultado. El template utilizará ese
+identificador exclusivamente para seleccionar la presentación
+correspondiente.
+
+Flujo:
+
+Result
+   ↓
+ResultViewModel
+   ↓
+VisualFamily
+   ↓
+Template Web
+   ↓
+Componente visual
+   ↓
+Ilustración temática
+
+La ausencia de una ilustración específica para una familia nunca
+afectará la conversión. En ese caso deberá utilizarse una representación
+visual genérica.
+
+En escritorio, la ilustración podrá ocupar una zona propia dentro del
+resumen del resultado.
+
+En dispositivos de menor anchura, la composición podrá reorganizarse
+mediante CSS responsive para preservar el tamaño, proporción y
+legibilidad de la ilustración sin perjudicar los datos del resultado.
+
+
+
+El `ResultViewModel` podrá proporcionar un identificador visual estable
+derivado de la clasificación ya resuelta del resultado (familia y,
+cuando sea necesario, magnitud).
+
+La capa Web no reclasifica información científica; únicamente utiliza
+la familia y magnitud ya determinadas por el dominio para seleccionar
+una representación visual.
