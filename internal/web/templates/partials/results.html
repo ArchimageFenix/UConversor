@@ -445,6 +445,135 @@
 
 
 
+{{else if eq .Result.VisualFamily "voltage"}}
+
+    <!--
+        VISUAL: VOLTAGE
+
+        Responsibility:
+          Represent Electrónica / Voltaje.
+
+        Receives:
+          VisualFamily = "voltage".
+
+        Produces:
+          HTML structure for a modern electrical-voltage warning visual.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-voltage.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric voltage value.
+          - Does not perform calculations or scientific classification.
+          - The battery and electrical symbol are conceptual.
+    -->
+
+    <div class="family-visual family-visual--voltage">
+
+        <div class="voltage-visual__halo"></div>
+
+        <!-- Símbolo eléctrico superior -->
+        <div class="voltage-visual__warning">
+            <span class="voltage-visual__bolt"></span>
+        </div>
+
+        <!-- Batería -->
+        <div class="voltage-visual__battery">
+
+            <span class="voltage-visual__terminal voltage-visual__terminal--positive"></span>
+            <span class="voltage-visual__terminal voltage-visual__terminal--negative"></span>
+
+            <div class="voltage-visual__battery-face">
+                <span class="voltage-visual__plus"></span>
+                <span class="voltage-visual__minus"></span>
+            </div>
+
+            <div class="voltage-visual__battery-shine"></div>
+
+        </div>
+
+        <!-- Resplandor inferior -->
+        <div class="voltage-visual__ground-glow"></div>
+
+        <!-- Partículas decorativas -->
+        <span class="voltage-visual__particle voltage-visual__particle--a"></span>
+        <span class="voltage-visual__particle voltage-visual__particle--b"></span>
+        <span class="voltage-visual__particle voltage-visual__particle--c"></span>
+
+    </div>
+
+
+
+
+
+{{else if eq .Result.VisualFamily "current"}}
+
+    <!--
+        VISUAL: CURRENT
+
+        Responsibility:
+          Represent Electrónica / Corriente.
+
+        Receives:
+          VisualFamily = "current".
+
+        Produces:
+          HTML structure for a modern electric-current illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-current.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric current value.
+          - Does not calculate electrical current.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--current">
+
+        <!-- Resplandor central -->
+        <div class="current-visual__halo"></div>
+
+        <!-- Conductor -->
+        <div class="current-visual__conductor">
+
+            <div class="current-visual__wire"></div>
+
+            <!-- Cargas -->
+            <span class="current-visual__charge current-visual__charge--1"></span>
+            <span class="current-visual__charge current-visual__charge--2"></span>
+            <span class="current-visual__charge current-visual__charge--3"></span>
+            <span class="current-visual__charge current-visual__charge--4"></span>
+
+            <!-- Dirección del flujo -->
+            <span class="current-visual__arrow current-visual__arrow--1"></span>
+            <span class="current-visual__arrow current-visual__arrow--2"></span>
+            <span class="current-visual__arrow current-visual__arrow--3"></span>
+
+        </div>
+
+        <!-- Terminales del conductor -->
+        <div class="current-visual__connector current-visual__connector--left"></div>
+        <div class="current-visual__connector current-visual__connector--right"></div>
+
+        <!-- Partículas ambientales -->
+        <span class="current-visual__particle current-visual__particle--a"></span>
+        <span class="current-visual__particle current-visual__particle--b"></span>
+        <span class="current-visual__particle current-visual__particle--c"></span>
+
+    </div>
+
+
+
+
 
 
 

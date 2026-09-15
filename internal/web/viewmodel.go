@@ -122,6 +122,12 @@ func visualFamily(family, magnitude string) string {
 	case family == "Física" && magnitude == "Energía":
 		return "energy"
 
+	case family == "Electrónica" && magnitude == "Voltaje":
+		return "voltage"
+
+	case family == "Electrónica" && magnitude == "Corriente":
+		return "current"
+
 	default:
 		return "generic"
 	}
