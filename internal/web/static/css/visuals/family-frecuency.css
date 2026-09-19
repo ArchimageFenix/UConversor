@@ -1,0 +1,364 @@
+/*
+    File: family-frecuency.css
+
+    Responsibility:
+      - Render the thematic Web illustration for the Frequency magnitude.
+      - Represent frequency through a continuous sinusoidal-style waveform.
+
+    Receives:
+      - HTML structure selected when VisualFamily = "frequency".
+
+    Produces:
+      - A responsive decorative waveform for the Web result panel.
+
+    Previous logical stage:
+      - results.html selects the frequency visual component.
+
+    Next logical stage:
+      - Browser rendering inside the conversion result summary.
+
+    Important restrictions:
+      - Presentation only.
+      - Does not represent the numeric frequency entered by the user.
+      - Wave amplitude and spacing are decorative.
+      - Does not calculate wavelength, period or propagation speed.
+      - Does not duplicate scientific classification or catalog logic.
+*/
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.family-visual--frequency {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT GLOW
+   ========================================================= */
+
+.frequency-visual__halo {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 82%;
+    height: 75%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(49, 174, 255, 0.22) 0%,
+            rgba(55, 111, 255, 0.12) 42%,
+            rgba(81, 70, 220, 0.05) 62%,
+            transparent 76%
+        );
+
+    filter: blur(12px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   CENTRAL REFERENCE AXIS
+   ========================================================= */
+
+.frequency-visual__axis {
+    position: absolute;
+
+    left: 8%;
+    right: 8%;
+    top: 50%;
+
+    height: 1px;
+
+    transform: translateY(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(115, 198, 255, 0.12),
+            rgba(150, 220, 255, 0.30),
+            rgba(115, 198, 255, 0.12),
+            transparent
+        );
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   SINUSOIDAL WAVE AREA
+   ========================================================= */
+
+.frequency-visual__wave {
+    position: absolute;
+
+    left: 9%;
+    right: 9%;
+    top: 50%;
+
+    height: 94px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 3;
+
+    filter:
+        drop-shadow(0 0 4px rgba(78, 213, 255, 0.95))
+        drop-shadow(0 0 10px rgba(55, 150, 255, 0.70))
+        drop-shadow(0 0 18px rgba(73, 80, 255, 0.34));
+}
+
+
+/* =========================================================
+   WAVE SEGMENTS
+
+   Each element draws one half-cycle.
+
+   Alternating upper and lower curves creates the appearance
+   of a continuous sinusoidal waveform without using images,
+   SVG or JavaScript.
+   ========================================================= */
+
+.frequency-visual__segment {
+    position: relative;
+
+    width: 20%;
+    height: 48px;
+
+    flex: 1 1 20%;
+
+    box-sizing: border-box;
+
+    border: 0 solid transparent;
+}
+
+
+/* ---------------------------------------------------------
+   Positive half-cycle
+   --------------------------------------------------------- */
+
+.frequency-visual__segment--1,
+.frequency-visual__segment--3,
+.frequency-visual__segment--5 {
+    align-self: flex-start;
+
+    margin-top: 23px;
+
+    border-top: 4px solid rgba(91, 224, 255, 0.98);
+    border-left: 4px solid rgba(91, 224, 255, 0.98);
+    border-right: 4px solid rgba(91, 224, 255, 0.98);
+
+    border-radius: 50% 50% 0 0;
+}
+
+
+/* ---------------------------------------------------------
+   Negative half-cycle
+   --------------------------------------------------------- */
+
+.frequency-visual__segment--2,
+.frequency-visual__segment--4 {
+    align-self: flex-end;
+
+    margin-bottom: 23px;
+
+    border-bottom: 4px solid rgba(79, 183, 255, 0.98);
+    border-left: 4px solid rgba(79, 183, 255, 0.98);
+    border-right: 4px solid rgba(79, 183, 255, 0.98);
+
+    border-radius: 0 0 50% 50%;
+}
+
+
+/* =========================================================
+   SOFT WAVE HIGHLIGHT
+   ========================================================= */
+
+.frequency-visual__segment::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border-radius: inherit;
+
+    opacity: 0.38;
+
+    filter: blur(4px);
+}
+
+
+.frequency-visual__segment--1::after,
+.frequency-visual__segment--3::after,
+.frequency-visual__segment--5::after {
+    border-top: 3px solid rgba(129, 238, 255, 0.85);
+}
+
+
+.frequency-visual__segment--2::after,
+.frequency-visual__segment--4::after {
+    border-bottom: 3px solid rgba(111, 205, 255, 0.85);
+}
+
+
+/* =========================================================
+   Hz SYMBOL
+   ========================================================= */
+
+.frequency-visual__symbol {
+    position: absolute;
+
+    right: 10%;
+    bottom: 11%;
+
+    padding: 5px 10px;
+
+    border: 1px solid rgba(114, 211, 255, 0.40);
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 62, 110, 0.62),
+            rgba(18, 38, 85, 0.48)
+        );
+
+    color: rgba(221, 247, 255, 0.96);
+
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+
+    box-shadow:
+        0 0 12px rgba(67, 185, 255, 0.24),
+        inset 0 0 10px rgba(124, 220, 255, 0.08);
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   DECORATIVE PARTICLES
+   ========================================================= */
+
+.frequency-visual__particle {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: rgba(149, 231, 255, 0.92);
+
+    box-shadow:
+        0 0 6px rgba(105, 220, 255, 0.95),
+        0 0 12px rgba(73, 140, 255, 0.55);
+
+    z-index: 2;
+}
+
+
+.frequency-visual__particle--a {
+    left: 15%;
+    top: 23%;
+}
+
+
+.frequency-visual__particle--b {
+    right: 18%;
+    top: 27%;
+
+    width: 3px;
+    height: 3px;
+}
+
+
+.frequency-visual__particle--c {
+    left: 27%;
+    bottom: 20%;
+
+    width: 3px;
+    height: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+    .family-visual--frequency {
+        min-height: 150px;
+    }
+
+
+    .frequency-visual__wave {
+        left: 7%;
+        right: 7%;
+
+        height: 78px;
+    }
+
+
+    .frequency-visual__segment {
+        height: 39px;
+    }
+
+
+    .frequency-visual__segment--1,
+    .frequency-visual__segment--3,
+    .frequency-visual__segment--5 {
+        margin-top: 19px;
+
+        border-top-width: 3px;
+        border-left-width: 3px;
+        border-right-width: 3px;
+    }
+
+
+    .frequency-visual__segment--2,
+    .frequency-visual__segment--4 {
+        margin-bottom: 19px;
+
+        border-bottom-width: 3px;
+        border-left-width: 3px;
+        border-right-width: 3px;
+    }
+
+
+    .frequency-visual__symbol {
+        right: 8%;
+        bottom: 8%;
+
+        font-size: 0.76rem;
+    }
+}

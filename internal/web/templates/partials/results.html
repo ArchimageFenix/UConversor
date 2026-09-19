@@ -1166,7 +1166,63 @@
     </div>
 
 
+{{else if eq .Result.VisualFamily "frequency"}}
 
+    <!--
+        VISUAL: FREQUENCY
+
+        Responsibility:
+          Represent Física / Frecuencia.
+
+        Receives:
+          VisualFamily = "frequency".
+
+        Produces:
+          HTML structure for a frequency-wave illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-frecuency.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric frequency value.
+          - Wave spacing is decorative and does not encode the input value.
+          - Does not calculate wavelength or propagation speed.
+          - Does not relate frequency to other physical magnitudes.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--frequency">
+
+        <!-- Resplandor ambiental -->
+        <div class="frequency-visual__halo"></div>
+
+        <!-- Onda principal -->
+        <div class="frequency-visual__wave">
+
+            <span class="frequency-visual__segment frequency-visual__segment--1"></span>
+            <span class="frequency-visual__segment frequency-visual__segment--2"></span>
+            <span class="frequency-visual__segment frequency-visual__segment--3"></span>
+            <span class="frequency-visual__segment frequency-visual__segment--4"></span>
+            <span class="frequency-visual__segment frequency-visual__segment--5"></span>
+
+        </div>
+
+        <!-- Línea central de referencia -->
+        <span class="frequency-visual__axis"></span>
+
+        <!-- Identificador conceptual -->
+        <span class="frequency-visual__symbol">Hz</span>
+
+        <!-- Partículas ambientales -->
+        <span class="frequency-visual__particle frequency-visual__particle--a"></span>
+        <span class="frequency-visual__particle frequency-visual__particle--b"></span>
+        <span class="frequency-visual__particle frequency-visual__particle--c"></span>
+
+    </div>
 
                     <!-- =============================================
                          VISUAL: GENERIC FALLBACK

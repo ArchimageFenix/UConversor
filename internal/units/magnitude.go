@@ -26,4 +26,5 @@ const (
 	MagnitudePlaneAngle  Magnitude = "Ángulo plano"
 	MagnitudeTime        Magnitude = "Tiempo"
 	MagnitudeDataRate    Magnitude = "Tasa de transferencia de datos"
+	MagnitudeFrequency   Magnitude = "Frecuencia"
 )

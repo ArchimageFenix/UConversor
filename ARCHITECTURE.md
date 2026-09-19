@@ -2523,3 +2523,40 @@ reutilizarse para las demás tutorías.
 
 La composición visual específica de Longitud no obliga a las demás
 magnitudes a utilizar las mismas ilustraciones.
+
+
+
+
+
+
+
+
+
+
+### Frecuencia
+
+UConversor admite la magnitud física **Frecuencia**, integrada dentro de la familia **Física**.
+
+La unidad de referencia es el **hertz (Hz)**, unidad derivada del Sistema Internacional equivalente a s⁻¹.
+
+Las conversiones de frecuencia utilizan el modelo lineal existente del sistema:
+
+reference = value × Scale
+
+Unidades inicialmente soportadas:
+
+- hertz (Hz) — referencia
+- kilohertz (kHz) — 10³ Hz
+- megahertz (MHz) — 10⁶ Hz
+- gigahertz (GHz) — 10⁹ Hz
+- terahertz (THz) — 10¹² Hz
+
+La incorporación de Frecuencia reutiliza el Engine actual y no introduce una nueva estrategia de conversión.
+
+#### Límite de responsabilidad
+
+La conversión entre unidades de frecuencia pertenece al propósito actual de UConversor.
+
+Las relaciones entre frecuencia y otras magnitudes físicas, como la conversión entre frecuencia y longitud de onda mediante λ = c/f, no se consideran conversiones de unidades de una misma magnitud y quedan fuera de esta ampliación.
+
+La incorporación de Frecuencia no debe introducir dependencias del núcleo respecto a aplicaciones concretas como radio, telecomunicaciones, sonido o informática. Estos son contextos de uso de la magnitud, no parte de su definición arquitectónica.
