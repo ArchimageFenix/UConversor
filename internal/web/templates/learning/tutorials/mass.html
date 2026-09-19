@@ -1,0 +1,687 @@
+<!--
+File: mass.html
+
+Responsabilidad:
+Presentar el contenido educativo estático de la tutoría
+"Masa" dentro de la sección Aprendizaje de UConversor.
+
+Recibe:
+TutorialViewModel previamente validado por handleTutorial().
+No recibe valores científicos dinámicos.
+
+Produce:
+Estructura HTML de la página educativa de Masa:
+Hero, conceptos básicos, escalas, ejemplo práctico,
+equivalencias, aplicaciones, acceso a UConversor
+y un dato científico de cierre.
+
+Etapa anterior:
+tutorial.html selecciona esta plantilla mediante
+el identificador controlado "mass".
+
+Etapa siguiente:
+tutorial.css proporciona la estructura común y
+mass.css define la identidad visual específica.
+
+Restricciones:
+- No realiza conversiones dinámicas.
+- No llama a App.Convert().
+- No accede a Registry, Validator, Engine, Parser ni Catalog.
+- Las equivalencias son contenido educativo estático.
+- Las ilustraciones son exclusivamente de presentación.
+- La estructura debe permanecer simple y responsiva.
+- Masa y peso se consideran magnitudes físicas diferentes.
+-->
+
+{{define "tutorial-mass"}}
+
+<article class="tutorial tutorial-mass">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="mass-hero">
+
+        <div class="mass-hero__content">
+
+            <span class="mass-hero__eyebrow">
+                Aprendizaje · Masa
+            </span>
+
+            <h1 class="mass-hero__title">
+                Masa
+            </h1>
+
+            <h2 class="mass-hero__subtitle">
+                Una misma magnitud, muchas formas de expresarla
+            </h2>
+
+            <p class="mass-hero__description">
+               La masa es una magnitud física que mide la inercia de un cuerpo, 
+               es decir, su resistencia a cambiar su estado de movimiento cuando actúa sobre él una fuerza. En el Sistema Internacional, 
+               su unidad base es el kilogramo (kg)
+            </p>
+
+            <div class="mass-hero__tags">
+                <span>Vida cotidiana</span>
+                <span>Industria</span>
+                <span>Ciencia</span>
+                <span>Universo</span>
+            </div>
+
+        </div>
+
+
+        <!-- Ilustración CSS simplificada -->
+
+        <div class="mass-hero__visual" aria-hidden="true">
+
+            <div class="mass-balance">
+
+                <div class="mass-balance__beam"></div>
+
+                <div class="mass-balance__center"></div>
+
+                <div class="mass-balance__stand"></div>
+
+                <div class="mass-balance__base"></div>
+
+
+                <div class="mass-balance__side mass-balance__side--left">
+
+                    <span class="mass-balance__rope mass-balance__rope--left"></span>
+                    <span class="mass-balance__rope mass-balance__rope--right"></span>
+
+                    <div class="mass-balance__plate">
+
+                        <div class="mass-balance__weight">
+                            1 kg
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mass-balance__side mass-balance__side--right">
+
+                    <span class="mass-balance__rope mass-balance__rope--left"></span>
+                    <span class="mass-balance__rope mass-balance__rope--right"></span>
+
+                    <div class="mass-balance__plate">
+
+                        <div class="mass-balance__rice"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="mass-hero__visual-note">
+                La misma masa,<br>
+                diferentes unidades.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILA 1
+         01 · 02 · 03
+         ===================================================== -->
+
+    <div class="mass-grid mass-grid--three">
+
+
+        <!-- 01 -->
+
+        <section class="learning-card mass-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    01
+                </span>
+
+                <h2>
+                    ¿Qué es la masa?
+                </h2>
+
+            </header>
+
+            <div class="mass-card__body">
+
+                <p>
+                    La masa es una propiedad física de los cuerpos
+                    y permite comparar objetos utilizando una misma
+                    magnitud.
+                </p>
+
+                <div class="mass-weights" aria-hidden="true">
+
+                    <div class="mass-weight mass-weight--large">
+                        <span>1 kg</span>
+                    </div>
+
+                    <div class="mass-weight mass-weight--medium">
+                        <span>500 g</span>
+                    </div>
+
+                    <div class="mass-weight mass-weight--small">
+                        <span>100 g</span>
+                    </div>
+
+                </div>
+
+                <div class="mass-info">
+                    <span class="mass-info__icon">i</span>
+
+                    <p>
+                        Masa y peso no son lo mismo:
+                        el peso es una fuerza y se expresa en newtons.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 02 -->
+
+        <section class="learning-card mass-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    02
+                </span>
+
+                <h2>
+                    Unidad principal
+                </h2>
+
+            </header>
+
+            <div class="mass-card__body">
+
+                <p>
+                    La unidad base de masa del Sistema Internacional
+                    es el kilogramo, cuyo símbolo es kg.
+                </p>
+
+                <div class="mass-unit">
+
+                    <strong>kg</strong>
+
+                    <span>
+                        kilogramo
+                    </span>
+
+                    <small>
+                        Unidad base del SI
+                    </small>
+
+                </div>
+
+                <div class="mass-unit-list">
+                    <span>mg</span>
+                    <span>g</span>
+                    <span>kg</span>
+                    <span>t</span>
+                </div>
+
+                <div class="mass-info">
+                    <span class="mass-info__icon">i</span>
+
+                    <p>
+                        Estas unidades permiten trabajar cómodamente
+                        con masas de escalas muy diferentes.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 03 -->
+
+        <section class="learning-card mass-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    03
+                </span>
+
+                <h2>
+                    Escala de tamaños
+                </h2>
+
+            </header>
+
+            <div class="mass-card__body">
+
+                <p>
+                    Las unidades de masa permiten representar
+                    cantidades muy pequeñas y también masas enormes.
+                </p>
+
+                <div class="mass-range">
+
+                    <div class="mass-range__item">
+
+                        <div class="mass-range__object mass-range__object--mg"></div>
+
+                        <strong>1 mg</strong>
+
+                        <small>
+                            escala diminuta
+                        </small>
+
+                    </div>
+
+
+                    <div class="mass-range__item">
+
+                        <div class="mass-range__object mass-range__object--g"></div>
+
+                        <strong>1 g</strong>
+
+                        <small>
+                            escala pequeña
+                        </small>
+
+                    </div>
+
+
+                    <div class="mass-range__item">
+
+                        <div class="mass-range__object mass-range__object--kg"></div>
+
+                        <strong>1 kg</strong>
+
+                        <small>
+                            escala cotidiana
+                        </small>
+
+                    </div>
+
+
+                    <div class="mass-range__item">
+
+                        <div class="mass-range__object mass-range__object--t"></div>
+
+                        <strong>1 t</strong>
+
+                        <small>
+                            gran escala
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mass-range__direction">
+
+                    <span>
+                        De lo muy pequeño
+                    </span>
+
+                    <div></div>
+
+                    <span>
+                        a lo muy grande
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA 2
+         04 · 05 · 06
+         ===================================================== -->
+
+    <div class="mass-grid mass-grid--second">
+
+
+        <!-- 04 -->
+
+        <section class="learning-card mass-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    04
+                </span>
+
+                <h2>
+                    Ejemplo práctico
+                </h2>
+
+            </header>
+
+            <div class="mass-card__body">
+
+                <p>
+                    Imagina un paquete de arroz cuya masa es
+                    de 2.5 kilogramos. Podemos expresar esa misma
+                    masa utilizando otras unidades.
+                </p>
+
+
+                <div class="mass-example">
+
+                    <div class="mass-rice-bag" aria-hidden="true">
+
+                        <span class="mass-rice-bag__name">
+                            ARROZ
+                        </span>
+
+                        <strong>
+                            2.5 kg
+                        </strong>
+
+                    </div>
+
+
+                    <div class="mass-example__values">
+
+                        <div>
+                            <span>Toneladas</span>
+                            <strong>0.0025 t</strong>
+                        </div>
+
+                        <div>
+                            <span>Kilogramos</span>
+                            <strong>2.5 kg</strong>
+                        </div>
+
+                        <div>
+                            <span>Gramos</span>
+                            <strong>2500 g</strong>
+                        </div>
+
+                        <div>
+                            <span>Miligramos</span>
+                            <strong>2 500 000 mg</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mass-info">
+                    <span class="mass-info__icon">i</span>
+
+                    <p>
+                        El valor numérico cambia, pero seguimos
+                        describiendo la misma masa.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 05 -->
+
+        <section class="learning-card mass-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    05
+                </span>
+
+                <h2>
+                    La misma masa en diferentes unidades
+                </h2>
+
+            </header>
+
+            <div class="mass-card__body">
+
+                <p>
+                    Una misma cantidad puede expresarse utilizando
+                    diferentes unidades equivalentes.
+                </p>
+
+
+                <div class="mass-equivalences">
+
+                    <div>
+                        <span>Toneladas</span>
+                        <small>t</small>
+                        <strong>0.0025</strong>
+                    </div>
+
+                    <div>
+                        <span>Kilogramos</span>
+                        <small>kg</small>
+                        <strong>2.5</strong>
+                    </div>
+
+                    <div>
+                        <span>Gramos</span>
+                        <small>g</small>
+                        <strong>2500</strong>
+                    </div>
+
+                    <div>
+                        <span>Miligramos</span>
+                        <small>mg</small>
+                        <strong>2 500 000</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="mass-equivalences__note">
+                    ✓ Diferentes unidades, la misma masa.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 06 -->
+
+        <section class="learning-card mass-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    06
+                </span>
+
+                <h2>
+                    ¿Dónde usamos la masa?
+                </h2>
+
+            </header>
+
+            <div class="mass-card__body">
+
+                <p>
+                    Medir masa es necesario en muchas actividades
+                    cotidianas, científicas y técnicas.
+                </p>
+
+
+                <ul class="mass-uses">
+
+                    <li>
+                        <span class="mass-uses__icon">C</span>
+
+                        <div>
+                            <strong>Cocina</strong>
+                            <small>Ingredientes y recetas</small>
+                        </div>
+                    </li>
+
+                    <li>
+                        <span class="mass-uses__icon">V</span>
+
+                        <div>
+                            <strong>Comercio</strong>
+                            <small>Productos y envíos</small>
+                        </div>
+                    </li>
+
+                    <li>
+                        <span class="mass-uses__icon">C</span>
+
+                        <div>
+                            <strong>Ciencia</strong>
+                            <small>Investigación y experimentos</small>
+                        </div>
+                    </li>
+
+                    <li>
+                        <span class="mass-uses__icon">I</span>
+
+                        <div>
+                            <strong>Industria</strong>
+                            <small>Materiales y fabricación</small>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA 3
+         07 · 08
+         ===================================================== -->
+
+    <div class="mass-grid mass-grid--final">
+
+
+        <!-- 07 -->
+
+        <section class="learning-card mass-card mass-card--converter">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    07
+                </span>
+
+                <h2>
+                    Explora con UConversor
+                </h2>
+
+            </header>
+
+            <div class="mass-card__body mass-converter">
+
+                <div class="mass-converter__mark" aria-hidden="true">
+                    U
+                </div>
+
+                <p>
+                    Utiliza UConversor para explorar diferentes
+                    unidades de masa y observar sus equivalencias.
+                </p>
+
+                <a
+                    class="mass-converter__button"
+                    href="/"
+                >
+                    Ir al conversor
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <small>
+                    Convierte, compara y aprende.
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- 08 -->
+
+        <section class="learning-card mass-card mass-card--fact">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    08
+                </span>
+
+                <h2>
+                    Dato interesante
+                </h2>
+
+            </header>
+
+            <div class="mass-fact">
+
+                <div class="mass-fact__content">
+
+                    <p>
+                        La masa de la Tierra es aproximadamente:
+                    </p>
+
+                    <strong class="mass-fact__number">
+                        5.972 × 10<sup>24</sup> kg
+                    </strong>
+
+                    <p>
+                        Las unidades de masa también permiten
+                        describir cuerpos a escalas astronómicas.
+                    </p>
+
+                </div>
+
+
+                <div class="mass-earth" aria-hidden="true">
+
+                    <div class="mass-earth__planet">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="mass-earth__orbit"></div>
+
+                    <p>
+                        De objetos cotidianos<br>
+                        a cuerpos celestes
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</article>
+
+{{end}}
