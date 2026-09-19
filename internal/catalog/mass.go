@@ -17,6 +17,7 @@ func MassUnits() []units.Unit {
 	nist := model.Source{Kind: model.SourceExact, Authority: "NIST", Reference: "International yard and pound / SI conversion values", URL: "https://www.nist.gov/pml/special-publication-811"}
 	zero := 0.0
 	return []units.Unit{
+		{Name: "microgramo", Symbol: "µg", Aliases: []string{"ug"}, Family: units.FamilyMass, Magnitude: units.MagnitudeMass, Scale: 1e-9, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
 		{Name: "miligramo", Symbol: "mg", Family: units.FamilyMass, Magnitude: units.MagnitudeMass, Scale: 1e-6, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
 		{Name: "gramo", Symbol: "g", Family: units.FamilyMass, Magnitude: units.MagnitudeMass, Scale: 0.001, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
 		{Name: "kilogramo", Symbol: "kg", Family: units.FamilyMass, Magnitude: units.MagnitudeMass, Reference: true, Scale: 1, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},

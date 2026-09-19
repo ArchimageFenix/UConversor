@@ -60,6 +60,37 @@ func LengthUnits() []units.Unit {
 	}
 
 	return []units.Unit{
+
+		{
+			Name:      "ångström",
+			Symbol:    "Å",
+			Aliases:   []string{"angstrom"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     1e-10,
+			Kind:      units.TransformLinear,
+			Source:    bipm,
+		},
+		{
+			Name:      "nanómetro",
+			Symbol:    "nm",
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     1e-9,
+			Kind:      units.TransformLinear,
+			Source:    bipm,
+		},
+		{
+			Name:      "micrómetro",
+			Symbol:    "µm",
+			Aliases:   []string{"um"},
+			Family:    units.FamilyLength,
+			Magnitude: units.MagnitudeLength,
+			Scale:     1e-6,
+			Kind:      units.TransformLinear,
+			Source:    bipm,
+		},
+
 		{
 			Name:      "milímetro",
 			Symbol:    "mm",
