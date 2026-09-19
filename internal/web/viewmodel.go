@@ -128,6 +128,36 @@ func visualFamily(family, magnitude string) string {
 	case family == "Electrónica" && magnitude == "Corriente":
 		return "current"
 
+	case family == "Electrónica" && magnitude == "Resistencia":
+		return "resistance"
+
+	case family == "Electrónica" && magnitude == "Potencia":
+		return "power"
+
+	case family == "Masa" && magnitude == "Masa":
+		return "mass"
+
+	case family == "Velocidad" && magnitude == "Velocidad":
+		return "speed"
+
+	case family == "Física" && magnitude == "Volumen":
+		return "volume"
+
+	case family == "Fuerza" && magnitude == "Fuerza":
+		return "force"
+
+	case family == "Datos" && magnitude == "Almacenamiento de datos":
+		return "data"
+
+	case family == "Ángulos" && magnitude == "Ángulo plano":
+		return "angle"
+
+	case family == "Tiempo" && magnitude == "Tiempo":
+		return "time"
+
+	case family == "Datos" && magnitude == "Tasa de transferencia de datos":
+		return "data-rate"
+
 	default:
 		return "generic"
 	}

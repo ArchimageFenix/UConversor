@@ -56,6 +56,18 @@ func ForceUnits() []units.Unit {
 			Scale:     1000,
 			Source:    si,
 		},
+
+		{
+			Name:      "meganewton",
+			Symbol:    "MN",
+			Aliases:   []string{"meganewton"},
+			Family:    units.FamilyForce,
+			Magnitude: units.MagnitudeForce,
+			Kind:      units.TransformLinear,
+			Scale:     1e6,
+			Source:    si,
+		},
+
 		{
 			Name:      "libra-fuerza",
 			Symbol:    "lbf",

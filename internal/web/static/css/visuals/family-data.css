@@ -1,0 +1,240 @@
+/*
+File: family-data.css
+
+Responsibility:
+  Draw the thematic visual representation for
+  Datos / Almacenamiento de datos.
+
+Receives:
+  HTML structure selected when VisualFamily = "data".
+
+Produces:
+  A modern vector-style storage device with status lights,
+  digital blocks and ambient particles.
+
+Previous logical stage:
+  results.html selects the data visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric storage value.
+  - Blocks and lights are decorative.
+  - Does not calculate bytes or storage capacity.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+.family-visual--data {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* Ambient halo */
+
+.family-visual--data .data-visual__halo {
+    position: absolute;
+
+    width: 135px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(70, 155, 255, 0.30) 0%,
+            rgba(45, 100, 220, 0.13) 48%,
+            transparent 72%
+        );
+
+    filter: blur(8px);
+    z-index: 0;
+}
+
+
+/* Storage device */
+
+.family-visual--data .data-visual__drive {
+    position: relative;
+
+    width: 88px;
+    height: 67px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d9efff 0%,
+            #70b8e8 32%,
+            #286cae 68%,
+            #16477d 100%
+        );
+
+    border: 2px solid rgba(190, 230, 255, 0.80);
+
+    box-shadow:
+        0 10px 16px rgba(20, 65, 120, 0.25),
+        0 0 17px rgba(55, 145, 235, 0.35),
+        inset 3px 3px 5px rgba(255, 255, 255, 0.42),
+        inset -4px -5px 7px rgba(15, 54, 100, 0.30);
+
+    z-index: 3;
+}
+
+
+/* Front panel */
+
+.family-visual--data .data-visual__drive-face {
+    position: absolute;
+
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+
+    height: 17px;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(19, 56, 98, 0.90),
+            rgba(9, 31, 61, 0.95)
+        );
+
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Status lights */
+
+.family-visual--data .data-visual__light {
+    position: absolute;
+
+    bottom: 14px;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    z-index: 4;
+}
+
+.family-visual--data .data-visual__light--1 {
+    right: 17px;
+
+    background: #75f5b2;
+
+    box-shadow:
+        0 0 7px rgba(117, 245, 178, 0.90);
+}
+
+.family-visual--data .data-visual__light--2 {
+    right: 29px;
+
+    background: #69c8ff;
+
+    box-shadow:
+        0 0 7px rgba(105, 200, 255, 0.90);
+}
+
+
+/* Digital blocks */
+
+.family-visual--data .data-visual__block {
+    position: absolute;
+
+    width: 15px;
+    height: 15px;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #86e8ff,
+            #398ddc
+        );
+
+    border: 1px solid rgba(205, 245, 255, 0.75);
+
+    box-shadow:
+        0 0 8px rgba(65, 175, 245, 0.55);
+
+    z-index: 2;
+}
+
+.family-visual--data .data-visual__block--1 {
+    top: 13px;
+    right: 24px;
+}
+
+.family-visual--data .data-visual__block--2 {
+    top: 30px;
+    right: 10px;
+
+    width: 11px;
+    height: 11px;
+}
+
+.family-visual--data .data-visual__block--3 {
+    bottom: 14px;
+    left: 17px;
+
+    width: 10px;
+    height: 10px;
+}
+
+
+/* Decorative particles */
+
+.family-visual--data .data-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(84, 194, 255, 0.90);
+
+    box-shadow:
+        0 0 7px rgba(84, 194, 255, 0.65);
+
+    z-index: 1;
+}
+
+.family-visual--data .data-visual__particle--a {
+    width: 4px;
+    height: 4px;
+
+    top: 18px;
+    left: 23px;
+}
+
+.family-visual--data .data-visual__particle--b {
+    width: 3px;
+    height: 3px;
+
+    bottom: 18px;
+    right: 27px;
+}
+
+
+@media (max-width: 640px) {
+    .family-visual--data {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

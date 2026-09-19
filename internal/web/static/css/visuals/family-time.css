@@ -1,0 +1,301 @@
+/*
+File: family-time.css
+
+Responsibility:
+  Draw the thematic visual representation for Tiempo / Tiempo.
+
+Receives:
+  HTML structure selected when VisualFamily = "time".
+
+Produces:
+  A modern vector-style analog clock with fixed hands,
+  dial marks and ambient particles.
+
+Previous logical stage:
+  results.html selects the time visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric time value.
+  - Clock hands remain fixed and decorative.
+  - Does not calculate durations, dates or time zones.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+.family-visual--time {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* Ambient halo */
+
+.family-visual--time .time-visual__halo {
+    position: absolute;
+
+    width: 125px;
+    height: 105px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(73, 175, 255, 0.28),
+            rgba(65, 105, 220, 0.12) 50%,
+            transparent 73%
+        );
+
+    filter: blur(8px);
+
+    z-index: 0;
+}
+
+
+/* Clock body */
+
+.family-visual--time .time-visual__clock {
+    position: relative;
+
+    width: 91px;
+    height: 91px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 42% 36%,
+            #f5fcff 0%,
+            #c7eaff 17%,
+            #70b8ec 50%,
+            #326fae 76%,
+            #204b82 100%
+        );
+
+    border: 4px solid rgba(207, 239, 255, 0.90);
+
+    box-shadow:
+        0 9px 16px rgba(25, 66, 115, 0.25),
+        0 0 18px rgba(67, 164, 240, 0.40),
+        inset 0 3px 5px rgba(255, 255, 255, 0.55),
+        inset 0 -6px 9px rgba(25, 70, 125, 0.28);
+
+    overflow: hidden;
+
+    z-index: 3;
+}
+
+
+/* Glass reflection */
+
+.family-visual--time .time-visual__shine {
+    position: absolute;
+
+    top: 10px;
+    left: 17px;
+
+    width: 53px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.55),
+            transparent
+        );
+
+    transform: rotate(-8deg);
+
+    z-index: 1;
+}
+
+
+/* Main dial marks */
+
+.family-visual--time .time-visual__mark {
+    position: absolute;
+
+    width: 5px;
+    height: 12px;
+
+    border-radius: 4px;
+
+    background: rgba(245, 252, 255, 0.92);
+
+    box-shadow:
+        0 0 4px rgba(255, 255, 255, 0.45);
+
+    z-index: 3;
+}
+
+.family-visual--time .time-visual__mark--12 {
+    top: 7px;
+    left: 39px;
+}
+
+.family-visual--time .time-visual__mark--6 {
+    bottom: 7px;
+    left: 39px;
+}
+
+.family-visual--time .time-visual__mark--3 {
+    top: 38px;
+    right: 8px;
+
+    width: 12px;
+    height: 5px;
+}
+
+.family-visual--time .time-visual__mark--9 {
+    top: 38px;
+    left: 8px;
+
+    width: 12px;
+    height: 5px;
+}
+
+
+/* Clock hands */
+
+.family-visual--time .time-visual__hand {
+    position: absolute;
+
+    left: 43px;
+    top: 43px;
+
+    height: 5px;
+
+    border-radius: 5px;
+
+    transform-origin: 0 50%;
+
+    z-index: 5;
+}
+
+
+/* Hour hand */
+
+.family-visual--time .time-visual__hand--hour {
+    width: 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #d9f3ff
+        );
+
+    transform: rotate(210deg);
+
+    box-shadow:
+        0 0 5px rgba(255, 255, 255, 0.60);
+}
+
+
+/* Minute hand */
+
+.family-visual--time .time-visual__hand--minute {
+    width: 34px;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff1a8,
+            #ffd04d
+        );
+
+    transform: rotate(295deg);
+
+    box-shadow:
+        0 0 6px rgba(255, 207, 72, 0.70);
+}
+
+
+/* Central pivot */
+
+.family-visual--time .time-visual__pivot {
+    position: absolute;
+
+    left: 38px;
+    top: 38px;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff,
+            #ffd766 38%,
+            #dd8e22 100%
+        );
+
+    box-shadow:
+        0 0 7px rgba(255, 205, 75, 0.70);
+
+    z-index: 6;
+}
+
+
+/* Decorative particles */
+
+.family-visual--time .time-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(83, 184, 255, 0.90);
+
+    box-shadow:
+        0 0 7px rgba(83, 184, 255, 0.65);
+
+    z-index: 1;
+}
+
+.family-visual--time .time-visual__particle--a {
+    width: 4px;
+    height: 4px;
+
+    top: 18px;
+    right: 24px;
+}
+
+.family-visual--time .time-visual__particle--b {
+    width: 3px;
+    height: 3px;
+
+    bottom: 19px;
+    right: 29px;
+}
+
+.family-visual--time .time-visual__particle--c {
+    width: 5px;
+    height: 5px;
+
+    top: 30px;
+    left: 20px;
+}
+
+
+@media (max-width: 640px) {
+    .family-visual--time {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

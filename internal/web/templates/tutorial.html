@@ -1,0 +1,98 @@
+{{define "tutorial"}}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Longitud y Distancia · Aprendizaje · UConversor</title>
+
+    <!--
+        Global styles shared by the UConversor Web interface.
+    -->
+    <link
+        rel="stylesheet"
+        href="/static/css/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/components.css"
+    >
+
+<link
+    rel="stylesheet"
+    href="/static/css/learning/tutorials/tutorial.css"
+>
+
+    <link
+    rel="stylesheet"
+    href="/static/css/learning/tutorials/length.css"
+>
+</head>
+
+<body>
+
+    {{template "header" .}}
+
+    <main class="page">
+
+        <!--
+            File: tutorial.html
+
+            Responsibility:
+                - Provide the common HTML shell used by thematic
+                  pages in the UConversor Learning area.
+                - Preserve the shared UConversor header and footer.
+                - Delegate educational content to the corresponding
+                  thematic template.
+
+            Receives:
+                TutorialViewModel.
+
+            Produces:
+                Complete HTML page for a Learning topic.
+
+            Previous logical stage:
+                renderTutorialPage().
+
+            Next logical stage:
+                Template selected from learning/tutorials/.
+
+            Important restrictions:
+                - Does not perform conversions.
+                - Does not call App.Convert().
+                - Does not inspect Registry or Catalog.
+                - Does not contain scientific conversion logic.
+                - Tutorial identifiers must already have been
+                  validated by handleTutorial().
+        -->
+
+        <div class="tutorial-page">
+
+            {{if eq .Tutorial "length"}}
+
+                {{template "tutorial-length" .}}
+
+            {{end}}
+
+        </div>
+
+    </main>
+
+    {{template "footer" .}}
+
+</body>
+
+</html>
+{{end}}

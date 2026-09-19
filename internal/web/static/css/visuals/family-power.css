@@ -1,0 +1,251 @@
+/*
+File: family-power.css
+
+Responsibility:
+  Draw the thematic visual representation for Electrónica / Potencia.
+
+Receives:
+  HTML structure selected when VisualFamily = "power".
+
+Produces:
+  A modern vector-style electrical-power illustration using
+  a luminous core, electrical bolt, external arcs and particles.
+
+Previous logical stage:
+  results.html selects the power visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric power value.
+  - Does not calculate electrical power.
+  - Does not derive power from voltage or current.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+
+/* =========================================================
+   POWER VISUAL
+   ========================================================= */
+
+.family-visual--power {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT HALO
+   ========================================================= */
+
+.family-visual--power .power-visual__halo {
+    position: absolute;
+
+    width: 125px;
+    height: 105px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(70, 165, 255, 0.32) 0%,
+            rgba(55, 120, 245, 0.17) 42%,
+            rgba(55, 120, 245, 0) 72%
+        );
+
+    filter: blur(7px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   CENTRAL POWER CORE
+   ========================================================= */
+
+.family-visual--power .power-visual__core {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 38% 32%,
+            #dff6ff 0%,
+            #58b7ff 22%,
+            #2868d8 55%,
+            #15347f 100%
+        );
+
+    border: 2px solid rgba(182, 226, 255, 0.72);
+
+    box-shadow:
+        0 8px 16px rgba(25, 65, 140, 0.28),
+        0 0 20px rgba(60, 155, 255, 0.55),
+        inset 0 3px 6px rgba(255, 255, 255, 0.55),
+        inset 0 -6px 9px rgba(10, 38, 100, 0.32);
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   CORE GLOW
+   ========================================================= */
+
+.family-visual--power .power-visual__core-glow {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.40),
+            rgba(110, 195, 255, 0.10) 55%,
+            transparent 72%
+        );
+}
+
+
+/* =========================================================
+   LIGHTNING BOLT
+   ========================================================= */
+
+.family-visual--power .power-visual__bolt {
+    position: relative;
+
+    width: 25px;
+    height: 42px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff9b0 0%,
+            #ffd83d 48%,
+            #f0a51f 100%
+        );
+
+    clip-path:
+        polygon(
+            55% 0%,
+            18% 48%,
+            45% 48%,
+            30% 100%,
+            82% 39%,
+            55% 39%
+        );
+
+    filter:
+        drop-shadow(0 0 4px rgba(255, 225, 80, 0.85));
+
+    z-index: 4;
+}
+
+
+/* =========================================================
+   EXTERNAL ARCS
+   ========================================================= */
+
+.family-visual--power .power-visual__arc {
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    border: 3px solid transparent;
+    border-radius: 50%;
+
+    z-index: 1;
+}
+
+.family-visual--power .power-visual__arc--left {
+    border-left-color: rgba(78, 154, 255, 0.60);
+    border-top-color: rgba(78, 154, 255, 0.24);
+
+    transform: rotate(-20deg);
+}
+
+.family-visual--power .power-visual__arc--right {
+    border-right-color: rgba(255, 207, 70, 0.62);
+    border-bottom-color: rgba(255, 207, 70, 0.22);
+
+    transform: rotate(20deg);
+}
+
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.family-visual--power .power-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255, 218, 78, 0.90);
+
+    box-shadow:
+        0 0 8px rgba(255, 211, 60, 0.75);
+
+    z-index: 2;
+}
+
+.family-visual--power .power-visual__particle--a {
+    width: 5px;
+    height: 5px;
+
+    top: 18px;
+    left: 29px;
+}
+
+.family-visual--power .power-visual__particle--b {
+    width: 4px;
+    height: 4px;
+
+    top: 28px;
+    right: 25px;
+}
+
+.family-visual--power .power-visual__particle--c {
+    width: 3px;
+    height: 3px;
+
+    bottom: 18px;
+    right: 39px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .family-visual--power {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

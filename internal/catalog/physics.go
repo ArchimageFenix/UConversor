@@ -53,5 +53,6 @@ func PhysicsUnits() []units.Unit {
 		{Name: "kilocaloría termoquímica", Symbol: "kcal", Family: units.FamilyPhysics, Magnitude: units.MagnitudeEnergy, Scale: 4184, Kind: units.TransformLinear, MinValue: &zero, Source: nist},
 		{Name: "watt-hora", Symbol: "Wh", Family: units.FamilyPhysics, Magnitude: units.MagnitudeEnergy, Scale: 3600, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
 		{Name: "kilowatt-hora", Symbol: "kWh", Family: units.FamilyPhysics, Magnitude: units.MagnitudeEnergy, Scale: 3.6e6, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
+		{Name: "megajoule", Symbol: "MJ", Family: units.FamilyPhysics, Magnitude: units.MagnitudeEnergy, Scale: 1e6, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
 	}
 }

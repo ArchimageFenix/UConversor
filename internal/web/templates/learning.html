@@ -1,0 +1,97 @@
+{{define "learning"}}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Aprendizaje · UConversor</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/components.css"
+    >
+
+
+    <link
+    rel="stylesheet"
+    href="/static/css/learning/hero.css"
+>
+
+
+<link
+    rel="stylesheet"
+    href="/static/css/learning/topics.css"
+>
+</head>
+
+<body>
+
+    {{template "header" .}}
+
+    <main class="page">
+
+        <!--
+            File: learning.html
+
+            Responsibility:
+                - Define the root document of the UConversor
+                  Learning area.
+                - Compose the independent presentation
+                  components that form the Learning page.
+
+            Receives:
+                LearningViewModel with the navigation state
+                required by the Web interface.
+
+            Produces:
+                Complete HTML document for /aprendizaje.
+
+            Previous logical stage:
+                learning_viewmodel.go / render.go.
+
+            Next logical stage:
+                Independent templates under templates/learning/.
+
+            Important restrictions:
+                - Must not perform conversions.
+                - Must not call App.Convert().
+                - Must not inspect Registry or Catalog.
+                - Must not contain Engine logic.
+                - Must not duplicate scientific logic.
+                - Educational formulas and exercises are
+                  static presentation content.
+                - Page-specific components must remain
+                  separated by real presentation responsibility.
+        -->
+
+        <section class="learning-page">
+
+            {{template "learning-hero" .}}
+            {{template "learning-topics" .}}
+
+        </section>
+
+    </main>
+
+    {{template "footer" .}}
+
+</body>
+
+</html>
+{{end}}

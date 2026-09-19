@@ -95,6 +95,7 @@ func NewHandler(
 //
 // Produces:
 //   - Initial HTML page with an empty PageViewModel.
+//   - ActivePage set explicitly to "home" for navigation state.
 //
 // Previous logical stage:
 //   - server.go route registration.
@@ -125,7 +126,9 @@ func (h *Handler) handleHome(
 		return
 	}
 
-	viewModel := PageViewModel{}
+	viewModel := PageViewModel{
+		ActivePage: "home",
+	}
 
 	h.renderPage(
 		w,
@@ -186,6 +189,55 @@ func (h *Handler) handleExamples(
 	)
 }
 
+// handleLearning renders the UConversor Learning page.
+//
+// Receives:
+//   - GET request for "/aprendizaje".
+//
+// Produces:
+//   - LearningViewModel prepared for the educational Web page.
+//
+// Previous logical stage:
+//   - server.go route registration.
+//
+// Next logical stages:
+//   - learning_viewmodel.go.
+//   - render.go.
+//
+// Important restrictions:
+//   - Must not call app.App.
+//   - Must not perform conversions.
+//   - Must not inspect the unit Registry or catalog.
+//   - Must not define or calculate scientific formulas.
+//   - Must not render templates directly.
+//   - Only GET is accepted for this route.
+func (h *Handler) handleLearning(
+	w http.ResponseWriter,
+	r *http.Request,
+) {
+	if r.URL.Path != "/aprendizaje" {
+		http.NotFound(w, r)
+		return
+	}
+
+	if r.Method != http.MethodGet {
+		http.Error(
+			w,
+			"Método no permitido",
+			http.StatusMethodNotAllowed,
+		)
+		return
+	}
+
+	viewModel := NewLearningViewModel()
+
+	h.renderLearningPage(
+		w,
+		http.StatusOK,
+		viewModel,
+	)
+}
+
 // handleConvert processes a conversion request submitted by the browser.
 //
 // Receives:
@@ -197,6 +249,8 @@ func (h *Handler) handleExamples(
 //   - A PageViewModel containing either:
 //   - a conversion result, or
 //   - a controlled presentation error.
+//   - ActivePage set explicitly to "home" because conversion
+//     results belong to the main page.
 //   - HTTP 413 when the request body exceeds the configured limit.
 //   - HTTP 400 when the form cannot be parsed.
 //
@@ -272,9 +326,10 @@ func (h *Handler) handleConvert(
 		)
 
 		viewModel := PageViewModel{
-			Input:    expression,
-			HasError: true,
-			Error:    &errorViewModel,
+			ActivePage: "home",
+			Input:      expression,
+			HasError:   true,
+			Error:      &errorViewModel,
 		}
 
 		h.renderPage(
@@ -290,9 +345,10 @@ func (h *Handler) handleConvert(
 		status, errorViewModel := classifyConversionError(err)
 
 		viewModel := PageViewModel{
-			Input:    expression,
-			HasError: true,
-			Error:    &errorViewModel,
+			ActivePage: "home",
+			Input:      expression,
+			HasError:   true,
+			Error:      &errorViewModel,
 		}
 
 		h.renderPage(
@@ -306,9 +362,10 @@ func (h *Handler) handleConvert(
 	resultViewModel := NewResultViewModel(result)
 
 	viewModel := PageViewModel{
-		Input:     expression,
-		HasResult: true,
-		Result:    &resultViewModel,
+		ActivePage: "home",
+		Input:      expression,
+		HasResult:  true,
+		Result:     &resultViewModel,
 	}
 
 	h.renderPage(
@@ -367,5 +424,70 @@ func (h *Handler) handleHealth(
 
 	_, _ = w.Write(
 		[]byte("OK"),
+	)
+}
+
+// handleTutorial resolves and serves the static thematic tutorials
+// available in the UConversor Learning area.
+//
+// Responsibility:
+//   - Receive requests under /aprendizaje/{tema}.
+//   - Validate the requested tutorial against a controlled Web-side
+//     list.
+//   - Build the corresponding TutorialViewModel.
+//   - Delegate HTML generation to the tutorial renderer.
+//
+// Receives:
+//   - HTTP GET requests for a supported Learning tutorial.
+//
+// Produces:
+//   - A rendered static tutorial page.
+//   - HTTP 404 when the requested tutorial does not exist.
+//   - HTTP 405 when the request method is not GET.
+//
+// Previous logical stage:
+//   - server.go.
+//
+// Next logical stage:
+//   - TutorialViewModel and renderTutorialPage().
+//
+// Important restrictions:
+//   - Must not perform conversions.
+//   - Must not call App.Convert().
+//   - Must not inspect Registry or Catalog.
+//   - Must not send arbitrary URL values directly to the template
+//     system.
+//   - Every tutorial must be explicitly allowed by this Web layer.
+func (h *Handler) handleTutorial(
+	w http.ResponseWriter,
+	r *http.Request,
+) {
+	if r.Method != http.MethodGet {
+		http.Error(
+			w,
+			"Método no permitido",
+			http.StatusMethodNotAllowed,
+		)
+		return
+	}
+
+	var tutorial string
+
+	switch r.URL.Path {
+
+	case "/aprendizaje/longitud":
+		tutorial = "length"
+
+	default:
+		http.NotFound(w, r)
+		return
+	}
+
+	viewModel := NewTutorialViewModel(tutorial)
+
+	h.renderTutorialPage(
+		w,
+		http.StatusOK,
+		viewModel,
 	)
 }

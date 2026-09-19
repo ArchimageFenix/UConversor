@@ -1,0 +1,292 @@
+/*
+File: family-mass.css
+
+Responsibility:
+  Draw the thematic visual representation for Masa / Masa.
+
+Receives:
+  HTML structure selected when VisualFamily = "mass".
+
+Produces:
+  A modern vector-style mass illustration using
+  a stylized calibration weight, metallic volume,
+  ground shadow and ambient particles.
+
+Previous logical stage:
+  results.html selects the mass visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric mass value.
+  - Does not calculate weight or gravitational force.
+  - The "kg" label is thematic and does not represent user input.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+
+/* =========================================================
+   MASS VISUAL
+   ========================================================= */
+
+.family-visual--mass {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT HALO
+   ========================================================= */
+
+.family-visual--mass .mass-visual__halo {
+    position: absolute;
+
+    width: 120px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(88, 145, 205, 0.25) 0%,
+            rgba(65, 110, 175, 0.12) 45%,
+            rgba(65, 110, 175, 0) 72%
+        );
+
+    filter: blur(8px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   HANDLE
+   ========================================================= */
+
+.family-visual--mass .mass-visual__handle {
+    position: absolute;
+
+    top: 13px;
+
+    width: 54px;
+    height: 40px;
+
+    border-radius: 25px 25px 8px 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d9e4ee 0%,
+            #7d93aa 55%,
+            #53697f 100%
+        );
+
+    border: 2px solid rgba(57, 78, 100, 0.55);
+
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.70),
+        0 4px 8px rgba(33, 53, 75, 0.20);
+
+    z-index: 1;
+}
+
+.family-visual--mass .mass-visual__handle-inner {
+    position: absolute;
+
+    top: 9px;
+    left: 11px;
+
+    width: 28px;
+    height: 21px;
+
+    border-radius: 14px 14px 6px 6px;
+
+    background: #f4f8fb;
+
+    box-shadow:
+        inset 0 2px 4px rgba(50, 75, 100, 0.20);
+}
+
+
+/* =========================================================
+   WEIGHT BODY
+   ========================================================= */
+
+.family-visual--mass .mass-visual__weight {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 92px;
+    height: 66px;
+
+    margin-top: 28px;
+
+    border-radius: 22px 22px 14px 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e9f0f6 0%,
+            #a4b5c5 38%,
+            #71869a 70%,
+            #4c6074 100%
+        );
+
+    border: 2px solid rgba(58, 77, 96, 0.55);
+
+    box-shadow:
+        0 10px 15px rgba(31, 49, 68, 0.25),
+        inset 3px 3px 5px rgba(255, 255, 255, 0.65),
+        inset -4px -5px 7px rgba(41, 58, 76, 0.25);
+
+    overflow: hidden;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   SURFACE SHINE
+   ========================================================= */
+
+.family-visual--mass .mass-visual__shine {
+    position: absolute;
+
+    top: 7px;
+    left: 17px;
+
+    width: 52px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.62),
+            transparent
+        );
+
+    filter: blur(1px);
+}
+
+
+/* =========================================================
+   MASS LABEL
+   ========================================================= */
+
+.family-visual--mass .mass-visual__label {
+    position: relative;
+
+    margin-top: 8px;
+
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+
+    color: #30475e;
+
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.70);
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   GROUND SHADOW
+   ========================================================= */
+
+.family-visual--mass .mass-visual__ground {
+    position: absolute;
+
+    bottom: 4px;
+
+    width: 100px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(40, 65, 90, 0.25),
+            rgba(40, 65, 90, 0)
+        );
+
+    filter: blur(3px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.family-visual--mass .mass-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(91, 153, 211, 0.72);
+
+    box-shadow:
+        0 0 7px rgba(91, 153, 211, 0.55);
+
+    z-index: 1;
+}
+
+.family-visual--mass .mass-visual__particle--a {
+    width: 4px;
+    height: 4px;
+
+    top: 22px;
+    left: 27px;
+}
+
+.family-visual--mass .mass-visual__particle--b {
+    width: 5px;
+    height: 5px;
+
+    top: 30px;
+    right: 25px;
+}
+
+.family-visual--mass .mass-visual__particle--c {
+    width: 3px;
+    height: 3px;
+
+    bottom: 21px;
+    right: 30px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .family-visual--mass {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

@@ -114,6 +114,10 @@ func NewServer(
 //	GET  /examples
 //	     Displays the units currently supported by UConversor.
 //
+// GET  /aprendizaje
+//
+//	     Displays the static UConversor Learning page.
+//
 //	POST /convert
 //	     Processes a conversion request.
 //
@@ -124,7 +128,7 @@ func NewServer(
 //   - NewServer().
 //
 // Next logical stage:
-//   - handlers.go for "/", "/examples" and "/convert".
+//   - handlers.go for "/", "/examples" and "/convert". "/aprendizaje",
 //   - Embedded filesystem for "/static/".
 //
 // Important restrictions:
@@ -148,8 +152,18 @@ func (s *Server) registerRoutes(
 	)
 
 	mux.HandleFunc(
+		"/aprendizaje",
+		handler.handleLearning,
+	)
+
+	mux.HandleFunc(
 		"/convert",
 		handler.handleConvert,
+	)
+
+	mux.HandleFunc(
+		"/aprendizaje/",
+		handler.handleTutorial,
 	)
 
 	mux.HandleFunc(

@@ -1,0 +1,243 @@
+/*
+File: family-force.css
+
+Responsibility:
+  Draw the thematic visual representation for Fuerza / Fuerza.
+
+Receives:
+  HTML structure selected when VisualFamily = "force".
+
+Produces:
+  A modern vector-style force illustration showing
+  a directional vector acting on a physical object.
+
+Previous logical stage:
+  results.html selects the force visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric force value.
+  - Vector length does not encode force magnitude.
+  - Does not calculate acceleration or mass.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+.family-visual--force {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* Ambient halo */
+
+.family-visual--force .force-visual__halo {
+    position: absolute;
+
+    width: 140px;
+    height: 85px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255, 125, 75, 0.26),
+            rgba(235, 85, 55, 0.12) 45%,
+            transparent 72%
+        );
+
+    filter: blur(8px);
+
+    z-index: 0;
+}
+
+
+/* Physical object */
+
+.family-visual--force .force-visual__object {
+    position: relative;
+
+    width: 58px;
+    height: 58px;
+
+    margin-left: 38px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffb36d 0%,
+            #e76a3c 50%,
+            #a83b2c 100%
+        );
+
+    border: 2px solid rgba(139, 53, 40, 0.55);
+
+    box-shadow:
+        0 9px 15px rgba(112, 45, 35, 0.25),
+        inset 3px 3px 5px rgba(255, 255, 255, 0.42),
+        inset -4px -4px 6px rgba(106, 39, 30, 0.25);
+
+    z-index: 3;
+}
+
+
+/* Object shine */
+
+.family-visual--force .force-visual__object-shine {
+    position: absolute;
+
+    top: 7px;
+    left: 9px;
+
+    width: 34px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.62),
+            transparent
+        );
+}
+
+
+/* Force vector */
+
+.family-visual--force .force-visual__vector {
+    position: absolute;
+
+    left: 15px;
+
+    display: flex;
+    align-items: center;
+
+    width: 73px;
+    height: 28px;
+
+    z-index: 4;
+}
+
+.family-visual--force .force-visual__vector-line {
+    display: block;
+
+    width: 54px;
+    height: 7px;
+
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffd666,
+            #ff6d43
+        );
+
+    box-shadow:
+        0 0 9px rgba(255, 111, 67, 0.60);
+}
+
+.family-visual--force .force-visual__vector-head {
+    display: block;
+
+    width: 18px;
+    height: 18px;
+
+    margin-left: -8px;
+
+    border-top: 7px solid #ff7045;
+    border-right: 7px solid #ff7045;
+
+    transform: rotate(45deg);
+
+    filter:
+        drop-shadow(0 0 4px rgba(255, 105, 65, 0.55));
+}
+
+
+/* Motion / reaction lines */
+
+.family-visual--force .force-visual__motion {
+    position: absolute;
+
+    right: 15px;
+
+    height: 4px;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(220, 74, 50, 0.65),
+            transparent
+        );
+
+    z-index: 1;
+}
+
+.family-visual--force .force-visual__motion--1 {
+    top: 45px;
+    width: 25px;
+}
+
+.family-visual--force .force-visual__motion--2 {
+    top: 65px;
+    width: 18px;
+}
+
+
+/* Decorative particles */
+
+.family-visual--force .force-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255, 130, 75, 0.90);
+
+    box-shadow:
+        0 0 7px rgba(255, 110, 65, 0.65);
+
+    z-index: 1;
+}
+
+.family-visual--force .force-visual__particle--a {
+    width: 4px;
+    height: 4px;
+
+    top: 22px;
+    right: 29px;
+}
+
+.family-visual--force .force-visual__particle--b {
+    width: 3px;
+    height: 3px;
+
+    bottom: 22px;
+    left: 35px;
+}
+
+
+@media (max-width: 640px) {
+    .family-visual--force {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

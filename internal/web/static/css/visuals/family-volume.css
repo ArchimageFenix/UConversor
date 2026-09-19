@@ -1,0 +1,242 @@
+/*
+File: family-volume.css
+
+Responsibility:
+  Draw the thematic visual representation for Física / Volumen.
+
+Receives:
+  HTML structure selected when VisualFamily = "volume".
+
+Produces:
+  A modern vector-style volume illustration using
+  a transparent graduated container and decorative liquid.
+
+Previous logical stage:
+  results.html selects the volume visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric volume value.
+  - Liquid level remains fixed and decorative.
+  - Does not calculate capacity or volume.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+.family-visual--volume {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* Ambient halo */
+
+.family-visual--volume .volume-visual__halo {
+    position: absolute;
+
+    width: 115px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(50, 190, 225, 0.25),
+            rgba(48, 140, 210, 0.11) 48%,
+            transparent 72%
+        );
+
+    filter: blur(8px);
+
+    z-index: 0;
+}
+
+
+/* Glass container */
+
+.family-visual--volume .volume-visual__container {
+    position: relative;
+
+    width: 70px;
+    height: 88px;
+
+    border: 3px solid rgba(83, 145, 185, 0.72);
+    border-top: 5px solid rgba(72, 130, 170, 0.78);
+
+    border-radius: 7px 7px 18px 18px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255, 255, 255, 0.65),
+            rgba(210, 239, 250, 0.25) 48%,
+            rgba(135, 202, 225, 0.20)
+        );
+
+    box-shadow:
+        0 9px 14px rgba(35, 92, 125, 0.20),
+        inset 3px 0 4px rgba(255, 255, 255, 0.55);
+
+    overflow: hidden;
+
+    z-index: 2;
+}
+
+
+/* Decorative liquid */
+
+.family-visual--volume .volume-visual__liquid {
+    position: absolute;
+
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+
+    height: 49px;
+
+    border-radius: 2px 2px 13px 13px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #64d9f2 0%,
+            #269ed4 48%,
+            #176db5 100%
+        );
+
+    box-shadow:
+        inset 0 5px 7px rgba(255, 255, 255, 0.25),
+        0 0 12px rgba(45, 175, 225, 0.35);
+}
+
+
+/* Glass shine */
+
+.family-visual--volume .volume-visual__shine {
+    position: absolute;
+
+    top: 10px;
+    left: 9px;
+
+    width: 8px;
+    height: 55px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.75),
+            rgba(255, 255, 255, 0.08)
+        );
+
+    z-index: 3;
+}
+
+
+/* Graduation marks */
+
+.family-visual--volume .volume-visual__mark {
+    position: absolute;
+
+    right: 7px;
+
+    width: 15px;
+    height: 2px;
+
+    border-radius: 2px;
+
+    background: rgba(43, 101, 140, 0.58);
+
+    z-index: 4;
+}
+
+.family-visual--volume .volume-visual__mark--1 {
+    top: 23px;
+}
+
+.family-visual--volume .volume-visual__mark--2 {
+    top: 38px;
+    width: 11px;
+}
+
+.family-visual--volume .volume-visual__mark--3 {
+    top: 53px;
+}
+
+
+/* Ground shadow */
+
+.family-visual--volume .volume-visual__ground {
+    position: absolute;
+
+    bottom: 5px;
+
+    width: 88px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(31, 105, 145, 0.24),
+            transparent 70%
+        );
+
+    filter: blur(3px);
+
+    z-index: 0;
+}
+
+
+/* Decorative particles */
+
+.family-visual--volume .volume-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(60, 191, 230, 0.85);
+
+    box-shadow:
+        0 0 7px rgba(60, 191, 230, 0.65);
+
+    z-index: 1;
+}
+
+.family-visual--volume .volume-visual__particle--a {
+    width: 5px;
+    height: 5px;
+
+    top: 21px;
+    left: 28px;
+}
+
+.family-visual--volume .volume-visual__particle--b {
+    width: 3px;
+    height: 3px;
+
+    top: 31px;
+    right: 29px;
+}
+
+
+@media (max-width: 640px) {
+    .family-visual--volume {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

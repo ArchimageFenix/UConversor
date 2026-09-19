@@ -1,0 +1,329 @@
+/*
+File: family-speed.css
+
+Responsibility:
+  Draw the thematic visual representation for Velocidad / Velocidad.
+
+Receives:
+  HTML structure selected when VisualFamily = "speed".
+
+Produces:
+  A modern vector-style speedometer using a luminous dial,
+  fixed needle, speed marks, motion trails and ambient particles.
+
+Previous logical stage:
+  results.html selects the speed visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric speed value.
+  - Needle position is fixed and decorative.
+  - Does not calculate velocity or displacement.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+
+.family-visual--speed {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT HALO
+   ========================================================= */
+
+.family-visual--speed .speed-visual__halo {
+    position: absolute;
+
+    width: 140px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(45, 175, 255, 0.32) 0%,
+            rgba(35, 105, 230, 0.15) 45%,
+            transparent 72%
+        );
+
+    filter: blur(8px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   SPEEDOMETER BODY
+
+   Existing .speed-visual__body becomes the instrument dial.
+   ========================================================= */
+
+.family-visual--speed .speed-visual__body {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 94px;
+    height: 94px;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 45% 40%,
+            #e8f8ff 0%,
+            #82cef5 13%,
+            #287ecb 48%,
+            #174a91 72%,
+            #102d62 100%
+        );
+
+    border: 4px solid rgba(188, 230, 255, 0.90);
+
+    box-shadow:
+        0 9px 16px rgba(20, 61, 120, 0.28),
+        0 0 18px rgba(52, 160, 245, 0.45),
+        inset 0 3px 6px rgba(255, 255, 255, 0.50),
+        inset 0 -7px 10px rgba(10, 35, 90, 0.38);
+
+    overflow: hidden;
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   GLASS SHINE
+   ========================================================= */
+
+.family-visual--speed .speed-visual__shine {
+    position: absolute;
+
+    top: 11px;
+    left: 18px;
+
+    width: 52px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.55),
+            transparent
+        );
+
+    transform: rotate(-8deg);
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   NEEDLE
+
+   Existing arrow element is transformed into a fixed needle.
+   It never represents the entered speed.
+   ========================================================= */
+
+.family-visual--speed .speed-visual__arrow {
+    position: absolute;
+
+    left: 45px;
+    bottom: 43px;
+
+    width: 37px;
+    height: 5px;
+
+    border: 0;
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #ffd34f
+        );
+
+    transform:
+        rotate(-47deg);
+
+    transform-origin:
+        0 50%;
+
+    box-shadow:
+        0 0 7px rgba(255, 220, 80, 0.80);
+
+    filter: none;
+
+    z-index: 5;
+}
+
+
+/* Central needle pivot */
+
+.family-visual--speed .speed-visual__arrow::after {
+    content: "";
+
+    position: absolute;
+
+    left: -6px;
+    top: -4px;
+
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff,
+            #ffd350 38%,
+            #e78b20 100%
+        );
+
+    box-shadow:
+        0 0 7px rgba(255, 200, 55, 0.70);
+}
+
+
+/* =========================================================
+   SPEED MARKS
+
+   The three existing trail elements now become dial marks.
+   ========================================================= */
+
+.family-visual--speed .speed-visual__trail {
+    position: absolute;
+
+    width: 5px;
+    height: 15px;
+
+    left: auto;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eaf9ff,
+            #66c7ff
+        );
+
+    box-shadow:
+        0 0 5px rgba(92, 196, 255, 0.65);
+
+    z-index: 5;
+}
+
+
+/* Left dial marker */
+
+.family-visual--speed .speed-visual__trail--1 {
+    top: 60px;
+    left: 43px;
+
+    transform: rotate(-62deg);
+}
+
+
+/* Upper dial marker */
+
+.family-visual--speed .speed-visual__trail--2 {
+    top: 21px;
+    left: 82px;
+
+    width: 5px;
+    height: 15px;
+
+    transform: rotate(0deg);
+}
+
+
+/* Right dial marker */
+
+.family-visual--speed .speed-visual__trail--3 {
+    top: 60px;
+    left: 122px;
+
+    width: 5px;
+    height: 15px;
+
+    transform: rotate(62deg);
+}
+
+
+/* =========================================================
+   AMBIENT PARTICLES
+   ========================================================= */
+
+.family-visual--speed .speed-visual__particle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(77, 191, 255, 0.90);
+
+    box-shadow:
+        0 0 8px rgba(77, 191, 255, 0.70);
+
+    z-index: 1;
+}
+
+.family-visual--speed .speed-visual__particle--a {
+    width: 4px;
+    height: 4px;
+
+    top: 20px;
+    right: 20px;
+}
+
+.family-visual--speed .speed-visual__particle--b {
+    width: 3px;
+    height: 3px;
+
+    bottom: 19px;
+    right: 29px;
+}
+
+.family-visual--speed .speed-visual__particle--c {
+    width: 5px;
+    height: 5px;
+
+    top: 29px;
+    left: 20px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .family-visual--speed {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

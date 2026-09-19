@@ -28,5 +28,7 @@ func ElectronicsUnits() []units.Unit {
 		{Name: "miliwatt", Symbol: "mW", Family: units.FamilyElectronics, Magnitude: units.MagnitudePower, Scale: 1e-3, Kind: units.TransformLinear, MinValue: &zero, Source: si},
 		{Name: "watt", Symbol: "W", Family: units.FamilyElectronics, Magnitude: units.MagnitudePower, Reference: true, Scale: 1, Kind: units.TransformLinear, MinValue: &zero, Source: si},
 		{Name: "kilowatt", Symbol: "kW", Family: units.FamilyElectronics, Magnitude: units.MagnitudePower, Scale: 1e3, Kind: units.TransformLinear, MinValue: &zero, Source: si},
+		{Name: "megawatt", Symbol: "MW", Family: units.FamilyElectronics, Magnitude: units.MagnitudePower, Scale: 1e6, Kind: units.TransformLinear, MinValue: &zero, Source: si},
+		{Name: "gigawatt", Symbol: "GW", Family: units.FamilyElectronics, Magnitude: units.MagnitudePower, Scale: 1e9, Kind: units.TransformLinear, MinValue: &zero, Source: si},
 	}
 }

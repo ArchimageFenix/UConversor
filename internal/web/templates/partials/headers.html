@@ -27,7 +27,7 @@
             aria-label="Navegación principal"
         >
             <a
-                {{if ne .ActivePage "examples"}}class="active"{{end}}
+                {{if eq .ActivePage "home"}}class="active"{{end}}
                 href="/"
             >
                 Inicio
@@ -40,8 +40,11 @@
                 Ejemplos
             </a>
 
-            <a href="/#resultPanel">
-                Resultado
+            <a
+                {{if eq .ActivePage "learning"}}class="active"{{end}}
+                href="/aprendizaje"
+            >
+                Aprendizaje
             </a>
 
             <a href="/#about">

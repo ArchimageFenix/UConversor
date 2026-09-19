@@ -1,0 +1,305 @@
+/*
+File: family-resistance.css
+
+Responsibility:
+  Draw the thematic visual representation for Electrónica / Resistencia.
+
+Receives:
+  HTML structure selected when VisualFamily = "resistance".
+
+Produces:
+  A modern vector-style electrical resistor illustration using
+  a central resistor body, metallic leads, decorative bands,
+  ambient particles and an ohm symbol.
+
+Previous logical stage:
+  results.html selects the resistance visual markup.
+
+Next logical stage:
+  Browser rendering.
+
+Important restrictions:
+  - Presentation only.
+  - Does not represent the numeric resistance value.
+  - Decorative bands do not encode resistance in ohms.
+  - Does not calculate electrical resistance.
+  - Does not perform scientific classification.
+  - Shared visual layout belongs to family-visual-base.css.
+*/
+
+
+/* =========================================================
+   RESISTANCE VISUAL
+   ========================================================= */
+
+.family-visual--resistance {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 120px;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT HALO
+   ========================================================= */
+
+.family-visual--resistance .resistance-visual__halo {
+    position: absolute;
+
+    width: 145px;
+    height: 78px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255, 185, 70, 0.30) 0%,
+            rgba(255, 145, 45, 0.14) 42%,
+            rgba(255, 145, 45, 0) 72%
+        );
+
+    filter: blur(7px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   METALLIC LEADS
+   ========================================================= */
+
+.family-visual--resistance .resistance-visual__lead {
+    position: absolute;
+
+    top: 52px;
+
+    width: 42px;
+    height: 7px;
+
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f5f8fc 0%,
+            #9caec0 45%,
+            #5f7184 100%
+        );
+
+    box-shadow:
+        0 2px 4px rgba(15, 35, 55, 0.22),
+        inset 0 1px 1px rgba(255, 255, 255, 0.85);
+
+    z-index: 1;
+}
+
+.family-visual--resistance .resistance-visual__lead--left {
+    left: 4px;
+}
+
+.family-visual--resistance .resistance-visual__lead--right {
+    right: 4px;
+}
+
+
+/* =========================================================
+   RESISTOR BODY
+   ========================================================= */
+
+.family-visual--resistance .resistance-visual__body {
+    position: relative;
+
+    width: 92px;
+    height: 40px;
+
+    border-radius: 20px 20px 18px 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffe2a1 0%,
+            #d99a45 47%,
+            #a86125 100%
+        );
+
+    border: 2px solid rgba(117, 67, 25, 0.55);
+
+    box-shadow:
+        0 9px 15px rgba(91, 54, 22, 0.25),
+        0 0 18px rgba(255, 174, 70, 0.25),
+        inset 0 3px 4px rgba(255, 255, 255, 0.55),
+        inset 0 -4px 5px rgba(91, 48, 17, 0.25);
+
+    overflow: hidden;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   BODY SHINE
+   ========================================================= */
+
+.family-visual--resistance .resistance-visual__shine {
+    position: absolute;
+
+    top: 5px;
+    left: 14px;
+
+    width: 58px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.60),
+            rgba(255, 255, 255, 0)
+        );
+
+    filter: blur(1px);
+}
+
+
+/* =========================================================
+   DECORATIVE BANDS
+
+   These bands are intentionally fixed.
+   They do not encode the user's resistance value.
+   ========================================================= */
+
+.family-visual--resistance .resistance-visual__band {
+    position: absolute;
+
+    top: -2px;
+
+    width: 9px;
+    height: 44px;
+
+    box-shadow:
+        inset 1px 0 1px rgba(255, 255, 255, 0.30),
+        inset -1px 0 2px rgba(0, 0, 0, 0.22);
+}
+
+.family-visual--resistance .resistance-visual__band--1 {
+    left: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #5632a8,
+            #2e176b
+        );
+}
+
+.family-visual--resistance .resistance-visual__band--2 {
+    left: 42px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ec4f45,
+            #a51f27
+        );
+}
+
+.family-visual--resistance .resistance-visual__band--3 {
+    left: 64px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f3c950,
+            #b47b17
+        );
+}
+
+
+/* =========================================================
+   OHM SYMBOL
+   ========================================================= */
+
+.family-visual--resistance .resistance-visual__symbol {
+    position: absolute;
+
+    left: 50%;
+    bottom: 2px;
+
+    transform: translateX(-50%);
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: #9c632a;
+
+    text-shadow:
+        0 2px 5px rgba(255, 179, 74, 0.25);
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   AMBIENT PARTICLES
+   ========================================================= */
+
+.family-visual--resistance .resistance-visual__particle {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 181, 75, 0.85);
+
+    box-shadow:
+        0 0 7px rgba(255, 181, 75, 0.75);
+
+    z-index: 1;
+}
+
+.family-visual--resistance .resistance-visual__particle--a {
+    top: 19px;
+    left: 28px;
+
+    width: 4px;
+    height: 4px;
+}
+
+.family-visual--resistance .resistance-visual__particle--b {
+    top: 25px;
+    right: 24px;
+}
+
+.family-visual--resistance .resistance-visual__particle--c {
+    bottom: 20px;
+    right: 38px;
+
+    width: 3px;
+    height: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .family-visual--resistance {
+        transform: scale(0.94);
+        transform-origin: center;
+    }
+}

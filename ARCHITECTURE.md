@@ -1850,3 +1850,676 @@ cuando sea necesario, magnitud).
 La capa Web no reclasifica información científica; únicamente utiliza
 la familia y magnitud ya determinadas por el dominio para seleccionar
 una representación visual.
+
+
+
+## Área de Aprendizaje Web
+
+### Propósito
+
+UConversor incorpora una sección Web independiente denominada **Aprendizaje**,
+destinada a presentar contenido educativo relacionado con las magnitudes,
+unidades y conceptos físicos o técnicos que forman parte del ámbito del
+proyecto.
+
+La sección tiene carácter **informativo, ilustrativo y estático**.
+
+Su finalidad es mostrar mediante situaciones cotidianas y algunos ejemplos
+especializados cómo aparecen en contextos reales las magnitudes y unidades
+que UConversor puede representar.
+
+Ejemplos de contenido:
+
+- Fuerza necesaria para sostener o levantar un objeto bajo determinadas
+  condiciones previamente definidas.
+- Consumo y equivalencias conceptuales de energía.
+- Situaciones relacionadas con potencia.
+- Distancias y velocidades.
+- Presión en contextos cotidianos o técnicos.
+- Almacenamiento y transferencia de datos.
+- Tiempo y otras magnitudes soportadas por el catálogo.
+
+Los ejercicios mostrados estarán previamente preparados y resueltos.
+
+---
+
+### Alcance
+
+La sección Aprendizaje pertenece exclusivamente a la capa de presentación Web.
+
+Su flujo conceptual es:
+
+    Navegador
+        ↓
+    /aprendizaje
+        ↓
+    handler Web
+        ↓
+    plantilla de Aprendizaje
+        ↓
+    contenido educativo estático
+        ↓
+    navegador
+
+Aprendizaje NO forma parte del flujo científico de conversión:
+
+    input
+      ↓
+    parser
+      ↓
+    registry
+      ↓
+    validator
+      ↓
+    engine
+
+Por tanto, la sección educativa no debe introducir dependencias hacia el
+motor de conversión.
+
+---
+
+### Restricciones arquitectónicas
+
+La sección Aprendizaje:
+
+- NO llama a `App.Convert()`.
+- NO utiliza el Engine para resolver ejercicios.
+- NO realiza conversiones dinámicas.
+- NO incorpora un motor matemático o físico independiente.
+- NO interpreta unidades introducidas por el usuario.
+- NO modifica Registry.
+- NO modifica Validator.
+- NO modifica las fórmulas del sistema de conversión.
+- NO modifica las definiciones científicas del catálogo.
+- NO modifica el propósito fundamental de UConversor.
+
+Las fórmulas, operaciones y resultados que aparezcan en esta sección forman
+parte del **contenido educativo estático**.
+
+Una expresión como:
+
+    F = m × g
+
+puede aparecer como explicación dentro de un ejercicio, pero no constituye
+una nueva operación soportada por el Engine.
+
+---
+
+### Relación con el núcleo de UConversor
+
+Aprendizaje debe permanecer desacoplado del núcleo científico.
+
+La relación conceptual es:
+
+                         UCONVERSOR
+                              │
+              ┌───────────────┴───────────────┐
+              │                               │
+       Núcleo científico                  Capa Web
+              │                               │
+       Conversion Engine          ┌───────────┼───────────┐
+                                  │           │           │
+                               Inicio      Ejemplos   Aprendizaje
+                                                          │
+                                                   contenido estático
+
+La eliminación, modificación o indisponibilidad de Aprendizaje no debe
+afectar la capacidad de UConversor para interpretar y convertir unidades.
+
+---
+
+### Relación con Ejemplos
+
+Aprendizaje sigue conceptualmente el patrón de una página especializada
+similar a `/examples`, pero ambas secciones tienen responsabilidades
+diferentes.
+
+    /examples
+        ↓
+    muestra ejemplos relacionados con el uso de UConversor
+
+    /aprendizaje
+        ↓
+    presenta ejercicios y explicaciones educativas resueltas
+
+No deben mezclarse ambas responsabilidades.
+
+---
+
+### Navegación Web
+
+La navegación principal pasa conceptualmente de:
+
+    Inicio | Ejemplos | Resultado | Acerca de
+
+a:
+
+    Inicio | Ejemplos | Aprendizaje | Acerca de
+
+`Resultado` deja de ocupar una entrada permanente de navegación.
+
+El panel de resultados de la página principal continúa existiendo como parte
+del flujo normal de conversión; únicamente deja de representarse mediante
+una opción independiente en la navegación superior.
+
+---
+
+### Organización prevista
+
+La implementación debe mantener aislados estructura, contenido y estilos de
+la nueva sección.
+
+Estructura conceptual prevista:
+
+    internal/web/
+        handlers.go
+        ...
+        learning_viewmodel.go     # Solo si la presentación estática necesita
+                                  # datos estructurados para renderizado.
+
+    templates/
+        learning.html
+
+    static/css/
+        learning.css
+
+No debe crearse `learning_viewmodel.go` si el contenido puede mantenerse de
+forma clara únicamente mediante la plantilla estática.
+
+Se aplica el principio:
+
+    Crear una pieza nueva solamente cuando exista
+    una responsabilidad independiente que la justifique.
+
+---
+
+### Responsabilidades
+
+#### `learning.html`
+
+Responsabilidad:
+presentar la estructura y contenido educativo de `/aprendizaje`.
+
+Recibe:
+contexto mínimo necesario para renderizar la página.
+
+Produce:
+HTML de la sección educativa.
+
+Etapa previa:
+handler de `/aprendizaje`.
+
+Etapa siguiente:
+renderizado del navegador y estilos de `learning.css`.
+
+Restricciones:
+no contiene lógica de conversión ni clasificación científica dinámica.
+
+---
+
+#### `learning.css`
+
+Responsabilidad:
+definir exclusivamente la presentación específica del área Aprendizaje.
+
+Recibe:
+estructura HTML de `learning.html`.
+
+Produce:
+presentación visual responsive coherente con UConversor.
+
+Etapa previa:
+`learning.html`.
+
+Etapa siguiente:
+renderizado del navegador.
+
+Restricciones:
+no debe duplicar innecesariamente reglas globales existentes en
+`base.css`, `layout.css`, `components.css` o los estilos visuales compartidos.
+
+---
+
+#### Handler de Aprendizaje
+
+Responsabilidad:
+atender la ruta `/aprendizaje` y renderizar su plantilla.
+
+Recibe:
+petición HTTP correspondiente a la ruta.
+
+Produce:
+respuesta HTML.
+
+Etapa previa:
+router/servidor Web.
+
+Etapa siguiente:
+`learning.html`.
+
+Restricciones:
+no llama al Engine ni introduce lógica científica.
+
+---
+
+### Organización visual
+
+La sección debe conservar el lenguaje visual general de UConversor:
+
+- tipografía existente;
+- sistema de tarjetas;
+- espaciado y jerarquía visual;
+- fondos y efectos compatibles con la interfaz actual;
+- comportamiento responsive;
+- identidad gráfica de las magnitudes cuando resulte apropiado.
+
+Los ejercicios pueden organizarse mediante tarjetas o bloques temáticos.
+
+Ejemplo conceptual:
+
+    APRENDE CON UCONVERSOR
+
+    ┌─────────────────────┐
+    │ FUERZA              │
+    │                     │
+    │ Una piedra tiene... │
+    │                     │
+    │ F = m × g           │
+    │                     │
+    │ Resultado: 98.07 N  │
+    └─────────────────────┘
+
+    ┌─────────────────────┐
+    │ ENERGÍA             │
+    │                     │
+    │ Situación...        │
+    │ Explicación...      │
+    │ Resultado...        │
+    └─────────────────────┘
+
+La presentación puede reutilizar elementos visuales compatibles con las
+magnitudes existentes, siempre que dicha reutilización permanezca en la
+capa Web.
+
+---
+
+### Tipos de ejercicios
+
+El contenido puede incluir dos niveles generales:
+
+1. **Situaciones cotidianas**
+
+   Problemas comprensibles sin conocimientos técnicos avanzados y
+   relacionados con experiencias reales.
+
+2. **Situaciones técnicas o especializadas**
+
+   Ejemplos científicos, tecnológicos o de ingeniería sencillos que permitan
+   mostrar aplicaciones de las magnitudes soportadas por UConversor.
+
+En ambos casos los ejercicios deben estar previamente resueltos y revisados.
+
+---
+
+### Regla de ampliación
+
+Agregar nuevos ejercicios a Aprendizaje debe ser principalmente una operación
+de contenido.
+
+La incorporación normal de un ejercicio NO debe requerir modificar:
+
+- Engine;
+- Registry;
+- Validator;
+- Parser;
+- catálogo científico;
+- magnitudes;
+- familias.
+
+Si en el futuro se propone que Aprendizaje calcule ejercicios, reciba
+variables del usuario, utilice fórmulas dinámicas o invoque el Engine,
+dicha modificación se considerará una **nueva decisión arquitectónica** y
+deberá actualizarse este documento antes de implementarla.
+
+---
+
+### Principio de aislamiento
+
+Aprendizaje debe respetar el principio general de UConversor:
+
+> Lo cambiante puede evolucionar sin obligar a modificar lo estable.
+
+En este caso:
+
+    contenido educativo
+            ↓
+      puede crecer
+            ↓
+    learning.html / learning.css
+            ↓
+    sin modificar
+            ↓
+    núcleo científico de UConversor
+
+
+    ## Tutorías temáticas de Aprendizaje
+
+La sección Web de Aprendizaje incorpora páginas temáticas estáticas
+destinadas a explicar el uso práctico de las magnitudes y unidades
+mediante situaciones cotidianas, técnicas y científicas.
+
+Estas páginas amplían el contenido educativo de UConversor, pero no
+forman parte del núcleo científico de conversión.
+
+### Objetivo
+
+Cada tarjeta temática disponible en `/aprendizaje` puede conducir a
+una tutoría dedicada.
+
+La tutoría debe ayudar al usuario a comprender:
+
+- qué representa la magnitud;
+- dónde aparece en la vida cotidiana;
+- por qué existen diferentes unidades;
+- cómo una misma medida puede expresarse mediante distintas unidades;
+- por qué resulta útil comprender las conversiones;
+- cómo UConversor puede utilizarse como herramienta de apoyo;
+- aplicaciones técnicas o científicas relevantes cuando corresponda.
+
+Las tutorías priorizan ejemplos visuales, situaciones concretas y
+explicaciones breves antes que contenido puramente teórico.
+
+---
+
+### Navegación
+
+La portada de Aprendizaje actúa como portal hacia las tutorías.
+
+Flujo general:
+
+    /aprendizaje
+          ↓
+    tarjeta temática
+          ↓
+    /aprendizaje/{tema}
+          ↓
+    tutoría temática
+          ↓
+    contenido educativo estático
+
+Rutas previstas inicialmente:
+
+    /aprendizaje/longitud
+    /aprendizaje/masa
+    /aprendizaje/tiempo
+    /aprendizaje/temperatura
+    /aprendizaje/velocidad
+    /aprendizaje/energia
+    /aprendizaje/presion
+    /aprendizaje/datos
+
+La primera implementación y referencia del sistema será:
+
+    /aprendizaje/longitud
+
+Las demás tutorías reutilizarán posteriormente la infraestructura
+validada con esta primera página.
+
+---
+
+### Arquitectura de navegación
+
+Las tutorías deben utilizar una infraestructura común.
+
+No se crearán handlers independientes para cada magnitud salvo que
+una necesidad futura técnicamente justificada lo requiera.
+
+Flujo previsto:
+
+    GET /aprendizaje/{tema}
+              ↓
+       handleTutorial()
+              ↓
+       identificación del tema
+              ↓
+       TutorialViewModel
+              ↓
+         tutorial.html
+              ↓
+       contenido temático
+              ↓
+            navegador
+
+El controlador selecciona contenido educativo.
+
+No realiza cálculos científicos.
+
+---
+
+### Estructura prevista de templates
+
+    internal/web/templates/
+    ├── learning.html
+    ├── tutorial.html
+    └── learning/
+        ├── hero.html
+        ├── topics.html
+        └── tutorials/
+            ├── length.html
+            ├── mass.html
+            ├── time.html
+            ├── temperature.html
+            ├── speed.html
+            ├── energy.html
+            ├── pressure.html
+            └── data.html
+
+`tutorial.html` constituye la estructura común de las páginas
+temáticas.
+
+Los archivos contenidos en `learning/tutorials/` contienen el
+contenido educativo particular de cada tema.
+
+Esta separación evita duplicar la estructura completa de una página
+HTML para cada tutoría.
+
+---
+
+### Estructura prevista de estilos
+
+    internal/web/static/css/learning/
+    ├── hero.css
+    ├── topics.css
+    └── tutorials/
+        ├── tutorial.css
+        ├── length.css
+        ├── mass.css
+        ├── time.css
+        ├── temperature.css
+        ├── speed.css
+        ├── energy.css
+        ├── pressure.css
+        └── data.css
+
+`tutorial.css` contiene los componentes visuales compartidos:
+
+- estructura de página;
+- tarjetas educativas;
+- bloques explicativos;
+- ejemplos;
+- tablas;
+- llamadas destacadas;
+- comportamiento responsive.
+
+Los archivos CSS específicos de cada tema contienen solamente
+ilustraciones, composiciones o ajustes visuales propios de esa
+tutoría.
+
+No deben duplicar innecesariamente los estilos comunes.
+
+---
+
+### Frontera con el núcleo científico
+
+Las tutorías son contenido Web educativo estático.
+
+No dependen directamente de:
+
+    App.Convert()
+    Parser
+    Registry
+    Validator
+    Engine
+    Catalog
+
+Por tanto:
+
+    Aprendizaje
+        ↓
+    Tutorías
+        ↓
+    HTML / CSS
+        ↓
+    navegador
+
+es independiente de:
+
+    entrada
+        ↓
+    Parser
+        ↓
+    Registry
+        ↓
+    Validator
+        ↓
+    Engine
+        ↓
+    Result
+
+Eliminar una tutoría o incluso toda la zona de Aprendizaje no debe
+alterar la capacidad de UConversor para realizar conversiones.
+
+---
+
+### Conversiones mostradas en las tutorías
+
+Las tutorías pueden explicar conversiones y mostrar ejemplos
+previamente resueltos.
+
+Estos ejemplos forman parte del contenido editorial educativo.
+
+Las tutorías:
+
+- no implementan algoritmos de conversión;
+- no ejecutan conversiones dinámicamente;
+- no duplican el Engine;
+- no mantienen una segunda tabla de factores destinada a realizar
+  cálculos;
+- no interpretan entradas del usuario.
+
+Una expresión educativa como:
+
+    2.5 m = 250 cm
+
+es contenido explicativo y no constituye una operación realizada por
+la página.
+
+Si en el futuro las tutorías necesitan ejecutar conversiones
+dinámicamente, esa capacidad deberá analizarse como un cambio
+arquitectónico antes de implementarse.
+
+---
+
+### Integración con el conversor
+
+Las tutorías pueden contener enlaces hacia la herramienta principal.
+
+Ejemplo:
+
+    Tutoría de Longitud
+            ↓
+    "Probar en el conversor"
+            ↓
+            /
+
+Esta relación es navegación Web.
+
+No constituye una dependencia programática entre la tutoría y el
+motor de conversión.
+
+---
+
+### Navegación interna de las tutorías
+
+Las tutorías se diseñan principalmente como páginas de lectura
+continua.
+
+No requieren una segunda navegación temática interna.
+
+Su contenido puede organizarse mediante bloques visuales sucesivos,
+por ejemplo:
+
+    ¿Qué estamos midiendo?
+            ↓
+    Uso cotidiano
+            ↓
+    Diferentes unidades
+            ↓
+    Ejemplo práctico
+            ↓
+    Una medida en diferentes unidades
+            ↓
+    Utilidad de convertir
+            ↓
+    Cómo ayuda UConversor
+            ↓
+    Aplicaciones adicionales
+
+Esta secuencia puede variar cuando la naturaleza de una magnitud lo
+justifique.
+
+---
+
+### Diseño responsive
+
+Las tutorías deben funcionar en escritorio, tablet y móvil.
+
+Reglas obligatorias:
+
+- no producir desplazamiento horizontal;
+- no recortar fórmulas, tablas ni texto;
+- reorganizar columnas cuando disminuya el ancho disponible;
+- mantener el orden semántico del contenido;
+- evitar reducir excesivamente el tamaño del texto para hacer caber
+  elementos;
+- simplificar elementos puramente decorativos cuando sea necesario.
+
+La misma página HTML debe reorganizarse mediante CSS.
+
+No se crearán versiones HTML separadas para dispositivos móviles.
+
+---
+
+### Primera tutoría: Longitud y Distancia
+
+`/aprendizaje/longitud` será la implementación piloto del sistema de
+tutorías.
+
+Su referencia visual contempla:
+
+1. Hero ilustrativo de Longitud y Distancia.
+2. ¿Qué estamos midiendo?
+3. Longitud en la vida cotidiana.
+4. Razón de utilizar diferentes unidades.
+5. Ejemplo práctico.
+6. Una misma medida expresada en distintas unidades.
+7. Utilidad de comprender las conversiones.
+8. Cómo ayuda UConversor.
+9. Aplicaciones desde escalas cotidianas hasta astronómicas.
+10. Cierre educativo.
+
+Una vez validada esta implementación, su infraestructura común podrá
+reutilizarse para las demás tutorías.
+
+La composición visual específica de Longitud no obliga a las demás
+magnitudes a utilizar las mismas ilustraciones.

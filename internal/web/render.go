@@ -142,3 +142,113 @@ func (h *Handler) renderExamplesPage(
 
 	_, _ = w.Write(buffer.Bytes())
 }
+
+// renderLearningPage renders the UConversor Learning page.
+//
+// Receives:
+//   - HTTP response writer.
+//   - HTTP status code.
+//   - LearningViewModel prepared by handleLearning().
+//
+// Produces:
+//   - Complete HTML response based on the "learning" template.
+//
+// Previous logical stage:
+//   - handlers.go -> handleLearning().
+//
+// Next logical stage:
+//   - Learning HTML template.
+//
+// Important restrictions:
+//   - Must not perform conversions.
+//   - Must not access app.App.
+//   - Must not inspect the unit Registry or catalog.
+//   - Must not contain scientific formulas or calculations.
+//   - Must not modify the LearningViewModel.
+//   - Must render the complete template into memory before
+//     writing the HTTP response.
+func (h *Handler) renderLearningPage(
+	w http.ResponseWriter,
+	status int,
+	viewModel LearningViewModel,
+) {
+	var buffer bytes.Buffer
+
+	if err := h.templates.ExecuteTemplate(
+		&buffer,
+		"learning",
+		viewModel,
+	); err != nil {
+		http.Error(
+			w,
+			"Error interno al generar la interfaz",
+			http.StatusInternalServerError,
+		)
+		return
+	}
+
+	w.Header().Set(
+		"Content-Type",
+		"text/html; charset=utf-8",
+	)
+
+	w.WriteHeader(status)
+
+	_, _ = w.Write(buffer.Bytes())
+}
+
+// renderTutorialPage renders one static thematic tutorial from the
+// UConversor Learning area.
+//
+// Responsibility:
+//   - Execute the common tutorial template.
+//   - Write the generated HTML response.
+//
+// Receives:
+//   - HTTP response writer.
+//   - HTTP status code.
+//   - TutorialViewModel previously validated by the Web handler.
+//
+// Produces:
+//   - Complete HTML response for a Learning tutorial.
+//
+// Previous logical stage:
+//   - handleTutorial() in handlers.go.
+//
+// Next logical stage:
+//   - tutorial.html and the selected thematic tutorial template.
+//
+// Important restrictions:
+//   - Must not perform conversions.
+//   - Must not call App.Convert().
+//   - Must not inspect Registry or Catalog.
+//   - Must not decide which tutorial is valid.
+//   - Tutorial validation belongs to handleTutorial().
+func (h *Handler) renderTutorialPage(
+	w http.ResponseWriter,
+	status int,
+	viewModel TutorialViewModel,
+) {
+	var buffer bytes.Buffer
+
+	if err := h.templates.ExecuteTemplate(
+		&buffer,
+		"tutorial",
+		viewModel,
+	); err != nil {
+		http.Error(
+			w,
+			"Error interno al generar la interfaz",
+			http.StatusInternalServerError,
+		)
+		return
+	}
+
+	w.Header().Set(
+		"Content-Type",
+		"text/html; charset=utf-8",
+	)
+
+	w.WriteHeader(status)
+	_, _ = w.Write(buffer.Bytes())
+}

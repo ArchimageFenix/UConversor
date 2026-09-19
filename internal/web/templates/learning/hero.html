@@ -1,0 +1,216 @@
+{{define "learning-hero"}}
+
+<!--
+    File: hero.html
+
+    Responsibility:
+        - Presentar el Hero principal de la zona Aprendizaje.
+        - Mantener la estructura definida por el concepto visual
+          oficial de Aprendizaje.
+        - Separar el contenido semántico de su presentación CSS.
+
+    Receives:
+        LearningViewModel recibido desde learning.html.
+
+    Produces:
+        Bloque HTML introductorio de Aprendizaje.
+
+    Previous logical stage:
+        learning.html.
+
+    Next logical stage:
+        static/css/learning/hero.css.
+
+    Important restrictions:
+        - No realiza conversiones.
+        - No llama a App.Convert().
+        - No consulta Registry ni Catalog.
+        - No contiene lógica del Engine.
+        - No realiza cálculos científicos.
+        - Los elementos decorativos pertenecen únicamente
+          a la presentación.
+-->
+
+<section
+    class="learning-hero"
+    aria-labelledby="learning-hero-title"
+>
+
+    <!-- Identificador de la sección -->
+    <div class="learning-hero__eyebrow">
+
+        <span
+            class="learning-hero__eyebrow-icon"
+            aria-hidden="true"
+        >
+            ◇
+        </span>
+
+        <span>
+            Aprendizaje
+        </span>
+
+    </div>
+
+
+    <!-- Composición principal -->
+    <div class="learning-hero__main">
+
+        <!-- Contenido textual -->
+        <div class="learning-hero__content">
+
+            <h1
+                id="learning-hero-title"
+                class="learning-hero__title"
+            >
+                Aprende con <span>UConversor</span>
+            </h1>
+
+            <p class="learning-hero__description">
+                Explora conceptos, ejemplos y aplicaciones reales
+                de las unidades en la ciencia, la tecnología y
+                la vida cotidiana.
+            </p>
+
+        </div>
+
+
+        <!-- Ilustración educativa -->
+        <div
+            class="learning-hero__visual"
+            aria-hidden="true"
+        >
+
+            <span
+                class="learning-hero__science-symbol
+                       learning-hero__science-symbol--atom"
+            >
+                ⚛
+            </span>
+
+            <span
+                class="learning-hero__science-symbol
+                       learning-hero__science-symbol--measure"
+            >
+                📏
+            </span>
+
+            <span
+                class="learning-hero__science-symbol
+                       learning-hero__science-symbol--science"
+            >
+                ⚗
+            </span>
+
+
+            <div class="learning-hero__idea">
+
+                <div class="learning-hero__bulb">
+                    💡
+                </div>
+
+                <div class="learning-hero__books">
+
+                    <span
+                        class="learning-hero__book
+                               learning-hero__book--top"
+                    ></span>
+
+                    <span
+                        class="learning-hero__book
+                               learning-hero__book--middle"
+                    ></span>
+
+                    <span
+                        class="learning-hero__book
+                               learning-hero__book--bottom"
+                    ></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Características principales -->
+    <div class="learning-hero__benefits">
+
+        <div class="learning-hero__benefit">
+
+            <div
+                class="learning-hero__benefit-icon"
+                aria-hidden="true"
+            >
+                📖
+            </div>
+
+            <div class="learning-hero__benefit-content">
+
+                <h2>
+                    Conceptos claros
+                </h2>
+
+                <p>
+                    Explicaciones sencillas y visuales.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="learning-hero__benefit">
+
+            <div
+                class="learning-hero__benefit-icon"
+                aria-hidden="true"
+            >
+                ⚙
+            </div>
+
+            <div class="learning-hero__benefit-content">
+
+                <h2>
+                    Aplicaciones reales
+                </h2>
+
+                <p>
+                    Casos del mundo cotidiano y técnico.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="learning-hero__benefit">
+
+            <div
+                class="learning-hero__benefit-icon"
+                aria-hidden="true"
+            >
+                💡
+            </div>
+
+            <div class="learning-hero__benefit-content">
+
+                <h2>
+                    Aprende a tu ritmo
+                </h2>
+
+                <p>
+                    Contenido organizado por temas.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{{end}}

@@ -572,7 +572,598 @@
     </div>
 
 
+{{else if eq .Result.VisualFamily "resistance"}}
 
+    <!--
+        VISUAL: RESISTANCE
+
+        Responsibility:
+          Represent Electrónica / Resistencia.
+
+        Receives:
+          VisualFamily = "resistance".
+
+        Produces:
+          HTML structure for a modern electrical-resistance illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-resistance.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric resistance value.
+          - Color bands are decorative and do not encode ohms.
+          - Does not calculate electrical resistance.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--resistance">
+
+        <!-- Resplandor ambiental -->
+        <div class="resistance-visual__halo"></div>
+
+        <!-- Terminal izquierdo -->
+        <div class="resistance-visual__lead resistance-visual__lead--left"></div>
+
+        <!-- Cuerpo del resistor -->
+        <div class="resistance-visual__body">
+
+            <!-- Brillo superficial -->
+            <div class="resistance-visual__shine"></div>
+
+            <!-- Bandas decorativas -->
+            <span class="resistance-visual__band resistance-visual__band--1"></span>
+            <span class="resistance-visual__band resistance-visual__band--2"></span>
+            <span class="resistance-visual__band resistance-visual__band--3"></span>
+
+        </div>
+
+        <!-- Terminal derecho -->
+        <div class="resistance-visual__lead resistance-visual__lead--right"></div>
+
+        <!-- Símbolo conceptual -->
+        <div class="resistance-visual__symbol">
+            Ω
+        </div>
+
+        <!-- Partículas ambientales -->
+        <span class="resistance-visual__particle resistance-visual__particle--a"></span>
+        <span class="resistance-visual__particle resistance-visual__particle--b"></span>
+        <span class="resistance-visual__particle resistance-visual__particle--c"></span>
+
+    </div>
+
+
+
+
+{{else if eq .Result.VisualFamily "power"}}
+
+    <!--
+        VISUAL: POWER
+
+        Responsibility:
+          Represent Electrónica / Potencia.
+
+        Receives:
+          VisualFamily = "power".
+
+        Produces:
+          HTML structure for a modern electrical-power illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-power.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric power value.
+          - Does not calculate electrical power.
+          - Does not derive power from voltage or current.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--power">
+
+        <!-- Resplandor energético -->
+        <div class="power-visual__halo"></div>
+
+        <!-- Núcleo -->
+        <div class="power-visual__core">
+
+            <div class="power-visual__core-glow"></div>
+
+            <!-- Rayo representativo -->
+            <span class="power-visual__bolt"></span>
+
+        </div>
+
+        <!-- Arcos exteriores -->
+        <span class="power-visual__arc power-visual__arc--left"></span>
+        <span class="power-visual__arc power-visual__arc--right"></span>
+
+        <!-- Partículas ambientales -->
+        <span class="power-visual__particle power-visual__particle--a"></span>
+        <span class="power-visual__particle power-visual__particle--b"></span>
+        <span class="power-visual__particle power-visual__particle--c"></span>
+
+    </div>
+
+
+{{else if eq .Result.VisualFamily "mass"}}
+
+    <!--
+        VISUAL: MASS
+
+        Responsibility:
+          Represent Masa / Masa.
+
+        Receives:
+          VisualFamily = "mass".
+
+        Produces:
+          HTML structure for a modern physical-mass illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-mass.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric mass value.
+          - Does not calculate weight or gravitational force.
+          - Does not confuse mass with force.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--mass">
+
+        <!-- Resplandor ambiental -->
+        <div class="mass-visual__halo"></div>
+
+        <!-- Asa de la pesa -->
+        <div class="mass-visual__handle">
+            <div class="mass-visual__handle-inner"></div>
+        </div>
+
+        <!-- Cuerpo principal -->
+        <div class="mass-visual__weight">
+
+            <!-- Brillo superficial -->
+            <div class="mass-visual__shine"></div>
+
+            <!-- Identificador conceptual -->
+            <span class="mass-visual__label">kg</span>
+
+        </div>
+
+        <!-- Sombra/base -->
+        <div class="mass-visual__ground"></div>
+
+        <!-- Partículas ambientales -->
+        <span class="mass-visual__particle mass-visual__particle--a"></span>
+        <span class="mass-visual__particle mass-visual__particle--b"></span>
+        <span class="mass-visual__particle mass-visual__particle--c"></span>
+
+    </div>
+
+
+
+{{else if eq .Result.VisualFamily "speed"}}
+
+    <!--
+        VISUAL: SPEED
+
+        Responsibility:
+          Represent Velocidad / Velocidad.
+
+        Receives:
+          VisualFamily = "speed".
+
+        Produces:
+          HTML structure for a modern speed illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-speed.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric speed value.
+          - Does not calculate velocity or displacement.
+          - Visual movement indicators are decorative.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--speed">
+
+        <!-- Resplandor -->
+        <div class="speed-visual__halo"></div>
+
+        <!-- Líneas de movimiento -->
+        <span class="speed-visual__trail speed-visual__trail--1"></span>
+        <span class="speed-visual__trail speed-visual__trail--2"></span>
+        <span class="speed-visual__trail speed-visual__trail--3"></span>
+
+        <!-- Indicador principal -->
+        <div class="speed-visual__body">
+
+            <div class="speed-visual__shine"></div>
+
+            <span class="speed-visual__arrow"></span>
+
+        </div>
+
+        <!-- Partículas -->
+        <span class="speed-visual__particle speed-visual__particle--a"></span>
+        <span class="speed-visual__particle speed-visual__particle--b"></span>
+        <span class="speed-visual__particle speed-visual__particle--c"></span>
+
+    </div>
+
+
+{{else if eq .Result.VisualFamily "volume"}}
+
+    <!--
+        VISUAL: VOLUME
+
+        Responsibility:
+          Represent Física / Volumen.
+
+        Receives:
+          VisualFamily = "volume".
+
+        Produces:
+          HTML structure for a modern volume illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-volume.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric volume value.
+          - Liquid level is decorative and remains fixed.
+          - Does not calculate capacity or volume.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--volume">
+
+        <!-- Resplandor ambiental -->
+        <div class="volume-visual__halo"></div>
+
+        <!-- Recipiente -->
+        <div class="volume-visual__container">
+
+            <!-- Líquido decorativo -->
+            <div class="volume-visual__liquid"></div>
+
+            <!-- Brillo del recipiente -->
+            <div class="volume-visual__shine"></div>
+
+            <!-- Marcas de referencia -->
+            <span class="volume-visual__mark volume-visual__mark--1"></span>
+            <span class="volume-visual__mark volume-visual__mark--2"></span>
+            <span class="volume-visual__mark volume-visual__mark--3"></span>
+
+        </div>
+
+        <!-- Base/sombra -->
+        <div class="volume-visual__ground"></div>
+
+        <!-- Partículas -->
+        <span class="volume-visual__particle volume-visual__particle--a"></span>
+        <span class="volume-visual__particle volume-visual__particle--b"></span>
+
+    </div>
+
+
+{{else if eq .Result.VisualFamily "force"}}
+
+    <!--
+        VISUAL: FORCE
+
+        Responsibility:
+          Represent Fuerza / Fuerza.
+
+        Receives:
+          VisualFamily = "force".
+
+        Produces:
+          HTML structure for a modern force illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-force.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric force value.
+          - Does not calculate acceleration or mass.
+          - Arrow length does not encode force magnitude.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--force">
+
+        <!-- Resplandor -->
+        <div class="force-visual__halo"></div>
+
+        <!-- Objeto sobre el que conceptualmente actúa la fuerza -->
+        <div class="force-visual__object">
+
+            <div class="force-visual__object-shine"></div>
+
+        </div>
+
+        <!-- Vector decorativo de fuerza -->
+        <div class="force-visual__vector">
+
+            <span class="force-visual__vector-line"></span>
+            <span class="force-visual__vector-head"></span>
+
+        </div>
+
+        <!-- Líneas de reacción/movimiento -->
+        <span class="force-visual__motion force-visual__motion--1"></span>
+        <span class="force-visual__motion force-visual__motion--2"></span>
+
+        <!-- Partículas -->
+        <span class="force-visual__particle force-visual__particle--a"></span>
+        <span class="force-visual__particle force-visual__particle--b"></span>
+
+    </div>
+
+
+
+
+
+{{else if eq .Result.VisualFamily "data"}}
+
+    <!--
+        VISUAL: DATA STORAGE
+
+        Responsibility:
+          Represent Datos / Almacenamiento de datos.
+
+        Receives:
+          VisualFamily = "data".
+
+        Produces:
+          HTML structure for a modern data-storage illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-data.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric storage value.
+          - Blocks and indicators are decorative.
+          - Does not calculate or classify data units.
+          - Does not duplicate catalog information.
+    -->
+
+    <div class="family-visual family-visual--data">
+
+        <div class="data-visual__halo"></div>
+
+        <!-- Unidad de almacenamiento -->
+        <div class="data-visual__drive">
+
+            <div class="data-visual__drive-face"></div>
+
+            <span class="data-visual__light data-visual__light--1"></span>
+            <span class="data-visual__light data-visual__light--2"></span>
+
+        </div>
+
+        <!-- Bloques digitales decorativos -->
+        <span class="data-visual__block data-visual__block--1"></span>
+        <span class="data-visual__block data-visual__block--2"></span>
+        <span class="data-visual__block data-visual__block--3"></span>
+
+        <!-- Partículas -->
+        <span class="data-visual__particle data-visual__particle--a"></span>
+        <span class="data-visual__particle data-visual__particle--b"></span>
+
+    </div>
+
+
+{{else if eq .Result.VisualFamily "angle"}}
+
+    <!--
+        VISUAL: PLANE ANGLE
+
+        Responsibility:
+          Represent Ángulos / Ángulo plano.
+
+        Receives:
+          VisualFamily = "angle".
+
+        Produces:
+          HTML structure for a geometric angle illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-angle.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric angle value.
+          - Arc opening remains fixed.
+          - Does not calculate or measure angles.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--angle">
+
+        <div class="angle-visual__halo"></div>
+
+        <!-- Vértice -->
+        <div class="angle-visual__vertex"></div>
+
+        <!-- Radios -->
+        <span class="angle-visual__ray angle-visual__ray--base"></span>
+        <span class="angle-visual__ray angle-visual__ray--upper"></span>
+
+        <!-- Arco decorativo -->
+        <div class="angle-visual__arc"></div>
+
+        <!-- Puntos geométricos -->
+        <span class="angle-visual__point angle-visual__point--a"></span>
+        <span class="angle-visual__point angle-visual__point--b"></span>
+
+        <!-- Partículas -->
+        <span class="angle-visual__particle angle-visual__particle--a"></span>
+        <span class="angle-visual__particle angle-visual__particle--b"></span>
+
+    </div>
+
+
+{{else if eq .Result.VisualFamily "time"}}
+
+    <!--
+        VISUAL: TIME
+
+        Responsibility:
+          Represent Tiempo / Tiempo.
+
+        Receives:
+          VisualFamily = "time".
+
+        Produces:
+          HTML structure for a modern analog-clock illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-time.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the entered time quantity.
+          - Clock hands remain fixed and decorative.
+          - Does not calculate durations or dates.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--time">
+
+        <div class="time-visual__halo"></div>
+
+        <!-- Reloj -->
+        <div class="time-visual__clock">
+
+            <div class="time-visual__shine"></div>
+
+            <!-- Marcas principales -->
+            <span class="time-visual__mark time-visual__mark--12"></span>
+            <span class="time-visual__mark time-visual__mark--3"></span>
+            <span class="time-visual__mark time-visual__mark--6"></span>
+            <span class="time-visual__mark time-visual__mark--9"></span>
+
+            <!-- Agujas -->
+            <span class="time-visual__hand time-visual__hand--hour"></span>
+            <span class="time-visual__hand time-visual__hand--minute"></span>
+
+            <!-- Centro -->
+            <span class="time-visual__pivot"></span>
+
+        </div>
+
+        <!-- Partículas -->
+        <span class="time-visual__particle time-visual__particle--a"></span>
+        <span class="time-visual__particle time-visual__particle--b"></span>
+        <span class="time-visual__particle time-visual__particle--c"></span>
+
+    </div>
+
+
+
+{{else if eq .Result.VisualFamily "data-rate"}}
+
+    <!--
+        VISUAL: DATA RATE
+
+        Responsibility:
+          Represent Datos / Tasa de transferencia de datos.
+
+        Receives:
+          VisualFamily = "data-rate".
+
+        Produces:
+          HTML structure for a modern data-transfer illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-data-rate.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric transfer rate.
+          - Packet quantity and spacing are decorative.
+          - Arrow length does not encode transfer speed.
+          - Does not calculate bandwidth or throughput.
+          - Does not perform scientific classification.
+          - Must remain visually distinct from data storage.
+    -->
+
+    <div class="family-visual family-visual--data-rate">
+
+        <!-- Resplandor ambiental -->
+        <div class="data-rate-visual__halo"></div>
+
+        <!-- Nodo de origen -->
+        <div class="data-rate-visual__node data-rate-visual__node--source">
+            <span class="data-rate-visual__node-core"></span>
+        </div>
+
+        <!-- Canal de transferencia -->
+        <div class="data-rate-visual__channel">
+
+            <span class="data-rate-visual__line"></span>
+
+            <!-- Paquetes de datos decorativos -->
+            <span class="data-rate-visual__packet data-rate-visual__packet--1"></span>
+            <span class="data-rate-visual__packet data-rate-visual__packet--2"></span>
+            <span class="data-rate-visual__packet data-rate-visual__packet--3"></span>
+
+            <!-- Dirección -->
+            <span class="data-rate-visual__arrow"></span>
+
+        </div>
+
+        <!-- Nodo de destino -->
+        <div class="data-rate-visual__node data-rate-visual__node--target">
+            <span class="data-rate-visual__node-core"></span>
+        </div>
+
+        <!-- Partículas ambientales -->
+        <span class="data-rate-visual__particle data-rate-visual__particle--a"></span>
+        <span class="data-rate-visual__particle data-rate-visual__particle--b"></span>
+
+    </div>
 
 
 

@@ -33,6 +33,8 @@ func LoadTemplates() (*template.Template, error) {
 		assets,
 		"templates/*.html",
 		"templates/partials/*.html",
+		"templates/learning/*.html",
+		"templates/learning/tutorials/*.html",
 	)
 	if err != nil {
 		return nil, fmt.Errorf(

@@ -1,0 +1,613 @@
+{{define "tutorial-length"}}
+
+<!--
+    File: length.html
+
+    Responsibility:
+        - Present the static educational tutorial for
+          Longitud y Distancia.
+        - Organize the content as a compact visual learning
+          experience based on the approved Learning concept.
+        - Guide the learner from everyday measurements toward
+          astronomical distance scales.
+
+    Receives:
+        - TutorialViewModel through tutorial.html.
+
+    Produces:
+        - Static educational HTML for Longitud y Distancia.
+
+    Previous logical stage:
+        - tutorial.html.
+
+    Next logical stage:
+        - tutorial.css for shared tutorial presentation.
+        - length.css for Longitud-specific visual identity.
+
+    Important restrictions:
+        - Does not perform dynamic conversions.
+        - Does not call App.Convert().
+        - Does not inspect Registry or Catalog.
+        - Does not implement conversion algorithms.
+        - Numerical examples are static educational content.
+        - Must remain independent from the scientific Engine.
+        - Must preserve the educational order from section
+          1 through section 8 on every screen size.
+-->
+
+<article class="tutorial tutorial-length">
+
+    <!-- =====================================================
+         HERO
+         Panoramic introduction to length and distance.
+         ===================================================== -->
+
+    <section
+        class="length-hero"
+        aria-labelledby="tutorial-length-title"
+    >
+
+        <div class="length-hero__content">
+
+            <p class="length-hero__eyebrow">
+                <span aria-hidden="true">◇</span>
+                Aprendizaje
+            </p>
+
+            <h1
+                id="tutorial-length-title"
+                class="length-hero__title"
+            >
+                Longitud y
+                <span>Distancia</span>
+            </h1>
+
+            <p class="length-hero__description">
+                Descubre cómo medimos el mundo: desde objetos
+                cotidianos hasta las grandes distancias del
+                universo.
+            </p>
+
+        </div>
+
+
+        <!-- Decorative panoramic illustration -->
+
+        <div
+            class="length-hero__scene"
+            aria-hidden="true"
+        >
+
+            <div class="length-hero__sky">
+                <span class="length-hero__cloud length-hero__cloud--one"></span>
+                <span class="length-hero__cloud length-hero__cloud--two"></span>
+
+                <span class="length-hero__plane">✈</span>
+
+                <span class="length-hero__plane-label">
+                    8 500 m
+                </span>
+            </div>
+
+            <div class="length-hero__mountains">
+                <span class="length-hero__mountain length-hero__mountain--back"></span>
+                <span class="length-hero__mountain length-hero__mountain--front"></span>
+            </div>
+
+            <div class="length-hero__city">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="length-hero__road">
+                <span class="length-hero__road-line"></span>
+            </div>
+
+            <div class="length-hero__distance">
+                <span class="length-hero__distance-line"></span>
+                <strong>1.5 km</strong>
+            </div>
+
+        </div>
+
+
+        <p class="length-hero__message">
+            Las medidas nos conectan con el mundo
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         ROW 1 — CONCEPTS 1, 2 AND 3
+         ===================================================== -->
+
+    <div class="tutorial-grid tutorial-grid--three">
+
+
+        <!-- 01 -->
+
+        <section class="learning-card learning-card--measure">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    1
+                </span>
+
+                <h2>
+                    ¿Qué estamos midiendo?
+                </h2>
+
+            </header>
+
+            <div class="learning-card__body">
+
+                <div class="learning-card__text">
+
+                    <p>
+                        La longitud y la distancia representan
+                        qué tan largo es un objeto o qué tan lejos
+                        está un punto de otro.
+                    </p>
+
+                    <p>
+                        Son fundamentales para describir el tamaño,
+                        la posición y la separación en nuestro
+                        entorno.
+                    </p>
+
+                </div>
+
+                <div
+                    class="length-card-illustration length-card-illustration--ruler"
+                    aria-hidden="true"
+                >
+                    <span class="length-ruler"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 02 -->
+
+        <section class="learning-card learning-card--daily">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    2
+                </span>
+
+                <h2>
+                    En la vida cotidiana
+                </h2>
+
+            </header>
+
+            <div class="learning-card__body">
+
+                <div class="learning-card__text">
+
+                    <p>
+                        Las usamos todos los días: al medir una
+                        habitación, comprar un cable, planificar
+                        un viaje o seguir indicaciones de un mapa.
+                    </p>
+
+                    <p>
+                        Conocer diferentes unidades ayuda a
+                        interpretar mejor la información que nos
+                        rodea.
+                    </p>
+
+                </div>
+
+                <div
+                    class="length-card-illustration length-card-illustration--daily"
+                    aria-hidden="true"
+                >
+                    <span class="length-house">⌂</span>
+                    <span class="length-tape">●</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 03 -->
+
+        <section class="learning-card learning-card--units">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    3
+                </span>
+
+                <h2>
+                    ¿Por qué existen diferentes unidades?
+                </h2>
+
+            </header>
+
+            <div class="learning-card__body">
+
+                <div class="learning-card__text">
+
+                    <p>
+                        Trabajamos con escalas muy distintas.
+                        Para objetos pequeños usamos milímetros;
+                        para distancias cotidianas, metros o
+                        kilómetros.
+                    </p>
+
+                    <p>
+                        En astronomía necesitamos unidades
+                        apropiadas para distancias mucho mayores.
+                    </p>
+
+                </div>
+
+                <div
+                    class="length-card-illustration length-card-illustration--world"
+                    aria-hidden="true"
+                >
+                    <span class="length-world">◎</span>
+                    <span class="length-world-scale"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         ROW 2 — PRACTICAL EXAMPLE AND EQUIVALENCE
+         ===================================================== -->
+
+    <div class="tutorial-grid tutorial-grid--two">
+
+
+        <!-- 04 -->
+
+        <section class="learning-card learning-card--example">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    4
+                </span>
+
+                <h2>
+                    Ejemplo práctico
+                </h2>
+
+            </header>
+
+            <div class="practical-example">
+
+                <div
+                    class="practical-example__visual"
+                    aria-hidden="true"
+                >
+
+                    <div class="length-measuring-tape">
+                        <span></span>
+                    </div>
+
+                    <strong class="length-measuring-label">
+                        2.5 m
+                    </strong>
+
+                </div>
+
+                <div class="practical-example__content">
+
+                    <p>
+                        Quieres comprar un cable de
+                        <strong>2.5 metros</strong>, pero en la
+                        tienda solo indican la medida en
+                        centímetros.
+                    </p>
+
+                    <p>
+                        ¿A cuántos centímetros equivale?
+                    </p>
+
+                    <div class="practical-example__result">
+                        2.5 m = 250 cm
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 05 -->
+
+        <section class="learning-card learning-card--equivalence">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    5
+                </span>
+
+                <h2>
+                    La misma medida en diferentes unidades
+                </h2>
+
+            </header>
+
+            <p>
+                Una misma longitud puede expresarse de muchas
+                formas:
+            </p>
+
+            <div class="equivalence-table-wrapper">
+
+                <table class="equivalence-table">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                Kilómetros
+                                <span>(km)</span>
+                            </th>
+
+                            <th>
+                                Metros
+                                <span>(m)</span>
+                            </th>
+
+                            <th>
+                                Centímetros
+                                <span>(cm)</span>
+                            </th>
+
+                            <th>
+                                Milímetros
+                                <span>(mm)</span>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>0.0025</td>
+                            <td>2.5</td>
+                            <td>250</td>
+                            <td>2500</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p class="equivalence-note">
+                Todas representan exactamente la misma longitud.
+            </p>
+
+            <p class="equivalence-message">
+                Diferentes unidades,<br>
+                la misma realidad
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         ROW 3 — USEFULNESS, UCONVERSOR AND UNIVERSE
+         ===================================================== -->
+
+    <div class="tutorial-grid tutorial-grid--three">
+
+
+        <!-- 06 -->
+
+        <section class="learning-card learning-card--useful">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    6
+                </span>
+
+                <h2>
+                    ¿Por qué es útil saber convertir?
+                </h2>
+
+            </header>
+
+            <div class="learning-card__body">
+
+                <div class="learning-card__text">
+
+                    <p>
+                        Porque te permite:
+                    </p>
+
+                    <ul class="learning-card__list">
+                        <li>
+                            Entender información en diferentes
+                            contextos.
+                        </li>
+
+                        <li>
+                            Comparar medidas sin confusiones.
+                        </li>
+
+                        <li>
+                            Utilizar especificaciones técnicas.
+                        </li>
+
+                        <li>
+                            Evitar errores en proyectos, estudios
+                            o viajes.
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div
+                    class="length-card-illustration length-card-illustration--idea"
+                    aria-hidden="true"
+                >
+                    💡
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 07 -->
+
+        <section class="learning-card learning-card--uconversor">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    7
+                </span>
+
+                <h2>
+                    ¿Cómo ayuda UConversor?
+                </h2>
+
+            </header>
+
+            <p>
+                Ingresa un valor y su unidad para obtener sus
+                equivalencias disponibles en unidades compatibles.
+                Así puedes explorar, verificar y aprender mientras
+                resuelves una necesidad real.
+            </p>
+
+            <a
+                class="learning-card__button"
+                href="/"
+            >
+                <span aria-hidden="true">U</span>
+                Probar en el conversor
+                <strong aria-hidden="true">→</strong>
+            </a>
+
+        </section>
+
+
+        <!-- 08 -->
+
+        <section class="learning-card learning-card--universe">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    8
+                </span>
+
+                <h2>
+                    Un poco más allá: del día a día al universo
+                </h2>
+
+            </header>
+
+            <div class="universe-example">
+
+                <div class="universe-example__content">
+
+                    <p>
+                        Las medidas sirven tanto para describir
+                        nuestro entorno como para expresar
+                        distancias astronómicas.
+                    </p>
+
+                    <div class="universe-example__values">
+
+                        <p>
+                            <strong>1 UA</strong>
+                            <span>
+                                ≈ 149 597 870.7 km
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>1 año luz</strong>
+                            <span>
+                                ≈ 9.4607 × 10¹² km
+                            </span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="universe-example__visual"
+                    aria-hidden="true"
+                >
+                    <span class="universe-example__galaxy"></span>
+                    <span class="universe-example__star universe-example__star--one">✦</span>
+                    <span class="universe-example__star universe-example__star--two">✦</span>
+                    <span class="universe-example__star universe-example__star--three">·</span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         EDUCATIONAL CLOSING
+         ===================================================== -->
+
+    <footer class="length-closing">
+
+        <div
+            class="length-closing__icon"
+            aria-hidden="true"
+        >
+            ◇
+        </div>
+
+        <div class="length-closing__content">
+
+            <h2>
+                Las medidas están en todas partes
+            </h2>
+
+            <p>
+                Comprenderlas y saber convertirlas nos ayuda
+                a interpretar el mundo con más claridad.
+                Con UConversor, aprender y convertir van
+                de la mano.
+            </p>
+
+        </div>
+
+        <p class="length-closing__message">
+            Pequeñas unidades,<br>
+            grandes posibilidades
+        </p>
+
+    </footer>
+
+</article>
+
+{{end}}

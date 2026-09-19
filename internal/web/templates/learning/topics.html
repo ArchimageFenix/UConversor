@@ -1,0 +1,306 @@
+{{define "learning-topics"}}
+
+<!--
+    File: topics.html
+
+    Responsibility:
+        - Presentar la sección "Explora por tema" del área
+          Aprendizaje.
+        - Organizar visualmente los principales temas educativos.
+        - Servir como punto de exploración del contenido estático.
+        - Permitir navegación únicamente hacia los temas cuya
+          página educativa ya se encuentre implementada.
+
+    Receives:
+        LearningViewModel a través de learning.html.
+
+    Produces:
+        Cuadrícula visual de temas educativos.
+
+    Previous logical stage:
+        learning.html / learning-hero.
+
+    Next logical stage:
+        Contenido educativo asociado a cada tema.
+
+    Important restrictions:
+        - No consulta Registry ni Catalog.
+        - No llama a App.Convert().
+        - No realiza conversiones.
+        - No clasifica dinámicamente unidades.
+        - Los temas son contenido editorial estático.
+        - No debe depender de family-*.css.
+        - Una tarjeta solo debe convertirse en enlace cuando
+          exista realmente su página educativa correspondiente.
+-->
+
+<section
+    class="learning-topics"
+    aria-labelledby="learning-topics-title"
+>
+
+    <header class="learning-topics__header">
+
+        <div class="learning-topics__heading">
+
+            <h2 id="learning-topics-title">
+                Explora por tema
+            </h2>
+
+            <p>
+                Selecciona una magnitud para ver explicaciones,
+                ejemplos y aplicaciones.
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <div class="learning-topics__grid">
+
+        <!--
+            Longitud y Distancia
+
+            Esta tarjeta ya dispone de contenido educativo,
+            por lo que funciona como enlace real hacia su página.
+        -->
+
+        <a
+            class="learning-topic-card learning-topic-card--link"
+            href="/aprendizaje/longitud"
+            aria-label="Aprender sobre Longitud y Distancia"
+        >
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                📏
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Longitud y Distancia</h3>
+
+                <p>
+                    Desde milímetros hasta años luz.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </a>
+
+
+        <!-- Masa -->
+
+        <article class="learning-topic-card">
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                ⚖
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Masa</h3>
+
+                <p>
+                    De miligramos a toneladas.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </article>
+
+
+        <!-- Tiempo -->
+
+        <article class="learning-topic-card">
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                ◷
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Tiempo</h3>
+
+                <p>
+                    Segundos, minutos, horas, años y más.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </article>
+
+
+        <!-- Temperatura -->
+
+        <article class="learning-topic-card">
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                🌡
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Temperatura</h3>
+
+                <p>
+                    Entiende escalas y conversiones.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </article>
+
+
+        <!-- Velocidad -->
+
+        <article class="learning-topic-card">
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                ◴
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Velocidad</h3>
+
+                <p>
+                    Del movimiento diario a la exploración espacial.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </article>
+
+
+        <!-- Energía -->
+
+        <article class="learning-topic-card">
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                ⚡
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Energía</h3>
+
+                <p>
+                    Trabajo, calor, energía y más.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </article>
+
+
+        <!-- Presión -->
+
+        <article class="learning-topic-card">
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                ◉
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Presión</h3>
+
+                <p>
+                    En la Tierra, bajo el agua y en el espacio.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </article>
+
+
+        <!-- Almacenamiento de datos -->
+
+        <article class="learning-topic-card">
+
+            <div
+                class="learning-topic-card__icon"
+                aria-hidden="true"
+            >
+                ◫
+            </div>
+
+            <div class="learning-topic-card__content">
+                <h3>Almacenamiento de datos</h3>
+
+                <p>
+                    De bytes a terabytes.
+                </p>
+            </div>
+
+            <span
+                class="learning-topic-card__arrow"
+                aria-hidden="true"
+            >
+                ›
+            </span>
+
+        </article>
+
+    </div>
+
+</section>
+
+{{end}}
