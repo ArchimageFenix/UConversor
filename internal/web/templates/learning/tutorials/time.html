@@ -1,0 +1,794 @@
+<!--
+    File: time.html
+
+    Responsibility:
+        - Presentar el contenido educativo estático de la tutoría
+          "Tiempo" dentro de la sección Aprendizaje de UConversor.
+        - Introducir escalas temporales cotidianas, planetarias
+          e interestelares.
+        - Mostrar cómo UConversor ayuda a visualizar una misma
+          duración mediante diferentes unidades.
+
+    Receives:
+        TutorialViewModel previamente validado por handleTutorial().
+        No recibe valores científicos dinámicos.
+
+    Produces:
+        Estructura HTML de la página educativa de Tiempo:
+        Hero, conceptos básicos, escalas, ejemplos,
+        tiempo fuera de la Tierra, viajes interestelares,
+        introducción conceptual a relatividad y acceso a UConversor.
+
+    Previous logical stage:
+        tutorial.html selecciona esta plantilla mediante
+        el identificador controlado "time".
+
+    Next logical stage:
+        tutorial.css proporciona la estructura común y
+        time.css define la identidad visual específica.
+
+    Important restrictions:
+        - No realiza conversiones dinámicas.
+        - No llama a App.Convert().
+        - No accede a Registry, Validator, Engine, Parser ni Catalog.
+        - Las equivalencias son contenido educativo estático.
+        - No calcula tiempos de viaje interestelar.
+        - No implementa cálculos relativistas.
+        - Un año luz se presenta exclusivamente como unidad de distancia.
+        - Las ilustraciones son exclusivamente de presentación.
+        - La estructura debe permanecer simple y responsiva.
+-->
+
+{{define "tutorial-time"}}
+
+<article class="tutorial tutorial-time">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="time-hero">
+
+        <div class="time-hero__content">
+
+            <span class="time-hero__eyebrow">
+                Aprendizaje · Tiempo
+            </span>
+
+            <h1 class="time-hero__title">
+                Tiempo
+            </h1>
+
+            <h2 class="time-hero__subtitle">
+                Desde un instante hasta escalas interestelares
+            </h2>
+
+            <p class="time-hero__description">
+                El tiempo permite describir la duración y el orden
+                de los acontecimientos. Podemos medir desde intervalos
+                extremadamente pequeños hasta periodos de años,
+                siglos o incluso enormes escalas asociadas con
+                la exploración del espacio.
+            </p>
+
+            <div class="time-hero__tags">
+                <span>Vida cotidiana</span>
+                <span>Ciencia</span>
+                <span>Espacio</span>
+                <span>Universo</span>
+            </div>
+
+        </div>
+
+
+        <!-- Ilustración CSS -->
+
+        <div class="time-hero__visual" aria-hidden="true">
+
+            <div class="time-clock">
+
+                <span class="time-clock__mark time-clock__mark--12">12</span>
+                <span class="time-clock__mark time-clock__mark--3">3</span>
+                <span class="time-clock__mark time-clock__mark--6">6</span>
+                <span class="time-clock__mark time-clock__mark--9">9</span>
+
+                <span class="time-clock__hand time-clock__hand--hour"></span>
+                <span class="time-clock__hand time-clock__hand--minute"></span>
+
+                <span class="time-clock__center"></span>
+
+            </div>
+
+            <p class="time-hero__visual-note">
+                Una duración,<br>
+                muchas escalas.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILA 1
+         01 · 02 · 03
+         ===================================================== -->
+
+    <div class="time-grid time-grid--three">
+
+
+        <!-- 01 -->
+
+        <section class="learning-card time-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    01
+                </span>
+
+                <h2>
+                    ¿Qué medimos con el tiempo?
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    El tiempo permite comparar duraciones y describir
+                    cuándo ocurren los acontecimientos y cuánto duran.
+                </p>
+
+                <div class="time-events" aria-hidden="true">
+
+                    <div>
+                        <span class="time-events__point"></span>
+                        <small>Inicio</small>
+                    </div>
+
+                    <span class="time-events__line"></span>
+
+                    <div>
+                        <span class="time-events__point"></span>
+                        <small>Final</small>
+                    </div>
+
+                </div>
+
+                <div class="time-info">
+
+                    <span class="time-info__icon">i</span>
+
+                    <p>
+                        Una duración expresa cuánto tiempo transcurre
+                        entre dos acontecimientos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 02 -->
+
+        <section class="learning-card time-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    02
+                </span>
+
+                <h2>
+                    La unidad principal
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    La unidad base de tiempo del Sistema Internacional
+                    es el segundo, cuyo símbolo es s.
+                </p>
+
+                <div class="time-unit">
+
+                    <strong>s</strong>
+
+                    <span>
+                        segundo
+                    </span>
+
+                    <small>
+                        Unidad base del SI
+                    </small>
+
+                </div>
+
+                <div class="time-unit-list">
+                    <span>ns</span>
+                    <span>µs</span>
+                    <span>ms</span>
+                    <span>s</span>
+                    <span>min</span>
+                    <span>h</span>
+                    <span>d</span>
+                    <span>yr</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 03 -->
+
+        <section class="learning-card time-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    03
+                </span>
+
+                <h2>
+                    De instantes a años
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    Las unidades temporales permiten representar
+                    intervalos enormemente diferentes sin cambiar
+                    la magnitud que estamos midiendo.
+                </p>
+
+                <div class="time-scale">
+
+                    <div>
+                        <strong>ns</strong>
+                        <small>nanosegundo</small>
+                    </div>
+
+                    <span>→</span>
+
+                    <div>
+                        <strong>ms</strong>
+                        <small>milisegundo</small>
+                    </div>
+
+                    <span>→</span>
+
+                    <div>
+                        <strong>s</strong>
+                        <small>segundo</small>
+                    </div>
+
+                    <span>→</span>
+
+                    <div>
+                        <strong>d</strong>
+                        <small>día</small>
+                    </div>
+
+                    <span>→</span>
+
+                    <div>
+                        <strong>yr</strong>
+                        <small>año</small>
+                    </div>
+
+                </div>
+
+                <div class="time-info">
+
+                    <span class="time-info__icon">i</span>
+
+                    <p>
+                        Cambia la escala de representación,
+                        pero continúa siendo la misma magnitud: tiempo.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA 2
+         04 · 05 · 06
+         ===================================================== -->
+
+    <div class="time-grid time-grid--second">
+
+
+        <!-- 04 -->
+
+        <section class="learning-card time-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    04
+                </span>
+
+                <h2>
+                    Un ejemplo cotidiano
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    Una película de dos horas puede describirse
+                    utilizando otras unidades de tiempo.
+                </p>
+
+                <div class="time-example">
+
+                    <div class="time-example__clock" aria-hidden="true">
+                        <span>2 h</span>
+                    </div>
+
+                    <div class="time-example__values">
+
+                        <div>
+                            <span>Horas</span>
+                            <strong>2 h</strong>
+                        </div>
+
+                        <div>
+                            <span>Minutos</span>
+                            <strong>120 min</strong>
+                        </div>
+
+                        <div>
+                            <span>Segundos</span>
+                            <strong>7200 s</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="time-info">
+
+                    <span class="time-info__icon">i</span>
+
+                    <p>
+                        Los números son diferentes, pero todos
+                        representan exactamente la misma duración.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 05 -->
+
+        <section class="learning-card time-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    05
+                </span>
+
+                <h2>
+                    La misma duración
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    Al cambiar de unidad podemos observar una duración
+                    desde escalas numéricas muy diferentes.
+                </p>
+
+                <div class="time-equivalences">
+
+                    <div>
+                        <span>Días</span>
+                        <strong>1</strong>
+                    </div>
+
+                    <div>
+                        <span>Horas</span>
+                        <strong>24</strong>
+                    </div>
+
+                    <div>
+                        <span>Minutos</span>
+                        <strong>1440</strong>
+                    </div>
+
+                    <div>
+                        <span>Segundos</span>
+                        <strong>86 400</strong>
+                    </div>
+
+                </div>
+
+                <div class="time-equivalences__note">
+                    ✓ Diferentes unidades, la misma duración.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 06 -->
+
+        <section class="learning-card time-card time-card--planetary">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    06
+                </span>
+
+                <h2>
+                    Tiempo fuera de la Tierra
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    Nuestra experiencia cotidiana utiliza el día
+                    terrestre, pero otros mundos poseen ciclos
+                    de rotación diferentes.
+                </p>
+
+                <div class="time-planets" aria-hidden="true">
+
+                    <div class="time-planet time-planet--earth">
+                        <div></div>
+                        <strong>Tierra</strong>
+                        <small>día</small>
+                    </div>
+
+                    <span class="time-planets__orbit"></span>
+
+                    <div class="time-planet time-planet--mars">
+                        <div></div>
+                        <strong>Marte</strong>
+                        <small>sol</small>
+                    </div>
+
+                </div>
+
+                <div class="time-info">
+
+                    <span class="time-info__icon">i</span>
+
+                    <p>
+                        En exploración marciana se utiliza el término
+                        <strong>sol</strong> para distinguir el día
+                        solar marciano del día terrestre.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA 3
+         07 · VIAJES INTERESTELARES
+         ===================================================== -->
+
+    <div class="time-grid time-grid--space">
+
+
+        <!-- 07 -->
+
+        <section class="learning-card time-card time-card--interstellar">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    07
+                </span>
+
+                <h2>
+                    El enorme tiempo de los viajes interestelares
+                </h2>
+
+            </header>
+
+            <div class="time-interstellar">
+
+                <div class="time-interstellar__content">
+
+                    <p>
+                        Las estrellas están separadas por distancias
+                        extraordinarias. Próxima Centauri, la estrella
+                        más cercana al Sol, se encuentra aproximadamente
+                        a 4.24 años luz.
+                    </p>
+
+                    <div class="time-lightyear-note">
+
+                        <strong>Importante</strong>
+
+                        <p>
+                            Un año luz es una unidad de
+                            <strong>distancia</strong>, no una unidad
+                            de tiempo.
+                        </p>
+
+                    </div>
+
+                    <p>
+                        En un viaje interestelar, la distancia y la
+                        velocidad de la nave determinan cuánto duraría
+                        el recorrido. Como las velocidades reales son
+                        finitas, las enormes distancias pueden producir
+                        tiempos de viaje de años, décadas, siglos
+                        o incluso más.
+                    </p>
+
+                </div>
+
+
+                <div class="time-interstellar__scene" aria-hidden="true">
+
+                    <div class="time-space-earth">
+                        <span></span>
+                    </div>
+
+                    <div class="time-space-route">
+
+                        <span class="time-space-ship">›</span>
+
+                    </div>
+
+                    <div class="time-space-star">
+                        <span></span>
+                    </div>
+
+                    <div class="time-space-label time-space-label--earth">
+                        Tierra
+                    </div>
+
+                    <div class="time-space-label time-space-label--star">
+                        Próxima Centauri
+                    </div>
+
+                    <strong class="time-space-distance">
+                        ≈ 4.24 ly
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA 4
+         08 · 09
+         ===================================================== -->
+
+    <div class="time-grid time-grid--final">
+
+
+        <!-- 08 -->
+
+        <section class="learning-card time-card time-card--visualize">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    08
+                </span>
+
+                <h2>
+                    Visualiza una duración enorme
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    Una cantidad expresada en años puede parecer
+                    sencilla hasta que observamos la misma duración
+                    utilizando unidades más pequeñas.
+                </p>
+
+                <div class="time-big-duration">
+
+                    <div class="time-big-duration__origin">
+                        <strong>1000</strong>
+                        <span>años</span>
+                    </div>
+
+                    <span class="time-big-duration__arrow">
+                        ↓
+                    </span>
+
+                    <div class="time-big-duration__result">
+
+                        <small>
+                            aproximadamente
+                        </small>
+
+                        <strong>
+                            31 556 952 000
+                        </strong>
+
+                        <span>
+                            segundos
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="time-info">
+
+                    <span class="time-info__icon">i</span>
+
+                    <p>
+                        UConversor permite observar una misma duración
+                        en distintas unidades y hacer más comprensible
+                        la escala de periodos extremadamente grandes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 09 -->
+
+        <section class="learning-card time-card time-card--relativity">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    09
+                </span>
+
+                <h2>
+                    ¿El tiempo transcurre igual para todos?
+                </h2>
+
+            </header>
+
+            <div class="time-card__body">
+
+                <p>
+                    En nuestra experiencia cotidiana podemos tratar
+                    el tiempo como una referencia común. Sin embargo,
+                    la relatividad muestra que esta descripción cambia
+                    cuando intervienen velocidades extremadamente altas
+                    o campos gravitatorios intensos.
+                </p>
+
+                <div class="time-relativity" aria-hidden="true">
+
+                    <div>
+                        <span>🌍</span>
+                        <strong>Tierra</strong>
+                        <small>observador</small>
+                    </div>
+
+                    <span class="time-relativity__difference">
+                        ≠
+                    </span>
+
+                    <div>
+                        <span>◇</span>
+                        <strong>Viajero</strong>
+                        <small>otro marco</small>
+                    </div>
+
+                </div>
+
+                <div class="time-info">
+
+                    <span class="time-info__icon">i</span>
+
+                    <p>
+                        Esta tutoría introduce solamente la idea.
+                        UConversor convierte unidades de duración;
+                        no realiza cálculos relativistas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA 5
+         10 · UCONVERSOR
+         ===================================================== -->
+
+    <div class="time-grid time-grid--converter">
+
+
+        <!-- 10 -->
+
+        <section class="learning-card time-card time-card--converter">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    10
+                </span>
+
+                <h2>
+                    Explora el tiempo con UConversor
+                </h2>
+
+            </header>
+
+            <div class="time-card__body time-converter">
+
+                <div class="time-converter__mark" aria-hidden="true">
+                    U
+                </div>
+
+                <p>
+                    Prueba diferentes duraciones y observa cómo una
+                    misma cantidad puede expresarse en nanosegundos,
+                    segundos, minutos, horas, días, años y otras
+                    unidades disponibles.
+                </p>
+
+                <a
+                    class="time-converter__button"
+                    href="/"
+                >
+                    Ir al conversor
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <small>
+                    Convierte, compara y descubre la escala del tiempo.
+                </small>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</article>
+
+{{end}}

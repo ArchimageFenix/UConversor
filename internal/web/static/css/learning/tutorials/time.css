@@ -1,0 +1,1371 @@
+/*
+    File: time.css
+
+    Responsibility:
+      - Define the visual identity of the Time learning tutorial.
+      - Style temporal scales, planetary time, interstellar travel,
+        large-duration visualization and the conceptual relativity section.
+
+    Receives:
+      - Static HTML from templates/learning/tutorials/time.html.
+      - Common tutorial styles from tutorial.css.
+
+    Produces:
+      - Responsive thematic presentation for the Time tutorial.
+
+    Previous logical stage:
+      - time.html.
+
+    Next logical stage:
+      - Browser rendering of /aprendizaje/tiempo.
+
+    Important restrictions:
+      - Presentation only.
+      - Must not perform or imply dynamic calculations.
+      - Must not encode scientific logic in CSS.
+      - Interstellar and relativity scenes are illustrative.
+      - Must remain independent from family-*.css result illustrations.
+*/
+
+
+/* =========================================================
+   GENERAL IDENTITY
+   ========================================================= */
+
+.tutorial-time {
+    --time-primary: #4f7cff;
+    --time-secondary: #8b5cf6;
+    --time-accent: #38bdf8;
+    --time-soft: rgba(79, 124, 255, 0.10);
+    --time-border: rgba(110, 150, 255, 0.20);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.time-hero {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+    gap: 2rem;
+
+    padding: 2.4rem;
+
+    border: 1px solid var(--time-border);
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(139, 92, 246, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 70% 80%,
+            rgba(56, 189, 248, 0.12),
+            transparent 34%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(79, 124, 255, 0.08),
+            rgba(139, 92, 246, 0.05)
+        );
+}
+
+
+.time-hero__content {
+    position: relative;
+    z-index: 2;
+}
+
+
+.time-hero__eyebrow {
+    display: inline-block;
+
+    margin-bottom: 0.8rem;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: var(--time-primary);
+}
+
+
+.time-hero__title {
+    margin: 0;
+
+    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    line-height: 0.95;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--time-primary),
+            var(--time-secondary),
+            var(--time-accent)
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+
+.time-hero__subtitle {
+    margin: 1rem 0 0;
+
+    font-size: clamp(1.15rem, 2.5vw, 1.65rem);
+    line-height: 1.25;
+}
+
+
+.time-hero__description {
+    max-width: 720px;
+
+    margin: 1rem 0 0;
+
+    line-height: 1.7;
+    opacity: 0.86;
+}
+
+
+.time-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+
+    margin-top: 1.4rem;
+}
+
+
+.time-hero__tags span {
+    padding: 0.45rem 0.75rem;
+
+    border: 1px solid var(--time-border);
+    border-radius: 999px;
+
+    background: rgba(79, 124, 255, 0.07);
+
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   HERO CLOCK
+   ========================================================= */
+
+.time-hero__visual {
+    position: relative;
+
+    min-height: 260px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.time-clock {
+    position: relative;
+
+    width: 190px;
+    height: 190px;
+
+    border: 3px solid rgba(79, 124, 255, 0.55);
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(56, 189, 248, 0.09),
+            rgba(79, 124, 255, 0.04) 55%,
+            transparent 57%
+        );
+
+    box-shadow:
+        0 0 35px rgba(79, 124, 255, 0.16),
+        inset 0 0 25px rgba(139, 92, 246, 0.08);
+}
+
+
+.time-clock__mark {
+    position: absolute;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+    opacity: 0.65;
+}
+
+
+.time-clock__mark--12 {
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.time-clock__mark--3 {
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.time-clock__mark--6 {
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.time-clock__mark--9 {
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.time-clock__hand {
+    position: absolute;
+
+    left: 50%;
+    bottom: 50%;
+
+    width: 3px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            to top,
+            var(--time-primary),
+            var(--time-accent)
+        );
+
+    transform-origin: bottom center;
+}
+
+
+.time-clock__hand--hour {
+    height: 52px;
+    transform: translateX(-50%) rotate(42deg);
+}
+
+
+.time-clock__hand--minute {
+    height: 72px;
+    transform: translateX(-50%) rotate(128deg);
+}
+
+
+.time-clock__center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 13px;
+    height: 13px;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: var(--time-secondary);
+
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.55);
+}
+
+
+.time-hero__visual-note {
+    margin: 1rem 0 0;
+
+    text-align: center;
+    line-height: 1.35;
+
+    font-size: 0.82rem;
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   GRIDS
+   ========================================================= */
+
+.time-grid {
+    display: grid;
+    gap: 1.2rem;
+
+    margin-top: 1.2rem;
+}
+
+
+.time-grid--three,
+.time-grid--second {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+.time-grid--final {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+
+.time-grid--space,
+.time-grid--converter {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.time-card {
+    border-color: var(--time-border);
+}
+
+
+.time-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    height: 100%;
+}
+
+
+.time-card__body > p {
+    margin: 0;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   COMMON INFO BOX
+   ========================================================= */
+
+.time-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+
+    padding: 0.9rem;
+
+    border: 1px solid rgba(56, 189, 248, 0.18);
+    border-radius: 14px;
+
+    background: rgba(56, 189, 248, 0.06);
+}
+
+
+.time-info__icon {
+    flex: 0 0 auto;
+
+    width: 24px;
+    height: 24px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--time-primary);
+    color: white;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+
+.time-info p {
+    margin: 0;
+
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   01 — DURATION
+   ========================================================= */
+
+.time-events {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
+    padding: 1rem 0.4rem;
+}
+
+
+.time-events > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+
+.time-events__point {
+    width: 18px;
+    height: 18px;
+
+    border: 4px solid rgba(79, 124, 255, 0.22);
+    border-radius: 50%;
+
+    background: var(--time-primary);
+
+    box-shadow: 0 0 12px rgba(79, 124, 255, 0.28);
+}
+
+
+.time-events__line {
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--time-primary),
+            var(--time-secondary)
+        );
+}
+
+
+/* =========================================================
+   02 — SI UNIT
+   ========================================================= */
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 1.2rem;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(79, 124, 255, 0.12),
+            rgba(139, 92, 246, 0.08)
+        );
+}
+
+
+.time-unit strong {
+    font-size: 3rem;
+    line-height: 1;
+
+    color: var(--time-primary);
+}
+
+
+.time-unit span {
+    margin-top: 0.4rem;
+    font-weight: 700;
+}
+
+
+.time-unit small {
+    margin-top: 0.25rem;
+    opacity: 0.65;
+}
+
+
+.time-unit-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+
+.time-unit-list span {
+    min-width: 40px;
+
+    padding: 0.4rem 0.55rem;
+
+    text-align: center;
+
+    border: 1px solid var(--time-border);
+    border-radius: 9px;
+
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   03 — SCALE
+   ========================================================= */
+
+.time-scale {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.45rem;
+
+    overflow-x: auto;
+
+    padding: 1rem 0.2rem;
+}
+
+
+.time-scale > div {
+    min-width: 64px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+
+.time-scale strong {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(79, 124, 255, 0.17),
+            rgba(139, 92, 246, 0.12)
+        );
+
+    color: var(--time-primary);
+}
+
+
+.time-scale small {
+    font-size: 0.68rem;
+    text-align: center;
+    opacity: 0.7;
+}
+
+
+.time-scale > span {
+    color: var(--time-secondary);
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   04 — EVERYDAY EXAMPLE
+   ========================================================= */
+
+.time-example {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+.time-example__clock {
+    width: 92px;
+    height: 92px;
+
+    display: grid;
+    place-items: center;
+
+    border: 3px solid rgba(79, 124, 255, 0.35);
+    border-radius: 50%;
+
+    background: rgba(79, 124, 255, 0.08);
+}
+
+
+.time-example__clock span {
+    font-size: 1.25rem;
+    font-weight: 800;
+
+    color: var(--time-primary);
+}
+
+
+.time-example__values {
+    display: grid;
+    gap: 0.45rem;
+}
+
+
+.time-example__values > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: 0.55rem 0.7rem;
+
+    border-radius: 10px;
+
+    background: rgba(79, 124, 255, 0.06);
+}
+
+
+/* =========================================================
+   05 — EQUIVALENCES
+   ========================================================= */
+
+.time-equivalences {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+
+
+.time-equivalences > div {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.85rem;
+
+    border: 1px solid var(--time-border);
+    border-radius: 13px;
+
+    background: rgba(79, 124, 255, 0.05);
+}
+
+
+.time-equivalences span {
+    font-size: 0.76rem;
+    opacity: 0.68;
+}
+
+
+.time-equivalences strong {
+    margin-top: 0.2rem;
+
+    font-size: 1.2rem;
+
+    color: var(--time-primary);
+}
+
+
+.time-equivalences__note {
+    padding: 0.7rem;
+
+    border-radius: 10px;
+
+    background: rgba(56, 189, 248, 0.08);
+
+    text-align: center;
+
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   06 — EARTH / MARS
+   ========================================================= */
+
+.time-planets {
+    position: relative;
+
+    min-height: 155px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    overflow: hidden;
+}
+
+
+.time-planet {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+
+.time-planet > div {
+    width: 64px;
+    height: 64px;
+
+    border-radius: 50%;
+}
+
+
+.time-planet--earth > div {
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #9ee7ff 0 10%,
+            #3b82f6 11% 55%,
+            #1d4ed8 56%
+        );
+
+    box-shadow: 0 0 18px rgba(59, 130, 246, 0.25);
+}
+
+
+.time-planet--mars > div {
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fca5a5,
+            #c2410c 55%,
+            #7c2d12
+        );
+
+    box-shadow: 0 0 18px rgba(194, 65, 12, 0.25);
+}
+
+
+.time-planet strong {
+    font-size: 0.82rem;
+}
+
+
+.time-planet small {
+    opacity: 0.62;
+}
+
+
+.time-planets__orbit {
+    position: absolute;
+
+    width: 65%;
+    height: 70px;
+
+    border: 1px dashed rgba(139, 92, 246, 0.24);
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   07 — INTERSTELLAR TRAVEL
+
+   This is intentionally the strongest visual block in the
+   tutorial. The scene represents context, not a simulation.
+   ========================================================= */
+
+.time-card--interstellar {
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 80% 25%,
+            rgba(99, 102, 241, 0.12),
+            transparent 30%
+        );
+}
+
+
+.time-interstellar {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+
+.time-interstellar__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.time-interstellar__content > p {
+    margin: 0;
+
+    line-height: 1.7;
+}
+
+
+.time-lightyear-note {
+    padding: 1rem;
+
+    border-left: 4px solid var(--time-accent);
+    border-radius: 0 12px 12px 0;
+
+    background: rgba(56, 189, 248, 0.07);
+}
+
+
+.time-lightyear-note strong {
+    color: var(--time-primary);
+}
+
+
+.time-lightyear-note p {
+    margin: 0.3rem 0 0;
+
+    line-height: 1.5;
+}
+
+
+/* Space scene */
+
+.time-interstellar__scene {
+    position: relative;
+
+    min-height: 260px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(120, 150, 255, 0.18);
+    border-radius: 22px;
+
+    background:
+        radial-gradient(
+            circle at 82% 40%,
+            rgba(139, 92, 246, 0.17),
+            transparent 16%
+        ),
+        radial-gradient(
+            circle at 15% 65%,
+            rgba(56, 189, 248, 0.10),
+            transparent 22%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(10, 18, 45, 0.98),
+            rgba(19, 22, 65, 0.96)
+        );
+}
+
+
+/* Static star field */
+
+.time-interstellar__scene::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.65;
+
+    background-image:
+        radial-gradient(circle, white 0 1px, transparent 1.5px),
+        radial-gradient(circle, white 0 1px, transparent 1.5px),
+        radial-gradient(circle, #93c5fd 0 1px, transparent 1.5px);
+
+    background-size:
+        61px 67px,
+        83px 71px,
+        97px 89px;
+
+    background-position:
+        5px 9px,
+        31px 22px,
+        50px 4px;
+}
+
+
+.time-space-earth {
+    position: absolute;
+
+    left: 8%;
+    top: 50%;
+
+    width: 52px;
+    height: 52px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #b9efff 0 8%,
+            #3b82f6 9% 58%,
+            #1e3a8a 59%
+        );
+
+    box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.45),
+        0 0 45px rgba(59, 130, 246, 0.18);
+
+    z-index: 3;
+}
+
+
+.time-space-route {
+    position: absolute;
+
+    left: 20%;
+    right: 19%;
+    top: 50%;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(56, 189, 248, 0.15),
+            rgba(56, 189, 248, 0.8),
+            rgba(139, 92, 246, 0.8),
+            rgba(139, 92, 246, 0.15)
+        );
+
+    z-index: 2;
+}
+
+
+.time-space-ship {
+    position: absolute;
+
+    left: 48%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: #dbeafe;
+
+    font-size: 2rem;
+    line-height: 1;
+
+    text-shadow:
+        0 0 8px #38bdf8,
+        0 0 18px rgba(56, 189, 248, 0.65);
+}
+
+
+.time-space-star {
+    position: absolute;
+
+    right: 9%;
+    top: 50%;
+
+    width: 32px;
+    height: 32px;
+
+    transform: translateY(-50%) rotate(45deg);
+
+    background: #fef3c7;
+
+    box-shadow:
+        0 0 12px #fef3c7,
+        0 0 28px rgba(250, 204, 21, 0.65),
+        0 0 55px rgba(250, 204, 21, 0.28);
+
+    z-index: 3;
+}
+
+
+.time-space-star::before,
+.time-space-star::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    background: #fef3c7;
+
+    transform: translate(-50%, -50%);
+}
+
+
+.time-space-star::before {
+    width: 54px;
+    height: 3px;
+}
+
+
+.time-space-star::after {
+    width: 3px;
+    height: 54px;
+}
+
+
+.time-space-label {
+    position: absolute;
+
+    bottom: 24%;
+
+    color: rgba(235, 245, 255, 0.86);
+
+    font-size: 0.7rem;
+
+    z-index: 4;
+}
+
+
+.time-space-label--earth {
+    left: 5%;
+}
+
+
+.time-space-label--star {
+    right: 4%;
+}
+
+
+.time-space-distance {
+    position: absolute;
+
+    left: 50%;
+    bottom: 13%;
+
+    transform: translateX(-50%);
+
+    color: #bfdbfe;
+
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+
+    z-index: 4;
+}
+
+
+/* =========================================================
+   08 — HUGE DURATION
+   ========================================================= */
+
+.time-big-duration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+
+    padding: 1rem;
+}
+
+
+.time-big-duration__origin,
+.time-big-duration__result {
+    width: min(100%, 320px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 1rem;
+
+    border: 1px solid var(--time-border);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(79, 124, 255, 0.09),
+            rgba(139, 92, 246, 0.06)
+        );
+}
+
+
+.time-big-duration__origin strong {
+    font-size: 2.2rem;
+
+    color: var(--time-primary);
+}
+
+
+.time-big-duration__result strong {
+    margin: 0.25rem 0;
+
+    font-size: clamp(1.35rem, 4vw, 2rem);
+
+    color: var(--time-secondary);
+}
+
+
+.time-big-duration__result small {
+    opacity: 0.6;
+}
+
+
+.time-big-duration__arrow {
+    color: var(--time-primary);
+
+    font-size: 1.6rem;
+}
+
+
+/* =========================================================
+   09 — RELATIVITY
+   ========================================================= */
+
+.time-relativity {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem 0;
+}
+
+
+.time-relativity > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+
+    padding: 0.8rem;
+
+    border-radius: 14px;
+
+    background: rgba(79, 124, 255, 0.06);
+}
+
+
+.time-relativity > div > span {
+    font-size: 2rem;
+}
+
+
+.time-relativity strong {
+    font-size: 0.85rem;
+}
+
+
+.time-relativity small {
+    opacity: 0.6;
+}
+
+
+.time-relativity__difference {
+    color: var(--time-secondary);
+
+    font-size: 1.7rem;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   10 — UCONVERSOR
+   ========================================================= */
+
+.time-card--converter {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(79, 124, 255, 0.08),
+            rgba(139, 92, 246, 0.06)
+        );
+}
+
+
+.time-converter {
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.time-converter__mark {
+    width: 64px;
+    height: 64px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--time-primary),
+            var(--time-secondary)
+        );
+
+    color: white;
+
+    font-size: 1.8rem;
+    font-weight: 900;
+
+    box-shadow: 0 10px 30px rgba(79, 124, 255, 0.22);
+}
+
+
+.time-converter__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    padding: 0.75rem 1.1rem;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--time-primary),
+            var(--time-secondary)
+        );
+
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease;
+}
+
+
+.time-converter__button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 24px rgba(79, 124, 255, 0.22);
+}
+
+
+.time-converter > small {
+    opacity: 0.62;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 980px) {
+
+    .time-hero {
+        grid-template-columns: 1fr;
+    }
+
+
+    .time-hero__visual {
+        min-height: 230px;
+    }
+
+
+    .time-grid--three,
+    .time-grid--second {
+        grid-template-columns: 1fr;
+    }
+
+
+    .time-interstellar {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 720px) {
+
+    .time-hero {
+        padding: 1.4rem;
+
+        border-radius: 20px;
+    }
+
+
+    .time-clock {
+        width: 160px;
+        height: 160px;
+    }
+
+
+    .time-clock__hand--hour {
+        height: 44px;
+    }
+
+
+    .time-clock__hand--minute {
+        height: 61px;
+    }
+
+
+    .time-grid--final {
+        grid-template-columns: 1fr;
+    }
+
+
+    .time-example {
+        grid-template-columns: 1fr;
+    }
+
+
+    .time-example__clock {
+        margin-inline: auto;
+    }
+
+
+    .time-scale {
+        justify-content: flex-start;
+    }
+
+
+    .time-interstellar__scene {
+        min-height: 230px;
+    }
+
+
+    .time-space-earth {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    .time-space-star {
+        width: 25px;
+        height: 25px;
+    }
+
+
+    .time-space-star::before {
+        width: 42px;
+    }
+
+
+    .time-space-star::after {
+        height: 42px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .time-equivalences {
+        grid-template-columns: 1fr;
+    }
+
+
+    .time-relativity {
+        grid-template-columns: 1fr;
+    }
+
+
+    .time-relativity__difference {
+        transform: rotate(90deg);
+    }
+
+
+    .time-interstellar__scene {
+        min-height: 205px;
+    }
+
+
+    .time-space-label {
+        font-size: 0.58rem;
+    }
+
+
+    .time-space-distance {
+        font-size: 0.7rem;
+    }
+
+}

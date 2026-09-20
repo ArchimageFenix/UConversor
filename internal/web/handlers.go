@@ -481,6 +481,9 @@ func (h *Handler) handleTutorial(
 	case "/aprendizaje/masa":
 		tutorial = "mass"
 
+	case "/aprendizaje/tiempo":
+		tutorial = "time"
+
 	default:
 		http.NotFound(w, r)
 		return

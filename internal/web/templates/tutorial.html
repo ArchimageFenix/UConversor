@@ -10,9 +10,15 @@
         content="width=device-width, initial-scale=1"
     >
 
-     <title>{{if eq .Tutorial "length"}}Longitud y Distancia{{end}}{{if eq .Tutorial "mass"}}Masa y medición{{end}} · Aprendizaje · UConversor</title>    <!--
+<title>
+        {{if eq .Tutorial "length"}}Longitud y Distancia{{end}}
+        {{if eq .Tutorial "mass"}}Masa y medición{{end}}
+        {{if eq .Tutorial "time"}}Tiempo{{end}}
+         · Aprendizaje · UConversor
+</title>  <!--
         Global styles shared by the UConversor Web interface.
     -->
+
     <link
         rel="stylesheet"
         href="/static/css/base.css"
@@ -39,6 +45,8 @@
 >
 
 <link rel="stylesheet" href="/static/css/learning/tutorials/mass.css">
+
+<link rel="stylesheet" href="/static/css/learning/tutorials/time.css">
 
 
 </head>
@@ -92,6 +100,13 @@
             {{if eq .Tutorial "mass"}}
 
         {{template "tutorial-mass" .}}
+
+    {{end}}
+
+
+    {{if eq .Tutorial "time"}}
+
+        {{template "tutorial-time" .}}
 
     {{end}}
 
