@@ -15,6 +15,7 @@ import (
 func SpeedUnits() []units.Unit {
 	bipm := model.Source{Kind: model.SourceOfficial, Authority: "BIPM", Reference: "SI Brochure, 9th ed., version 4.01; non-SI units table", URL: "https://www.bipm.org/en/publications/si-brochure"}
 	nist := model.Source{Kind: model.SourceExact, Authority: "NIST", Reference: "International yard and pound definitions", URL: "https://www.nist.gov/pml/owm/si-units-length"}
+	bipmLightSpeed := model.Source{Kind: model.SourceExact, Authority: "BIPM", Reference: "SI defining constants — speed of light in vacuum", URL: "https://www.bipm.org/en/measurement-units/si-defining-constants", Notes: "The speed of light in vacuum c has the exact value 299 792 458 m/s in the SI."}
 	zero := 0.0
 	return []units.Unit{
 		{Name: "metro por segundo", Symbol: "m/s", Family: units.FamilySpeed, Magnitude: units.MagnitudeSpeed, Reference: true, Scale: 1, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
@@ -23,5 +24,6 @@ func SpeedUnits() []units.Unit {
 		{Name: "milla por hora", Symbol: "mph", Aliases: []string{"mi/h"}, Family: units.FamilySpeed, Magnitude: units.MagnitudeSpeed, Scale: 1609.344 / 3600.0, Kind: units.TransformLinear, MinValue: &zero, Source: nist},
 		{Name: "nudo", Symbol: "kn", Aliases: []string{"knot"}, Family: units.FamilySpeed, Magnitude: units.MagnitudeSpeed, Scale: 1852.0 / 3600.0, Kind: units.TransformLinear, MinValue: &zero, Source: bipm},
 		{Name: "pie por segundo", Symbol: "ft/s", Family: units.FamilySpeed, Magnitude: units.MagnitudeSpeed, Scale: 0.3048, Kind: units.TransformLinear, MinValue: &zero, Source: nist},
+		{Name: "velocidad de la luz en el vacío", Symbol: "c", Family: units.FamilySpeed, Magnitude: units.MagnitudeSpeed, Scale: 299_792_458, Kind: units.TransformLinear, MinValue: &zero, Source: bipmLightSpeed},
 	}
 }
