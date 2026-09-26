@@ -1,0 +1,788 @@
+<!--
+    File: temperature.html
+
+    Responsibility:
+        - Presentar el contenido educativo estático de la tutoría
+          "Temperatura" dentro de la sección Aprendizaje de UConversor.
+        - Explicar el significado físico de la temperatura.
+        - Introducir las escalas kelvin, Celsius y Fahrenheit.
+        - Mostrar límites físicos, equivalencias, ejemplos cotidianos
+          y escalas térmicas astronómicas.
+        - Explicar por qué las conversiones de temperatura requieren
+          escala y desplazamiento.
+
+    Receives:
+        TutorialViewModel previamente validado por handleTutorial().
+        No recibe valores científicos dinámicos.
+
+    Produces:
+        Estructura HTML de la página educativa de Temperatura:
+        hero, conceptos, escalas, referencias, equivalencias,
+        límites físicos, ejemplos astronómicos y acceso a UConversor.
+
+    Previous logical stage:
+        tutorial.html selecciona esta plantilla mediante
+        el identificador controlado "temperature".
+
+    Next logical stage:
+        tutorial.css proporciona la estructura común y
+        temperature.css define la identidad visual específica.
+
+    Important restrictions:
+        - No realiza conversiones dinámicas.
+        - No llama a App.Convert().
+        - No accede a Registry, Validator, Engine, Parser ni Catalog.
+        - Las fórmulas y equivalencias son contenido educativo estático.
+        - No sustituye la lógica científica del conversor.
+        - Los valores astronómicos se presentan como aproximaciones.
+        - No debe afirmar que todo el espacio posee una única temperatura.
+        - Las ilustraciones son exclusivamente de presentación.
+        - La estructura debe permanecer simple y responsiva.
+-->
+
+{{define "tutorial-temperature"}}
+
+<article class="tutorial tutorial-temperature">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="temperature-hero">
+
+        <div class="temperature-hero__content">
+
+            <span class="temperature-hero__eyebrow">
+                Aprendizaje · Temperatura
+            </span>
+
+            <h1 class="temperature-hero__title">
+                Temperatura
+            </h1>
+
+            <h2 class="temperature-hero__subtitle">
+                Desde el cero absoluto hasta el interior de las estrellas
+            </h2>
+
+            <p class="temperature-hero__description">
+                La temperatura nos ayuda a describir el estado térmico
+                de la materia. Está presente en la vida cotidiana,
+                la industria, la meteorología, la medicina y el estudio
+                de planetas, estrellas y del universo.
+            </p>
+
+            <div class="temperature-hero__tags">
+                <span>Vida cotidiana</span>
+                <span>Ciencia</span>
+                <span>Industria</span>
+                <span>Astronomía</span>
+            </div>
+
+        </div>
+
+        <div
+            class="temperature-hero__visual"
+            aria-hidden="true"
+        >
+            <div class="temperature-thermometer">
+
+                <span class="temperature-thermometer__scale">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </span>
+
+                <span class="temperature-thermometer__tube">
+                    <i></i>
+                </span>
+
+                <span class="temperature-thermometer__bulb"></span>
+
+            </div>
+
+            <div class="temperature-hero__labels">
+                <span>Caliente</span>
+                <span>Templado</span>
+                <span>Frío</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILA 1
+         01 · 02 · 03
+         ===================================================== -->
+
+    <div class="temperature-grid temperature-grid--three">
+
+        <!-- 01 -->
+
+        <section class="learning-card temperature-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    01
+                </span>
+
+                <h2>
+                    ¿Qué es la temperatura?
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <p>
+                    La temperatura es una magnitud física que permite
+                    describir el estado térmico de un sistema.
+                </p>
+
+                <div
+                    class="temperature-particles"
+                    aria-hidden="true"
+                >
+                    <div class="temperature-particles__cold">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="temperature-particles__hot">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <p>
+                    A escala microscópica se relaciona con la energía
+                    y el movimiento de las partículas que forman
+                    la materia.
+                </p>
+
+                <div class="temperature-info">
+                    <span class="temperature-info__icon">i</span>
+
+                    <p>
+                        Temperatura y calor no son lo mismo. La
+                        temperatura describe un estado; el calor es
+                        energía transferida debido a una diferencia
+                        de temperatura.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 02 -->
+
+        <section class="learning-card temperature-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    02
+                </span>
+
+                <h2>
+                    El kelvin y el SI
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <p>
+                    El kelvin es la unidad de temperatura
+                    termodinámica del Sistema Internacional.
+                </p>
+
+                <div class="temperature-si-unit">
+                    <strong>K</strong>
+                    <span>kelvin</span>
+                    <small>Unidad base del SI</small>
+                </div>
+
+                <ul class="temperature-facts">
+                    <li>
+                        Su símbolo es <strong>K</strong>.
+                    </li>
+
+                    <li>
+                        No se escribe con el signo de grado.
+                    </li>
+
+                    <li>
+                        Se escribe 300 K, no 300 °K.
+                    </li>
+
+                    <li>
+                        Un intervalo de 1 K tiene la misma magnitud
+                        que un intervalo de 1 °C.
+                    </li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- 03 -->
+
+        <section class="learning-card temperature-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    03
+                </span>
+
+                <h2>
+                    Tres escalas conocidas
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <div class="temperature-scales">
+
+                    <div class="temperature-scale temperature-scale--celsius">
+                        <strong>°C</strong>
+                        <span>Celsius</span>
+                        <small>Uso cotidiano y científico</small>
+                    </div>
+
+                    <div class="temperature-scale temperature-scale--kelvin">
+                        <strong>K</strong>
+                        <span>Kelvin</span>
+                        <small>Escala termodinámica absoluta</small>
+                    </div>
+
+                    <div class="temperature-scale temperature-scale--fahrenheit">
+                        <strong>°F</strong>
+                        <span>Fahrenheit</span>
+                        <small>Uso cotidiano en algunos países</small>
+                    </div>
+
+                </div>
+
+                <p>
+                    Las tres escalas pueden describir el mismo estado
+                    térmico, pero utilizan diferentes puntos de origen
+                    y, en el caso de Fahrenheit, una división diferente.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA 2
+         04 · 05 · 06
+         ===================================================== -->
+
+    <div class="temperature-grid temperature-grid--second">
+
+        <!-- 04 -->
+
+        <section class="learning-card temperature-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    04
+                </span>
+
+                <h2>
+                    Puntos de referencia
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <p>
+                    Algunos valores conocidos ayudan a comprender
+                    las escalas de temperatura.
+                </p>
+
+                <div class="temperature-reference">
+
+                    <div>
+                        <span class="temperature-reference__icon">❄</span>
+                        <strong>0 °C</strong>
+                        <small>
+                            Congelación aproximada del agua
+                        </small>
+                    </div>
+
+                    <div>
+                        <span class="temperature-reference__icon">●</span>
+                        <strong>Temperatura corporal</strong>
+                        <small>
+                            Cerca de 37 °C como referencia común
+                        </small>
+                    </div>
+
+                    <div>
+                        <span class="temperature-reference__icon">♨</span>
+                        <strong>100 °C</strong>
+                        <small>
+                            Ebullición aproximada del agua
+                        </small>
+                    </div>
+
+                </div>
+
+                <div class="temperature-info">
+                    <span class="temperature-info__icon">i</span>
+
+                    <p>
+                        La congelación y la ebullición dependen de
+                        condiciones como la presión. Estos valores
+                        funcionan aquí como referencias educativas.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 05 -->
+
+        <section class="learning-card temperature-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    05
+                </span>
+
+                <h2>
+                    Una conversión diferente
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <p>
+                    Muchas unidades se convierten multiplicando por
+                    un factor. La temperatura puede necesitar además
+                    un desplazamiento entre los puntos cero.
+                </p>
+
+                <div class="temperature-formulas">
+
+                    <div>
+                        <span>Celsius a kelvin</span>
+                        <strong>K = °C + 273.15</strong>
+                    </div>
+
+                    <div>
+                        <span>Celsius a Fahrenheit</span>
+                        <strong>°F = (°C × 9/5) + 32</strong>
+                    </div>
+
+                    <div>
+                        <span>Fahrenheit a Celsius</span>
+                        <strong>°C = (°F − 32) × 5/9</strong>
+                    </div>
+
+                </div>
+
+                <div class="temperature-info">
+                    <span class="temperature-info__icon">i</span>
+
+                    <p>
+                        Estas expresiones son explicaciones estáticas.
+                        Los cálculos reales permanecen en el núcleo
+                        científico de UConversor.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 06 -->
+
+        <section class="learning-card temperature-card">
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    06
+                </span>
+
+                <h2>
+                    Temperaturas negativas
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <p>
+                    Un valor negativo puede ser válido en Celsius
+                    o Fahrenheit, pero no en la escala kelvin
+                    ordinaria.
+                </p>
+
+                <div class="temperature-limits">
+
+                    <div class="temperature-limit temperature-limit--valid">
+                        <span>Válido</span>
+                        <strong>−20 °C</strong>
+                        <small>
+                            Temperatura inferior al punto de
+                            congelación del agua
+                        </small>
+                    </div>
+
+                    <div class="temperature-limit temperature-limit--invalid">
+                        <span>No válido</span>
+                        <strong>−20 K</strong>
+                        <small>
+                            Está por debajo del cero absoluto
+                        </small>
+                    </div>
+
+                </div>
+
+                <div class="temperature-floor">
+
+                    <span>Límite inferior de la escala</span>
+
+                    <div>
+                        <strong>0 K</strong>
+                        <strong>−273.15 °C</strong>
+                        <strong>−459.67 °F</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         07 · TEMPERATURAS ASTRONÓMICAS
+         ===================================================== -->
+
+    <div class="temperature-grid temperature-grid--space">
+
+        <section
+            class="learning-card
+                   temperature-card
+                   temperature-card--astronomy"
+        >
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    07
+                </span>
+
+                <h2>
+                    Temperaturas en el universo
+                </h2>
+
+            </header>
+
+            <div class="temperature-astronomy">
+
+                <div class="temperature-astronomy__content">
+
+                    <p>
+                        La astronomía estudia entornos con diferencias
+                        térmicas enormes: desde planetas fríos hasta
+                        el interior de las estrellas.
+                    </p>
+
+                    <div class="temperature-cosmic-values">
+
+                        <div>
+                            <span>Marte</span>
+                            <strong>≈ −65 °C</strong>
+                            <small>Temperatura media aproximada</small>
+                        </div>
+
+                        <div>
+                            <span>Venus</span>
+                            <strong>≈ 464 °C</strong>
+                            <small>Temperatura media aproximada</small>
+                        </div>
+
+                        <div>
+                            <span>Superficie visible del Sol</span>
+                            <strong>≈ 5 500 °C</strong>
+                            <small>Fotosfera</small>
+                        </div>
+
+                        <div>
+                            <span>Núcleo del Sol</span>
+                            <strong>≈ 15 000 000 °C</strong>
+                            <small>Valor aproximado</small>
+                        </div>
+
+                    </div>
+
+                    <div class="temperature-cmb">
+
+                        <strong>2.725 K</strong>
+
+                        <p>
+                            Temperatura aproximada del fondo cósmico
+                            de microondas, una radiación que llena
+                            el universo observable.
+                        </p>
+
+                    </div>
+
+                    <div class="temperature-info">
+                        <span class="temperature-info__icon">i</span>
+
+                        <p>
+                            El espacio no tiene una sola temperatura.
+                            Los valores dependen de qué objeto,
+                            materia o radiación se está midiendo.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div
+                    class="temperature-astronomy__scene"
+                    aria-hidden="true"
+                >
+                    <span class="temperature-space-star"></span>
+                    <span class="temperature-space-planet"></span>
+                    <span class="temperature-space-orbit"></span>
+                    <span class="temperature-space-glow"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILA FINAL
+         08 · 09
+         ===================================================== -->
+
+    <div class="temperature-grid temperature-grid--final">
+
+        <!-- 08 -->
+
+        <section
+            class="learning-card
+                   temperature-card
+                   temperature-card--absolute"
+        >
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    08
+                </span>
+
+                <h2>
+                    El cero absoluto
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <p>
+                    El cero absoluto es el punto de origen de la
+                    escala termodinámica kelvin y representa el
+                    límite inferior de la temperatura.
+                </p>
+
+                <div class="temperature-absolute">
+
+                    <span class="temperature-absolute__value">
+                        0 K
+                    </span>
+
+                    <div class="temperature-absolute__equivalences">
+                        <strong>−273.15 °C</strong>
+                        <strong>−459.67 °F</strong>
+                    </div>
+
+                </div>
+
+                <div class="temperature-info">
+                    <span class="temperature-info__icon">i</span>
+
+                    <p>
+                        No debe describirse simplemente como ausencia
+                        total de energía. Incluso cerca del cero
+                        absoluto intervienen fenómenos cuánticos.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 09 -->
+
+        <section
+            class="learning-card
+                   temperature-card
+                   temperature-card--equivalence"
+        >
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    09
+                </span>
+
+                <h2>
+                    Una temperatura, tres expresiones
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body">
+
+                <p>
+                    El mismo estado térmico puede expresarse mediante
+                    diferentes escalas.
+                </p>
+
+                <div class="temperature-equivalence">
+
+                    <div>
+                        <strong>0 °C</strong>
+                        <span>Celsius</span>
+                    </div>
+
+                    <span class="temperature-equivalence__equals">
+                        =
+                    </span>
+
+                    <div>
+                        <strong>273.15 K</strong>
+                        <span>Kelvin</span>
+                    </div>
+
+                    <span class="temperature-equivalence__equals">
+                        =
+                    </span>
+
+                    <div>
+                        <strong>32 °F</strong>
+                        <span>Fahrenheit</span>
+                    </div>
+
+                </div>
+
+                <p>
+                    Los números cambian porque cada escala utiliza
+                    una referencia distinta, pero la temperatura
+                    física representada es la misma.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         10 · ACCESO AL CONVERSOR
+         ===================================================== -->
+
+    <div class="temperature-grid temperature-grid--converter">
+
+        <section
+            class="learning-card
+                   temperature-card
+                   temperature-card--converter"
+        >
+
+            <header class="learning-card__header">
+
+                <span class="learning-card__number">
+                    10
+                </span>
+
+                <h2>
+                    Explora las escalas con UConversor
+                </h2>
+
+            </header>
+
+            <div class="temperature-card__body temperature-converter">
+
+                <div
+                    class="temperature-converter__mark"
+                    aria-hidden="true"
+                >
+                    °C
+                    <span>→</span>
+                    K
+                    <span>→</span>
+                    °F
+                </div>
+
+                <div>
+
+                    <p>
+                        Utiliza el conversor para expresar una
+                        temperatura en las diferentes unidades
+                        disponibles.
+                    </p>
+
+                    <a
+                        class="temperature-converter__button"
+                        href="/"
+                    >
+                        Ir al conversor
+                    </a>
+
+                    <small>
+                        La tutoría explica los conceptos. El núcleo
+                        de UConversor realiza las conversiones.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</article>
+
+{{end}}
