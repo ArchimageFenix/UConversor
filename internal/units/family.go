@@ -19,4 +19,5 @@ const (
 	FamilyData        Family = "Datos"
 	FamilyAngle       Family = "Ángulos"
 	FamilyTime        Family = "Tiempo"
+	FamilyComputing   Family = "Computación"
 )
