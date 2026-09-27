@@ -30,11 +30,11 @@
 
     background: rgba(255, 255, 255, 0.84);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
 
     border-bottom:
-        1px solid rgba(219, 229, 243, 0.84);
+        1px solid rgba(219, 229, 243, 0.76);
 }
 
 .topbar__content,
