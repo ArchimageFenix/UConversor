@@ -161,6 +161,10 @@ func visualFamily(family, magnitude string) string {
 	case family == "Datos" && magnitude == "Tasa de transferencia de datos":
 		return "data-rate"
 
+	case family == "Computación" &&
+		magnitude == "Rendimiento computacional":
+		return "computing"
+
 	default:
 		return "generic"
 	}

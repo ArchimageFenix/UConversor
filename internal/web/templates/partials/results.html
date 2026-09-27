@@ -1224,6 +1224,90 @@
 
     </div>
 
+    </div>
+
+
+{{else if eq .Result.VisualFamily "computing"}}
+
+    <!--
+        VISUAL: COMPUTATIONAL PERFORMANCE
+
+        Responsibility:
+          Represent Computación / Rendimiento computacional.
+
+        Receives:
+          VisualFamily = "computing".
+
+        Produces:
+          HTML structure for a processor-based
+          computational-performance illustration.
+
+        Previous logical stage:
+          visualFamily() in viewmodel.go.
+
+        Next logical stage:
+          family-computing.css.
+
+        Important restrictions:
+          - Presentation only.
+          - Does not represent the numeric FLOP/s value.
+          - Does not calculate computational performance.
+          - Does not compare processors or graphics hardware.
+          - Does not distinguish FP16, FP32 or FP64.
+          - Pulses and binary digits are decorative.
+          - Does not perform scientific classification.
+    -->
+
+    <div class="family-visual family-visual--computing">
+
+        <!-- Resplandor ambiental -->
+        <div class="computing-visual__glow"></div>
+
+        <!-- Pulsos decorativos de procesamiento -->
+        <div class="computing-visual__pulse computing-visual__pulse--one"></div>
+        <div class="computing-visual__pulse computing-visual__pulse--two"></div>
+
+        <!-- Procesador principal -->
+        <div class="computing-visual__chip">
+
+            <!-- Núcleo conceptual -->
+            <div class="computing-visual__core">
+                <span>FLOPS</span>
+            </div>
+
+            <!-- Pines superiores -->
+            <span class="computing-visual__pin computing-visual__pin--top-one"></span>
+            <span class="computing-visual__pin computing-visual__pin--top-two"></span>
+            <span class="computing-visual__pin computing-visual__pin--top-three"></span>
+
+            <!-- Pines derechos -->
+            <span class="computing-visual__pin computing-visual__pin--right-one"></span>
+            <span class="computing-visual__pin computing-visual__pin--right-two"></span>
+            <span class="computing-visual__pin computing-visual__pin--right-three"></span>
+
+            <!-- Pines inferiores -->
+            <span class="computing-visual__pin computing-visual__pin--bottom-one"></span>
+            <span class="computing-visual__pin computing-visual__pin--bottom-two"></span>
+            <span class="computing-visual__pin computing-visual__pin--bottom-three"></span>
+
+            <!-- Pines izquierdos -->
+            <span class="computing-visual__pin computing-visual__pin--left-one"></span>
+            <span class="computing-visual__pin computing-visual__pin--left-two"></span>
+            <span class="computing-visual__pin computing-visual__pin--left-three"></span>
+
+        </div>
+
+        <!-- Bits ambientales -->
+        <span class="computing-visual__bit computing-visual__bit--one">1</span>
+        <span class="computing-visual__bit computing-visual__bit--two">0</span>
+        <span class="computing-visual__bit computing-visual__bit--three">1</span>
+
+    </div>
+
+
+
+
+
                     <!-- =============================================
                          VISUAL: GENERIC FALLBACK
 

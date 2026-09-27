@@ -1,0 +1,633 @@
+/*
+    File: family-computing.css
+
+    Responsibility:
+      - Render the thematic Web illustration for the
+        Computational Performance magnitude.
+      - Represent computational performance through a
+        processor, connection pins and processing pulses.
+
+    Receives:
+      - HTML structure selected when VisualFamily = "computing".
+
+    Produces:
+      - A responsive decorative processor illustration for
+        the Web result panel.
+
+    Previous logical stage:
+      - results.html selects the computing visual component.
+
+    Next logical stage:
+      - Browser rendering inside the conversion result summary.
+
+    Important restrictions:
+      - Presentation only.
+      - Does not represent the numeric FLOP/s value entered.
+      - Does not calculate processor frequency or performance.
+      - Does not compare CPU, GPU or accelerator architectures.
+      - Does not distinguish FP16, FP32 or FP64 performance.
+      - Pulses and binary digits are exclusively decorative.
+      - Does not duplicate scientific classification or catalog logic.
+*/
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.family-visual--computing {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT GLOW
+   ========================================================= */
+
+.computing-visual__glow {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 78%;
+    height: 82%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(67, 222, 255, 0.24) 0%,
+            rgba(55, 125, 255, 0.15) 38%,
+            rgba(104, 73, 236, 0.08) 58%,
+            transparent 76%
+        );
+
+    filter: blur(13px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   PROCESSOR BODY
+   ========================================================= */
+
+.computing-visual__chip {
+    position: relative;
+
+    width: 116px;
+    height: 116px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid rgba(113, 220, 255, 0.72);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(21, 77, 139, 0.98),
+            rgba(27, 48, 111, 0.98) 48%,
+            rgba(56, 38, 127, 0.96)
+        );
+
+    box-shadow:
+        0 0 0 5px rgba(70, 151, 255, 0.10),
+        0 0 22px rgba(58, 190, 255, 0.42),
+        0 0 46px rgba(71, 92, 255, 0.24),
+        inset 0 0 24px rgba(94, 222, 255, 0.14);
+
+    z-index: 4;
+}
+
+
+/* =========================================================
+   PROCESSOR CORE
+   ========================================================= */
+
+.computing-visual__core {
+    position: relative;
+
+    width: 72px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid rgba(157, 235, 255, 0.76);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(41, 149, 224, 0.92),
+            rgba(47, 91, 196, 0.94) 52%,
+            rgba(90, 55, 190, 0.92)
+        );
+
+    box-shadow:
+        0 0 16px rgba(87, 214, 255, 0.52),
+        inset 0 0 18px rgba(208, 250, 255, 0.15);
+
+    animation:
+        computing-core-pulse 2.8s ease-in-out infinite;
+
+    z-index: 3;
+}
+
+
+.computing-visual__core::before {
+    content: "";
+
+    position: absolute;
+    inset: 8px;
+
+    border:
+        1px solid rgba(203, 248, 255, 0.22);
+
+    border-radius: 9px;
+}
+
+
+.computing-visual__core span {
+    position: relative;
+
+    color: rgba(236, 253, 255, 0.98);
+
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.10em;
+
+    text-shadow:
+        0 0 7px rgba(137, 235, 255, 0.85);
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   CONNECTION PINS
+   ========================================================= */
+
+.computing-visual__pin {
+    position: absolute;
+
+    border-radius: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(104, 196, 255, 0.58),
+            rgba(189, 245, 255, 0.98),
+            rgba(93, 153, 255, 0.65)
+        );
+
+    box-shadow:
+        0 0 7px rgba(84, 211, 255, 0.60);
+
+    z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   Top and bottom pins
+   --------------------------------------------------------- */
+
+.computing-visual__pin--top-one,
+.computing-visual__pin--top-two,
+.computing-visual__pin--top-three,
+.computing-visual__pin--bottom-one,
+.computing-visual__pin--bottom-two,
+.computing-visual__pin--bottom-three {
+    width: 8px;
+    height: 22px;
+}
+
+
+.computing-visual__pin--top-one {
+    left: 23px;
+    top: -19px;
+}
+
+
+.computing-visual__pin--top-two {
+    left: 52px;
+    top: -19px;
+}
+
+
+.computing-visual__pin--top-three {
+    right: 23px;
+    top: -19px;
+}
+
+
+.computing-visual__pin--bottom-one {
+    left: 23px;
+    bottom: -19px;
+}
+
+
+.computing-visual__pin--bottom-two {
+    left: 52px;
+    bottom: -19px;
+}
+
+
+.computing-visual__pin--bottom-three {
+    right: 23px;
+    bottom: -19px;
+}
+
+
+/* ---------------------------------------------------------
+   Left and right pins
+   --------------------------------------------------------- */
+
+.computing-visual__pin--left-one,
+.computing-visual__pin--left-two,
+.computing-visual__pin--left-three,
+.computing-visual__pin--right-one,
+.computing-visual__pin--right-two,
+.computing-visual__pin--right-three {
+    width: 22px;
+    height: 8px;
+}
+
+
+.computing-visual__pin--left-one {
+    left: -19px;
+    top: 23px;
+}
+
+
+.computing-visual__pin--left-two {
+    left: -19px;
+    top: 52px;
+}
+
+
+.computing-visual__pin--left-three {
+    left: -19px;
+    bottom: 23px;
+}
+
+
+.computing-visual__pin--right-one {
+    right: -19px;
+    top: 23px;
+}
+
+
+.computing-visual__pin--right-two {
+    right: -19px;
+    top: 52px;
+}
+
+
+.computing-visual__pin--right-three {
+    right: -19px;
+    bottom: 23px;
+}
+
+
+/* =========================================================
+   PROCESSING PULSES
+   ========================================================= */
+
+.computing-visual__pulse {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border:
+        1px solid rgba(99, 216, 255, 0.48);
+
+    border-radius: 24px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.82);
+
+    opacity: 0;
+
+    z-index: 2;
+
+    animation:
+        computing-processing-pulse 3.2s ease-out infinite;
+}
+
+
+.computing-visual__pulse--one {
+    width: 152px;
+    height: 152px;
+}
+
+
+.computing-visual__pulse--two {
+    width: 190px;
+    height: 190px;
+
+    animation-delay: 1.35s;
+}
+
+
+/* =========================================================
+   DECORATIVE BINARY DIGITS
+   ========================================================= */
+
+.computing-visual__bit {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+
+    border:
+        1px solid rgba(108, 215, 255, 0.34);
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(21, 77, 139, 0.66),
+            rgba(39, 38, 105, 0.54)
+        );
+
+    color: rgba(211, 248, 255, 0.90);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size: 0.76rem;
+    font-weight: 700;
+
+    box-shadow:
+        0 0 10px rgba(67, 185, 255, 0.18);
+
+    z-index: 3;
+}
+
+
+.computing-visual__bit--one {
+    left: 13%;
+    top: 20%;
+}
+
+
+.computing-visual__bit--two {
+    right: 14%;
+    top: 25%;
+}
+
+
+.computing-visual__bit--three {
+    right: 19%;
+    bottom: 16%;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes computing-core-pulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 13px rgba(87, 214, 255, 0.38),
+            inset 0 0 18px rgba(208, 250, 255, 0.13);
+    }
+
+    50% {
+        box-shadow:
+            0 0 23px rgba(87, 214, 255, 0.72),
+            0 0 38px rgba(77, 107, 255, 0.28),
+            inset 0 0 22px rgba(208, 250, 255, 0.20);
+    }
+}
+
+
+@keyframes computing-processing-pulse {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.72);
+
+        opacity: 0;
+    }
+
+    22% {
+        opacity: 0.58;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .computing-visual__core,
+    .computing-visual__pulse {
+        animation: none;
+    }
+
+
+    .computing-visual__pulse--one {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 0.32;
+    }
+
+
+    .computing-visual__pulse--two {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+    .family-visual--computing {
+        min-height: 150px;
+    }
+
+
+    .computing-visual__chip {
+        width: 96px;
+        height: 96px;
+
+        border-radius: 17px;
+    }
+
+
+    .computing-visual__core {
+        width: 60px;
+        height: 60px;
+
+        border-radius: 12px;
+    }
+
+
+    .computing-visual__core span {
+        font-size: 0.64rem;
+    }
+
+
+    .computing-visual__pin--top-one,
+    .computing-visual__pin--top-two,
+    .computing-visual__pin--top-three,
+    .computing-visual__pin--bottom-one,
+    .computing-visual__pin--bottom-two,
+    .computing-visual__pin--bottom-three {
+        width: 7px;
+        height: 18px;
+    }
+
+
+    .computing-visual__pin--top-one {
+        left: 19px;
+        top: -16px;
+    }
+
+
+    .computing-visual__pin--top-two {
+        left: 44px;
+        top: -16px;
+    }
+
+
+    .computing-visual__pin--top-three {
+        right: 19px;
+        top: -16px;
+    }
+
+
+    .computing-visual__pin--bottom-one {
+        left: 19px;
+        bottom: -16px;
+    }
+
+
+    .computing-visual__pin--bottom-two {
+        left: 44px;
+        bottom: -16px;
+    }
+
+
+    .computing-visual__pin--bottom-three {
+        right: 19px;
+        bottom: -16px;
+    }
+
+
+    .computing-visual__pin--left-one,
+    .computing-visual__pin--left-two,
+    .computing-visual__pin--left-three,
+    .computing-visual__pin--right-one,
+    .computing-visual__pin--right-two,
+    .computing-visual__pin--right-three {
+        width: 18px;
+        height: 7px;
+    }
+
+
+    .computing-visual__pin--left-one,
+    .computing-visual__pin--right-one {
+        top: 19px;
+    }
+
+
+    .computing-visual__pin--left-two,
+    .computing-visual__pin--right-two {
+        top: 44px;
+    }
+
+
+    .computing-visual__pin--left-three,
+    .computing-visual__pin--right-three {
+        bottom: 19px;
+    }
+
+
+    .computing-visual__pin--left-one,
+    .computing-visual__pin--left-two,
+    .computing-visual__pin--left-three {
+        left: -16px;
+    }
+
+
+    .computing-visual__pin--right-one,
+    .computing-visual__pin--right-two,
+    .computing-visual__pin--right-three {
+        right: -16px;
+    }
+
+
+    .computing-visual__pulse--one {
+        width: 126px;
+        height: 126px;
+    }
+
+
+    .computing-visual__pulse--two {
+        width: 158px;
+        height: 158px;
+    }
+
+
+    .computing-visual__bit {
+        width: 22px;
+        height: 22px;
+
+        font-size: 0.68rem;
+    }
+}
