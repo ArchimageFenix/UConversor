@@ -34,10 +34,11 @@ import (
 // formatWebValue converts a raw numeric value into a
 // presentation-friendly string for the web interface.
 //
-// Ordinary values use at most three decimal places.
-// Unnecessary trailing zeros are removed.
-//
-// Very large or very small values preserve the existing
+// Ordinary values use adaptive fixed-point precision.
+// Values smaller than one preserve enough decimal places
+// to retain approximately three significant digits.
+// // Unnecessary trailing zeros are removed.
+// // Very large or very small values preserve the existing
 // scientific-notation thresholds, but are displayed using
 // mathematical notation such as:
 //
@@ -49,7 +50,24 @@ func formatWebValue(value float64) string {
 		return formatScientificWeb(value)
 	}
 
-	formatted := strconv.FormatFloat(value, 'f', 3, 64)
+	//formatted := strconv.FormatFloat(value, 'f', 3, 64)
+	precision := 3
+
+	if abs > 0 && abs < 1 {
+		requiredPrecision :=
+			2 - int(math.Floor(math.Log10(abs)))
+
+		if requiredPrecision > precision {
+			precision = requiredPrecision
+		}
+	}
+
+	formatted := strconv.FormatFloat(
+		value,
+		'f',
+		precision,
+		64,
+	)
 
 	formatted = strings.TrimRight(formatted, "0")
 	formatted = strings.TrimRight(formatted, ".")
