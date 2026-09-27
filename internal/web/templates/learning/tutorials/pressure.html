@@ -1,0 +1,383 @@
+<!--
+    File: pressure.html
+
+    Responsibility:
+        - Presentar el contenido educativo estático de la tutoría
+          "Presión" dentro de la sección Aprendizaje.
+        - Explicar la relación entre fuerza, superficie y presión.
+        - Introducir el pascal y otras unidades habituales.
+        - Mostrar aplicaciones atmosféricas, submarinas,
+          industriales y espaciales.
+
+    Receives:
+        TutorialViewModel previamente validado por handleTutorial().
+
+    Produces:
+        Página educativa temática de Presión.
+
+    Previous logical stage:
+        tutorial.html selecciona esta plantilla mediante
+        el identificador controlado "pressure".
+
+    Next logical stage:
+        pressure.css define su identidad visual.
+
+    Important restrictions:
+        - No realiza conversiones dinámicas.
+        - No llama a App.Convert().
+        - No consulta Registry, Catalog, Parser ni Engine.
+        - Las equivalencias son contenido educativo estático.
+        - Los valores ambientales se presentan como aproximaciones.
+-->
+
+{{define "tutorial-pressure"}}
+
+<article class="tutorial tutorial-pressure">
+
+    <!-- Hero -->
+
+    <section class="pressure-hero">
+
+        <div class="pressure-hero__content">
+
+            <span class="pressure-hero__eyebrow">
+                Aprendizaje · Presión
+            </span>
+
+            <h1>Presión</h1>
+
+            <h2>
+                De la atmósfera terrestre al vacío del espacio
+            </h2>
+
+            <p>
+                La presión describe cómo se distribuye una fuerza
+                sobre una superficie. Está presente en el aire,
+                los océanos, los neumáticos, los sistemas hidráulicos
+                y las cámaras utilizadas para estudiar el espacio.
+            </p>
+
+            <div class="pressure-hero__tags">
+                <span>Atmósfera</span>
+                <span>Océanos</span>
+                <span>Industria</span>
+                <span>Espacio</span>
+            </div>
+
+        </div>
+
+        <div class="pressure-hero__visual" aria-hidden="true">
+
+            <div class="pressure-gauge">
+                <span class="pressure-gauge__mark pressure-gauge__mark--one"></span>
+                <span class="pressure-gauge__mark pressure-gauge__mark--two"></span>
+                <span class="pressure-gauge__mark pressure-gauge__mark--three"></span>
+                <span class="pressure-gauge__mark pressure-gauge__mark--four"></span>
+
+                <div class="pressure-gauge__needle"></div>
+                <div class="pressure-gauge__center"></div>
+
+                <strong>Pa</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Concepto principal -->
+
+    <section class="pressure-section">
+
+        <header class="pressure-section__header">
+            <span>Concepto fundamental</span>
+            <h2>Fuerza distribuida sobre una superficie</h2>
+        </header>
+
+        <div class="pressure-concept-grid">
+
+            <div class="pressure-card pressure-card--explanation">
+
+                <h3>¿Qué representa la presión?</h3>
+
+                <p>
+                    Una misma fuerza puede producir efectos diferentes
+                    dependiendo del área sobre la cual actúa. Cuando el
+                    área disminuye, la presión aumenta.
+                </p>
+
+                <p>
+                    Por eso una aguja penetra con facilidad: concentra
+                    la fuerza en una superficie extremadamente pequeña.
+                </p>
+
+            </div>
+
+            <div class="pressure-formula-card">
+
+                <span>Relación básica</span>
+
+                <div class="pressure-formula">
+                    <strong>P</strong>
+                    <span>=</span>
+                    <div>
+                        <b>F</b>
+                        <i>A</i>
+                    </div>
+                </div>
+
+                <ul>
+                    <li><strong>P</strong>: presión</li>
+                    <li><strong>F</strong>: fuerza</li>
+                    <li><strong>A</strong>: área</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Pascal -->
+
+    <section class="pressure-section pressure-section--soft">
+
+        <header class="pressure-section__header">
+            <span>Sistema Internacional</span>
+            <h2>El pascal</h2>
+        </header>
+
+        <div class="pressure-si-grid">
+
+            <div class="pressure-unit-symbol">
+                <strong>Pa</strong>
+                <span>pascal</span>
+            </div>
+
+            <div class="pressure-unit-description">
+
+                <p>
+                    El pascal es la unidad de presión del Sistema
+                    Internacional.
+                </p>
+
+                <div class="pressure-equation">
+                    1 Pa = 1 N/m²
+                </div>
+
+                <p>
+                    Un pascal corresponde a un newton distribuido
+                    uniformemente sobre un metro cuadrado.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Unidades -->
+
+    <section class="pressure-section">
+
+        <header class="pressure-section__header">
+            <span>Unidades habituales</span>
+            <h2>Una misma magnitud, diferentes contextos</h2>
+        </header>
+
+        <div class="pressure-units-grid">
+
+            <article class="pressure-unit-card">
+                <strong>Pa</strong>
+                <h3>Pascal</h3>
+                <p>
+                    Unidad SI utilizada en ciencia, ingeniería
+                    y mediciones de precisión.
+                </p>
+            </article>
+
+            <article class="pressure-unit-card">
+                <strong>bar</strong>
+                <h3>Bar</h3>
+                <p>
+                    Frecuente en meteorología, compresores
+                    y aplicaciones industriales.
+                </p>
+            </article>
+
+            <article class="pressure-unit-card">
+                <strong>atm</strong>
+                <h3>Atmósfera</h3>
+                <p>
+                    Se relaciona con la presión atmosférica
+                    estándar al nivel del mar.
+                </p>
+            </article>
+
+            <article class="pressure-unit-card">
+                <strong>psi</strong>
+                <h3>Libra por pulgada cuadrada</h3>
+                <p>
+                    Muy utilizada para neumáticos y sistemas
+                    de presión en países anglosajones.
+                </p>
+            </article>
+
+            <article class="pressure-unit-card">
+                <strong>Torr</strong>
+                <h3>Torr</h3>
+                <p>
+                    Utilizada en laboratorios, sistemas de vacío
+                    y algunas aplicaciones médicas.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- Equivalencia -->
+
+    <section class="pressure-section pressure-section--atmosphere">
+
+        <div class="pressure-atmosphere__content">
+
+            <span>Referencia atmosférica</span>
+
+            <h2>Una atmósfera estándar</h2>
+
+            <p>
+                La atmósfera estándar proporciona una referencia
+                común para comparar distintas unidades de presión.
+            </p>
+
+            <div class="pressure-equivalence">
+                <strong>1 atm</strong>
+                <span>=</span>
+                <b>101 325 Pa</b>
+            </div>
+
+            <div class="pressure-equivalence-list">
+                <span>≈ 1.01325 bar</span>
+                <span>= 760 Torr</span>
+                <span>≈ 14.6959 psi</span>
+            </div>
+
+        </div>
+
+        <div class="pressure-atmosphere__visual" aria-hidden="true">
+            <div class="pressure-earth">
+                <span></span>
+            </div>
+            <div class="pressure-air pressure-air--one"></div>
+            <div class="pressure-air pressure-air--two"></div>
+            <div class="pressure-air pressure-air--three"></div>
+        </div>
+
+    </section>
+
+
+    <!-- Profundidad -->
+
+    <section class="pressure-section">
+
+        <header class="pressure-section__header">
+            <span>Bajo el agua</span>
+            <h2>La presión aumenta con la profundidad</h2>
+        </header>
+
+        <div class="pressure-depth">
+
+            <div class="pressure-depth__visual" aria-hidden="true">
+                <div class="pressure-water-line"></div>
+                <span class="pressure-bubble pressure-bubble--one"></span>
+                <span class="pressure-bubble pressure-bubble--two"></span>
+                <span class="pressure-bubble pressure-bubble--three"></span>
+                <div class="pressure-submarine">●</div>
+            </div>
+
+            <div class="pressure-depth__content">
+
+                <h3>Más agua sobre nosotros, mayor presión</h3>
+
+                <p>
+                    En un líquido en reposo, la presión aumenta
+                    al incrementar la profundidad porque existe
+                    una columna de líquido cada vez mayor sobre
+                    el punto observado.
+                </p>
+
+                <div class="pressure-note">
+                    La presión total también depende de la presión
+                    existente sobre la superficie del líquido.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Espacio -->
+
+    <section class="pressure-section pressure-section--space">
+
+        <div class="pressure-space__visual" aria-hidden="true">
+            <div class="pressure-planet"></div>
+            <span class="pressure-star pressure-star--one"></span>
+            <span class="pressure-star pressure-star--two"></span>
+            <span class="pressure-star pressure-star--three"></span>
+        </div>
+
+        <div class="pressure-space__content">
+
+            <span>Presión y exploración espacial</span>
+
+            <h2>El espacio no es simplemente “presión cero”</h2>
+
+            <p>
+                Las regiones espaciales pueden alcanzar presiones
+                extremadamente bajas, pero el espacio contiene
+                partículas, radiación y entornos muy diferentes.
+                Por eso no debe describirse todo el universo mediante
+                un único valor de presión.
+            </p>
+
+            <p>
+                Las naves y los trajes espaciales mantienen ambientes
+                controlados para proteger a sus ocupantes frente a
+                esas condiciones externas.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Conversor -->
+
+    <section class="pressure-converter">
+
+        <div>
+            <span>Practica con UConversor</span>
+            <h2>Compara unidades de presión</h2>
+            <p>
+                Convierte entre pascales, bar, atmósferas, psi
+                y las demás unidades disponibles en el catálogo.
+            </p>
+        </div>
+
+        <a href="/?category=pressure">
+            Ir al conversor
+            <span aria-hidden="true">→</span>
+        </a>
+
+    </section>
+
+</article>
+
+{{end}}

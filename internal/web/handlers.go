@@ -487,6 +487,18 @@ func (h *Handler) handleTutorial(
 	case "/aprendizaje/temperatura":
 		tutorial = "temperature"
 
+	case "/aprendizaje/velocidad":
+		tutorial = "speed"
+
+	case "/aprendizaje/energia":
+		tutorial = "energy"
+
+	case "/aprendizaje/presion":
+		tutorial = "pressure"
+
+	case "/aprendizaje/almacenamiento-datos":
+		tutorial = "storage"
+
 	default:
 		http.NotFound(w, r)
 		return

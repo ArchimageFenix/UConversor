@@ -1,0 +1,535 @@
+<!--
+    File: energy.html
+
+    Responsibility:
+        - Presentar el contenido educativo estático de Energía.
+        - Explicar joule, caloría, kilocaloría, Wh y kWh.
+        - Diferenciar energía, calor, trabajo y potencia.
+        - Incorporar ejemplos cotidianos y astronómicos.
+        - Mostrar cómo UConversor compara distintas unidades.
+
+    Receives:
+        TutorialViewModel validado por handleTutorial().
+        No recibe valores científicos dinámicos.
+
+    Produces:
+        Hero y diez bloques educativos sobre Energía.
+
+    Previous logical stage:
+        tutorial.html selecciona esta plantilla mediante "energy".
+
+    Next logical stage:
+        tutorial.css proporciona la estructura común y
+        energy.css define la identidad visual.
+
+    Important restrictions:
+        - No realiza conversiones dinámicas.
+        - No llama a App.Convert().
+        - No consulta Parser, Registry, Validator, Engine ni Catalog.
+        - Las fórmulas y equivalencias son contenido estático.
+        - No confunde energía con potencia.
+        - Los ejemplos astronómicos son referencias aproximadas.
+        - La estructura debe permanecer simple y responsiva.
+-->
+
+{{define "tutorial-energy"}}
+
+<article class="tutorial tutorial-energy">
+
+    <!-- HERO -->
+
+    <section class="energy-hero">
+
+        <div class="energy-hero__content">
+
+            <span class="energy-hero__eyebrow">
+                Aprendizaje · Energía
+            </span>
+
+            <h1 class="energy-hero__title">
+                Energía
+            </h1>
+
+            <h2 class="energy-hero__subtitle">
+                Desde una pequeña acción hasta la energía de las estrellas
+            </h2>
+
+            <p class="energy-hero__description">
+                La energía permite producir cambios, realizar trabajo,
+                generar movimiento, transferir calor y alimentar
+                sistemas naturales o tecnológicos.
+            </p>
+
+            <div class="energy-hero__tags">
+                <span>Movimiento</span>
+                <span>Calor</span>
+                <span>Electricidad</span>
+                <span>Estrellas</span>
+            </div>
+
+        </div>
+
+        <div class="energy-hero__visual" aria-hidden="true">
+
+            <div class="energy-core">
+                <span class="energy-core__center"></span>
+                <span class="energy-core__orbit"></span>
+                <span class="energy-core__particle"></span>
+            </div>
+
+            <div class="energy-rays">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 01 · 02 · 03 -->
+
+    <div class="energy-grid energy-grid--three">
+
+        <section class="learning-card energy-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">01</span>
+                <h2>¿Qué es la energía?</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <p>
+                    La energía es una magnitud física asociada con la
+                    capacidad de producir cambios o realizar trabajo.
+                </p>
+
+                <div class="energy-change" aria-hidden="true">
+                    <span class="energy-change__start"></span>
+                    <span class="energy-change__arrow">→</span>
+                    <span class="energy-change__result"></span>
+                </div>
+
+                <p>
+                    Puede participar en movimiento, calentamiento,
+                    deformación, radiación, reacciones químicas y
+                    muchos otros procesos.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card energy-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">02</span>
+                <h2>El joule y el SI</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <p>
+                    El joule es la unidad derivada del Sistema
+                    Internacional para energía, trabajo y calor.
+                </p>
+
+                <div class="energy-si-unit">
+                    <strong>J</strong>
+                    <span>joule</span>
+                    <small>kg·m²/s²</small>
+                </div>
+
+                <p>
+                    Un joule también puede interpretarse como el
+                    trabajo realizado por una fuerza de un newton
+                    a lo largo de un metro.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card energy-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">03</span>
+                <h2>Formas de energía</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <div class="energy-forms">
+
+                    <div>
+                        <span>◉</span>
+                        <strong>Cinética</strong>
+                        <small>Asociada al movimiento</small>
+                    </div>
+
+                    <div>
+                        <span>↕</span>
+                        <strong>Potencial</strong>
+                        <small>Asociada a posición o configuración</small>
+                    </div>
+
+                    <div>
+                        <span>♨</span>
+                        <strong>Térmica</strong>
+                        <small>Relacionada con el estado microscópico</small>
+                    </div>
+
+                    <div>
+                        <span>⚡</span>
+                        <strong>Eléctrica</strong>
+                        <small>Relacionada con cargas y campos</small>
+                    </div>
+
+                    <div>
+                        <span>☀</span>
+                        <strong>Radiante</strong>
+                        <small>Transportada por radiación</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 04 · 05 · 06 -->
+
+    <div class="energy-grid energy-grid--second">
+
+        <section class="learning-card energy-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">04</span>
+                <h2>Transformación y conservación</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <p>
+                    En los procesos físicos la energía puede cambiar
+                    de forma o transferirse entre sistemas.
+                </p>
+
+                <div class="energy-transform">
+
+                    <div>
+                        <strong>Química</strong>
+                        <span>→</span>
+                        <strong>Eléctrica</strong>
+                        <span>→</span>
+                        <strong>Luminosa</strong>
+                    </div>
+
+                    <small>
+                        Ejemplo conceptual de una batería y una lámpara
+                    </small>
+
+                </div>
+
+                <div class="energy-info">
+                    <span class="energy-info__icon">i</span>
+
+                    <p>
+                        En un sistema aislado, la energía total se
+                        conserva aunque cambie la forma en que se
+                        manifiesta.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card energy-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">05</span>
+                <h2>Energía, trabajo, calor y potencia</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <div class="energy-concepts">
+
+                    <div>
+                        <strong>Trabajo</strong>
+                        <span>Transferencia mediante fuerza y desplazamiento.</span>
+                    </div>
+
+                    <div>
+                        <strong>Calor</strong>
+                        <span>
+                            Energía transferida por una diferencia
+                            de temperatura.
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Potencia</strong>
+                        <span>
+                            Rapidez con la que se transfiere o utiliza
+                            energía.
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="energy-info">
+                    <span class="energy-info__icon">i</span>
+
+                    <p>
+                        El joule mide energía; el watt mide potencia.
+                        Un watt equivale a un joule por segundo.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card energy-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">06</span>
+                <h2>Caloría y kilocaloría</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <div class="energy-calories">
+
+                    <div>
+                        <strong>1 cal</strong>
+                        <span>=</span>
+                        <strong>4.184 J</strong>
+                    </div>
+
+                    <div>
+                        <strong>1 kcal</strong>
+                        <span>=</span>
+                        <strong>4 184 J</strong>
+                    </div>
+
+                </div>
+
+                <p>
+                    En nutrición, la palabra Caloría con mayúscula
+                    suele representar una kilocaloría.
+                </p>
+
+                <div class="energy-info">
+                    <span class="energy-info__icon">i</span>
+
+                    <p>
+                        La caloría no es la unidad SI de energía.
+                        Para documentación científica se prefiere
+                        el joule.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 07 · ENERGÍA ELÉCTRICA -->
+
+    <div class="energy-grid energy-grid--wide">
+
+        <section class="learning-card energy-card energy-card--electric">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">07</span>
+                <h2>Wh y kWh</h2>
+            </header>
+
+            <div class="energy-electric">
+
+                <div class="energy-electric__content">
+
+                    <p>
+                        El watt-hora representa energía: combina una
+                        potencia con el tiempo durante el cual actúa.
+                    </p>
+
+                    <div class="energy-electric__values">
+
+                        <div>
+                            <strong>1 Wh</strong>
+                            <span>= 3 600 J</span>
+                        </div>
+
+                        <div>
+                            <strong>1 kWh</strong>
+                            <span>= 3.6 MJ</span>
+                        </div>
+
+                    </div>
+
+                    <div class="energy-info">
+                        <span class="energy-info__icon">i</span>
+
+                        <p>
+                            kW es potencia. kWh es energía acumulada
+                            durante un intervalo.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="energy-electric__scene" aria-hidden="true">
+                    <span class="energy-bulb"></span>
+                    <span class="energy-cable"></span>
+                    <span class="energy-bolt">ϟ</span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 08 · 09 -->
+
+    <div class="energy-grid energy-grid--final">
+
+        <section class="learning-card energy-card energy-card--example">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">08</span>
+                <h2>Una energía, varias unidades</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <div class="energy-example">
+
+                    <div class="energy-example__origin">
+                        <span>Valor inicial</span>
+                        <strong>200 kcal</strong>
+                    </div>
+
+                    <span class="energy-example__arrow">→</span>
+
+                    <div class="energy-example__results">
+                        <strong>836 800 J</strong>
+                        <strong>836.8 kJ</strong>
+                        <strong>≈ 232.444 Wh</strong>
+                        <strong>≈ 0.232 kWh</strong>
+                    </div>
+
+                </div>
+
+                <p>
+                    Todas las expresiones representan la misma
+                    cantidad de energía.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card energy-card energy-card--space">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">09</span>
+                <h2>Energía procedente del Sol</h2>
+            </header>
+
+            <div class="energy-card__body">
+
+                <div class="energy-sun" aria-hidden="true">
+                    <span class="energy-sun__star"></span>
+                    <span class="energy-sun__rays"></span>
+                    <span class="energy-sun__earth"></span>
+                </div>
+
+                <p>
+                    A la distancia media de la Tierra, la irradiancia
+                    solar recibida fuera de la atmósfera es de
+                    aproximadamente 1 361 W/m².
+                </p>
+
+                <div class="energy-info">
+                    <span class="energy-info__icon">i</span>
+
+                    <p>
+                        W/m² expresa potencia recibida por unidad de
+                        área. Para obtener energía también se necesita
+                        considerar el tiempo.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 10 · CONVERSOR -->
+
+    <div class="energy-grid energy-grid--converter">
+
+        <section class="learning-card energy-card energy-card--converter">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">10</span>
+                <h2>Explora la energía con UConversor</h2>
+            </header>
+
+            <div class="energy-card__body energy-converter">
+
+                <div class="energy-converter__mark" aria-hidden="true">
+                    J
+                    <span>→</span>
+                    kcal
+                    <span>→</span>
+                    kWh
+                </div>
+
+                <div>
+
+                    <p>
+                        Introduce una cantidad de energía para
+                        expresarla en las unidades disponibles.
+                    </p>
+
+                    <a class="energy-converter__button" href="/">
+                        Ir al conversor
+                    </a>
+
+                    <small>
+                        La tutoría explica los conceptos. El núcleo
+                        de UConversor realiza las conversiones.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</article>
+
+{{end}}

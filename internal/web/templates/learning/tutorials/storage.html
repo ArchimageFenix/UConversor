@@ -1,0 +1,433 @@
+<!--
+    File: storage.html
+
+    Responsibility:
+        - Presentar el contenido educativo estático de la tutoría
+          "Almacenamiento de datos".
+        - Explicar bits, bytes y capacidad digital.
+        - Diferenciar prefijos decimales y binarios.
+        - Mostrar ejemplos cotidianos de almacenamiento.
+        - Diferenciar capacidad de almacenamiento y velocidad.
+
+    Receives:
+        TutorialViewModel previamente validado por handleTutorial().
+
+    Produces:
+        Página educativa temática de Almacenamiento de datos.
+
+    Previous logical stage:
+        tutorial.html selecciona esta plantilla mediante
+        el identificador controlado "storage".
+
+    Next logical stage:
+        storage.css define su identidad visual.
+
+    Important restrictions:
+        - No realiza conversiones dinámicas.
+        - No llama a App.Convert().
+        - No consulta Registry, Catalog, Parser ni Engine.
+        - Las equivalencias son contenido educativo estático.
+        - No confunde capacidad con tasa de transferencia.
+-->
+
+{{define "tutorial-storage"}}
+
+<article class="tutorial tutorial-storage">
+
+    <!-- Hero -->
+
+    <section class="storage-hero">
+
+        <div class="storage-hero__content">
+
+            <span class="storage-hero__eyebrow">
+                Aprendizaje · Almacenamiento de datos
+            </span>
+
+            <h1>Almacenamiento de datos</h1>
+
+            <h2>
+                De bits individuales a enormes centros de datos
+            </h2>
+
+            <p>
+                Fotografías, documentos, aplicaciones y videos
+                se representan mediante información digital.
+                Las unidades de almacenamiento permiten expresar
+                cuántos datos puede contener un dispositivo.
+            </p>
+
+            <div class="storage-hero__tags">
+                <span>Bits y bytes</span>
+                <span>Archivos</span>
+                <span>Dispositivos</span>
+                <span>Nube</span>
+            </div>
+
+        </div>
+
+        <div class="storage-hero__visual" aria-hidden="true">
+
+            <div class="storage-drive">
+                <div class="storage-drive__light"></div>
+
+                <div class="storage-drive__binary">
+                    <span>101101</span>
+                    <span>011010</span>
+                    <span>110001</span>
+                </div>
+
+                <strong>DATA</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Datos digitales -->
+
+    <section class="storage-section">
+
+        <header class="storage-section__header">
+            <span>Fundamento digital</span>
+            <h2>Información representada con dos estados</h2>
+        </header>
+
+        <div class="storage-binary-grid">
+
+            <div class="storage-explanation-card">
+
+                <h3>El bit</h3>
+
+                <p>
+                    El bit es una unidad elemental de información
+                    digital. Su nombre procede de la expresión inglesa
+                    <em>binary digit</em>.
+                </p>
+
+                <p>
+                    Se representa mediante uno de dos valores posibles:
+                    normalmente <strong>0</strong> o <strong>1</strong>.
+                </p>
+
+            </div>
+
+            <div class="storage-bit-visual" aria-label="Ejemplo visual de ocho bits">
+                <span>0</span>
+                <span>1</span>
+                <span>0</span>
+                <span>0</span>
+                <span>1</span>
+                <span>1</span>
+                <span>0</span>
+                <span>1</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Byte -->
+
+    <section class="storage-section storage-section--byte">
+
+        <div class="storage-byte-symbol">
+            <strong>8</strong>
+            <span>bits</span>
+        </div>
+
+        <div class="storage-byte-content">
+
+            <span>Unidad fundamental</span>
+            <h2>Ocho bits forman un byte</h2>
+
+            <div class="storage-byte-equation">
+                1 B = 8 bit
+            </div>
+
+            <p>
+                El símbolo del bit es <strong>bit</strong>, mientras
+                que el símbolo del byte es una <strong>B mayúscula</strong>.
+                Esta diferencia es importante al interpretar capacidades
+                y velocidades de transmisión.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Escala decimal -->
+
+    <section class="storage-section">
+
+        <header class="storage-section__header">
+            <span>Prefijos decimales</span>
+            <h2>Capacidades expresadas en potencias de mil</h2>
+        </header>
+
+        <div class="storage-units-grid">
+
+            <article class="storage-unit-card">
+                <strong>kB</strong>
+                <h3>Kilobyte</h3>
+                <p>1 000 bytes</p>
+            </article>
+
+            <article class="storage-unit-card">
+                <strong>MB</strong>
+                <h3>Megabyte</h3>
+                <p>1 000 000 bytes</p>
+            </article>
+
+            <article class="storage-unit-card">
+                <strong>GB</strong>
+                <h3>Gigabyte</h3>
+                <p>1 000 000 000 bytes</p>
+            </article>
+
+            <article class="storage-unit-card">
+                <strong>TB</strong>
+                <h3>Terabyte</h3>
+                <p>1 000 000 000 000 bytes</p>
+            </article>
+
+        </div>
+
+        <div class="storage-scale">
+            <span>kB</span>
+            <i>× 1000</i>
+            <span>MB</span>
+            <i>× 1000</i>
+            <span>GB</span>
+            <i>× 1000</i>
+            <span>TB</span>
+        </div>
+
+    </section>
+
+
+    <!-- Decimal vs binario -->
+
+    <section class="storage-section storage-section--comparison">
+
+        <header class="storage-section__header">
+            <span>Una distinción importante</span>
+            <h2>Gigabyte y gibibyte no son lo mismo</h2>
+        </header>
+
+        <div class="storage-comparison-grid">
+
+            <article class="storage-comparison-card storage-comparison-card--decimal">
+
+                <span>Sistema decimal</span>
+                <strong>1 GB</strong>
+                <p>1 000 000 000 bytes</p>
+
+                <small>
+                    Utiliza potencias de 10 y prefijos del
+                    Sistema Internacional.
+                </small>
+
+            </article>
+
+            <div class="storage-comparison-sign" aria-hidden="true">
+                ≠
+            </div>
+
+            <article class="storage-comparison-card storage-comparison-card--binary">
+
+                <span>Sistema binario</span>
+                <strong>1 GiB</strong>
+                <p>1 073 741 824 bytes</p>
+
+                <small>
+                    Utiliza potencias de 2 y el prefijo binario
+                    gibi.
+                </small>
+
+            </article>
+
+        </div>
+
+        <p class="storage-comparison-note">
+            Usar símbolos precisos evita interpretar una capacidad
+            decimal como si fuera una cantidad binaria.
+        </p>
+
+    </section>
+
+
+    <!-- Ejemplos -->
+
+    <section class="storage-section">
+
+        <header class="storage-section__header">
+            <span>Escalas cotidianas</span>
+            <h2>El tamaño depende del contenido</h2>
+        </header>
+
+        <div class="storage-examples-grid">
+
+            <article class="storage-example-card">
+                <div aria-hidden="true">📝</div>
+                <h3>Documento de texto</h3>
+                <p>
+                    Puede ocupar desde unos pocos kilobytes,
+                    dependiendo de su formato y contenido.
+                </p>
+            </article>
+
+            <article class="storage-example-card">
+                <div aria-hidden="true">📷</div>
+                <h3>Fotografía</h3>
+                <p>
+                    Puede ocupar varios megabytes según su resolución,
+                    formato y nivel de compresión.
+                </p>
+            </article>
+
+            <article class="storage-example-card">
+                <div aria-hidden="true">🎬</div>
+                <h3>Video</h3>
+                <p>
+                    Puede requerir gigabytes cuando aumenta la duración,
+                    resolución o calidad de codificación.
+                </p>
+            </article>
+
+            <article class="storage-example-card">
+                <div aria-hidden="true">🗄️</div>
+                <h3>Centro de datos</h3>
+                <p>
+                    Puede administrar capacidades expresadas en
+                    terabytes, petabytes o escalas superiores.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- Capacidad frente a velocidad -->
+
+    <section class="storage-section storage-section--difference">
+
+        <div class="storage-difference__content">
+
+            <span>No son la misma magnitud</span>
+            <h2>Capacidad y velocidad de transferencia</h2>
+
+            <p>
+                Los bytes, kilobytes y gigabytes pueden expresar
+                cuánto espacio ocupan los datos. En cambio, una unidad
+                por segundo expresa cuánto puede transferirse durante
+                un intervalo de tiempo.
+            </p>
+
+            <div class="storage-difference-grid">
+
+                <div>
+                    <strong>GB</strong>
+                    <span>Capacidad o cantidad de datos</span>
+                </div>
+
+                <div>
+                    <strong>Gb/s</strong>
+                    <span>Tasa de transferencia</span>
+                </div>
+
+            </div>
+
+            <p>
+                También debe observarse la diferencia entre
+                <strong>B</strong> de byte y <strong>b</strong> de bit.
+            </p>
+
+        </div>
+
+        <div class="storage-transfer-visual" aria-hidden="true">
+            <div class="storage-server storage-server--left">
+                <span></span><span></span><span></span>
+            </div>
+
+            <div class="storage-transfer-line">
+                <i></i>
+            </div>
+
+            <div class="storage-server storage-server--right">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Dispositivos -->
+
+    <section class="storage-section storage-section--devices">
+
+        <header class="storage-section__header">
+            <span>Medios de almacenamiento</span>
+            <h2>Diferentes tecnologías, una misma magnitud</h2>
+        </header>
+
+        <div class="storage-devices-grid">
+
+            <div>
+                <strong>HDD</strong>
+                <span>Almacenamiento magnético</span>
+            </div>
+
+            <div>
+                <strong>SSD</strong>
+                <span>Memoria de estado sólido</span>
+            </div>
+
+            <div>
+                <strong>USB</strong>
+                <span>Almacenamiento portátil</span>
+            </div>
+
+            <div>
+                <strong>Nube</strong>
+                <span>Infraestructura remota</span>
+            </div>
+
+        </div>
+
+        <p>
+            Aunque sus tecnologías y rendimientos sean diferentes,
+            su capacidad puede compararse utilizando unidades de
+            almacenamiento compatibles.
+        </p>
+
+    </section>
+
+
+    <!-- Conversor -->
+
+    <section class="storage-converter">
+
+        <div>
+            <span>Practica con UConversor</span>
+            <h2>Compara unidades de datos</h2>
+            <p>
+                Convierte entre bits, bytes y las unidades decimales
+                o binarias disponibles en el catálogo.
+            </p>
+        </div>
+
+        <a href="/?category=data">
+            Ir al conversor
+            <span aria-hidden="true">→</span>
+        </a>
+
+    </section>
+
+</article>
+
+{{end}}

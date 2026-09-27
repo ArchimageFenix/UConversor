@@ -1,0 +1,659 @@
+/*
+    File: pressure.css
+
+    Responsibility:
+        - Definir la identidad visual de la tutoría de Presión.
+        - Representar presión atmosférica, profundidad y vacío.
+
+    Receives:
+        Estructura de tutorial-pressure en pressure.html.
+
+    Produces:
+        Presentación responsiva de la tutoría.
+
+    Important restrictions:
+        - No define estructura educativa.
+        - No depende de family-*.css.
+        - No altera estilos del conversor.
+*/
+
+.tutorial-pressure {
+    --pressure-blue: #1464d2;
+    --pressure-cyan: #27c5e8;
+    --pressure-navy: #102b55;
+    --pressure-ink: #17304f;
+    --pressure-soft: #eef8ff;
+    --pressure-border: rgba(20, 100, 210, 0.16);
+
+    color: var(--pressure-ink);
+}
+
+.pressure-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 3rem;
+    align-items: center;
+    min-height: 520px;
+    padding: clamp(2.5rem, 6vw, 5.5rem);
+    overflow: hidden;
+    border-radius: 32px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 82% 25%, rgba(75, 225, 255, 0.35), transparent 25%),
+        linear-gradient(135deg, #102b55 0%, #1464d2 55%, #28bdda 100%);
+    box-shadow: 0 28px 70px rgba(14, 60, 120, 0.24);
+}
+
+.pressure-hero::before {
+    content: "";
+    position: absolute;
+    inset: auto -10% -45% 35%;
+    height: 440px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.pressure-hero__content,
+.pressure-hero__visual {
+    position: relative;
+    z-index: 1;
+}
+
+.pressure-hero__eyebrow,
+.pressure-section__header span,
+.pressure-atmosphere__content > span,
+.pressure-space__content > span,
+.pressure-converter div > span {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--pressure-blue);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.pressure-hero__eyebrow {
+    color: #a7f0ff;
+}
+
+.pressure-hero h1 {
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.95;
+}
+
+.pressure-hero h2 {
+    max-width: 720px;
+    margin: 1.25rem 0;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 600;
+}
+
+.pressure-hero p {
+    max-width: 700px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 1.06rem;
+    line-height: 1.8;
+}
+
+.pressure-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.8rem;
+}
+
+.pressure-hero__tags span {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+}
+
+.pressure-hero__visual {
+    display: grid;
+    place-items: center;
+}
+
+.pressure-gauge {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: min(300px, 72vw);
+    aspect-ratio: 1;
+    border: 16px solid rgba(255, 255, 255, 0.82);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, #f8fdff 0 47%, #d6f7ff 48% 58%, transparent 59%),
+        conic-gradient(from 220deg, #59dcff, #fff, #59dcff);
+    box-shadow:
+        0 30px 55px rgba(0, 20, 60, 0.28),
+        inset 0 0 28px rgba(20, 100, 210, 0.25);
+}
+
+.pressure-gauge strong {
+    position: absolute;
+    bottom: 22%;
+    color: var(--pressure-navy);
+    font-size: 1.3rem;
+}
+
+.pressure-gauge__needle {
+    position: absolute;
+    width: 37%;
+    height: 8px;
+    border-radius: 999px;
+    background: #f04464;
+    transform: translateX(-43%) rotate(-25deg);
+    transform-origin: right center;
+}
+
+.pressure-gauge__center {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    background: var(--pressure-navy);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+.pressure-gauge__mark {
+    position: absolute;
+    width: 5px;
+    height: 25px;
+    border-radius: 5px;
+    background: var(--pressure-navy);
+}
+
+.pressure-gauge__mark--one {
+    top: 9%;
+}
+
+.pressure-gauge__mark--two {
+    top: 24%;
+    right: 14%;
+    transform: rotate(45deg);
+}
+
+.pressure-gauge__mark--three {
+    top: 24%;
+    left: 14%;
+    transform: rotate(-45deg);
+}
+
+.pressure-gauge__mark--four {
+    right: 7%;
+    transform: rotate(90deg);
+}
+
+.pressure-section {
+    margin-top: 2rem;
+    padding: clamp(2rem, 5vw, 4.5rem);
+    border: 1px solid var(--pressure-border);
+    border-radius: 30px;
+    background: #fff;
+    box-shadow: 0 18px 55px rgba(20, 62, 110, 0.08);
+}
+
+.pressure-section--soft {
+    background: linear-gradient(145deg, #f7fcff, #e9f6ff);
+}
+
+.pressure-section__header {
+    max-width: 760px;
+    margin-bottom: 2rem;
+}
+
+.pressure-section__header h2 {
+    margin: 0;
+    color: var(--pressure-navy);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.pressure-concept-grid,
+.pressure-si-grid,
+.pressure-depth {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.pressure-card,
+.pressure-formula-card,
+.pressure-unit-card {
+    padding: 1.7rem;
+    border: 1px solid var(--pressure-border);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.84);
+}
+
+.pressure-card h3,
+.pressure-unit-card h3,
+.pressure-depth__content h3 {
+    margin-top: 0;
+    color: var(--pressure-navy);
+}
+
+.pressure-card p,
+.pressure-unit-card p,
+.pressure-unit-description p,
+.pressure-depth__content p,
+.pressure-space__content p {
+    line-height: 1.75;
+}
+
+.pressure-formula-card {
+    color: #fff;
+    background: linear-gradient(145deg, var(--pressure-blue), var(--pressure-navy));
+}
+
+.pressure-formula-card > span {
+    color: #a7f0ff;
+    font-weight: 700;
+}
+
+.pressure-formula {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1.4rem 0;
+    font-size: 2rem;
+}
+
+.pressure-formula > strong {
+    font-size: 3.5rem;
+}
+
+.pressure-formula div {
+    display: grid;
+    text-align: center;
+}
+
+.pressure-formula div b {
+    padding: 0 1.3rem 0.35rem;
+    border-bottom: 2px solid #fff;
+}
+
+.pressure-formula div i {
+    padding-top: 0.35rem;
+    font-style: normal;
+}
+
+.pressure-formula-card ul {
+    margin-bottom: 0;
+    padding-left: 1.2rem;
+    line-height: 1.8;
+}
+
+.pressure-si-grid {
+    align-items: center;
+}
+
+.pressure-unit-symbol {
+    display: grid;
+    place-items: center;
+    min-height: 240px;
+    border-radius: 24px;
+    color: #fff;
+    background: linear-gradient(145deg, #19b8de, #1464d2);
+}
+
+.pressure-unit-symbol strong {
+    font-size: clamp(4rem, 10vw, 7rem);
+    line-height: 1;
+}
+
+.pressure-unit-symbol span {
+    margin-top: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.pressure-equation {
+    display: inline-block;
+    margin: 0.8rem 0;
+    padding: 1rem 1.35rem;
+    border-radius: 15px;
+    color: var(--pressure-blue);
+    background: #fff;
+    font-size: 1.4rem;
+    font-weight: 800;
+    box-shadow: 0 12px 28px rgba(20, 100, 210, 0.1);
+}
+
+.pressure-units-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.pressure-unit-card {
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.pressure-unit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 35px rgba(20, 100, 210, 0.12);
+}
+
+.pressure-unit-card > strong {
+    display: inline-grid;
+    place-items: center;
+    min-width: 54px;
+    height: 54px;
+    padding: 0 0.6rem;
+    border-radius: 15px;
+    color: #fff;
+    background: linear-gradient(145deg, var(--pressure-blue), var(--pressure-cyan));
+}
+
+.pressure-section--atmosphere {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(145deg, #102b55, #134f9f);
+}
+
+.pressure-atmosphere__content > span {
+    color: #7deaff;
+}
+
+.pressure-atmosphere__content h2 {
+    margin-top: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.pressure-equivalence {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+    margin: 1.5rem 0;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.pressure-equivalence-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.pressure-equivalence-list span {
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.11);
+}
+
+.pressure-atmosphere__visual {
+    position: relative;
+    min-height: 330px;
+}
+
+.pressure-earth {
+    position: absolute;
+    right: -8%;
+    bottom: -55%;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 25%, #76e1a2 0 8%, transparent 9%),
+        radial-gradient(circle at 65% 38%, #63cf91 0 12%, transparent 13%),
+        linear-gradient(145deg, #42bdec, #1464d2);
+    box-shadow: 0 0 0 18px rgba(80, 210, 255, 0.12);
+}
+
+.pressure-air {
+    position: absolute;
+    right: 10%;
+    border: 2px solid rgba(130, 235, 255, 0.45);
+    border-radius: 50%;
+}
+
+.pressure-air--one {
+    bottom: 12%;
+    width: 300px;
+    height: 170px;
+}
+
+.pressure-air--two {
+    bottom: 22%;
+    width: 250px;
+    height: 140px;
+}
+
+.pressure-air--three {
+    bottom: 32%;
+    width: 200px;
+    height: 110px;
+}
+
+.pressure-depth {
+    overflow: hidden;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #87e6f7, #1373bb 55%, #092d62);
+}
+
+.pressure-depth__visual {
+    position: relative;
+    min-height: 340px;
+}
+
+.pressure-depth__content {
+    align-self: center;
+    margin: 1rem;
+    padding: 2rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.93);
+}
+
+.pressure-water-line {
+    height: 30px;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.pressure-submarine {
+    position: absolute;
+    right: 25%;
+    bottom: 18%;
+    width: 105px;
+    padding: 0.65rem;
+    border-radius: 55px 55px 42px 42px;
+    color: #0b315d;
+    text-align: center;
+    background: #ffd05a;
+    box-shadow: 0 15px 30px rgba(0, 20, 60, 0.28);
+}
+
+.pressure-bubble {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+}
+
+.pressure-bubble--one {
+    right: 25%;
+    bottom: 38%;
+    width: 18px;
+    height: 18px;
+}
+
+.pressure-bubble--two {
+    right: 32%;
+    bottom: 50%;
+    width: 12px;
+    height: 12px;
+}
+
+.pressure-bubble--three {
+    right: 27%;
+    bottom: 62%;
+    width: 8px;
+    height: 8px;
+}
+
+.pressure-note {
+    padding: 1rem;
+    border-left: 4px solid var(--pressure-cyan);
+    border-radius: 0 12px 12px 0;
+    background: var(--pressure-soft);
+}
+
+.pressure-section--space {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    align-items: center;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(77, 155, 255, 0.2), transparent 20%),
+        linear-gradient(145deg, #071326, #122d59);
+}
+
+.pressure-space__content > span {
+    color: #7deaff;
+}
+
+.pressure-space__content h2 {
+    margin-top: 0;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.pressure-space__visual {
+    position: relative;
+    min-height: 300px;
+}
+
+.pressure-planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #78dcff, #2353bd 55%, #101d54);
+    box-shadow: -25px -10px 55px rgba(86, 202, 255, 0.3);
+    transform: translate(-50%, -50%);
+}
+
+.pressure-star {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 12px #fff;
+}
+
+.pressure-star--one {
+    top: 15%;
+    left: 20%;
+}
+
+.pressure-star--two {
+    top: 30%;
+    right: 10%;
+}
+
+.pressure-star--three {
+    bottom: 15%;
+    left: 15%;
+}
+
+.pressure-converter {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: 30px;
+    background: linear-gradient(135deg, #eaf8ff, #fff);
+    box-shadow: 0 18px 55px rgba(20, 62, 110, 0.09);
+}
+
+.pressure-converter h2 {
+    margin: 0;
+    color: var(--pressure-navy);
+}
+
+.pressure-converter p {
+    margin-bottom: 0;
+}
+
+.pressure-converter a {
+    display: inline-flex;
+    gap: 0.7rem;
+    align-items: center;
+    flex: 0 0 auto;
+    padding: 1rem 1.4rem;
+    border-radius: 14px;
+    color: #fff;
+    font-weight: 800;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--pressure-blue), var(--pressure-cyan));
+    box-shadow: 0 12px 25px rgba(20, 100, 210, 0.2);
+}
+
+@media (max-width: 980px) {
+    .pressure-hero,
+    .pressure-section--atmosphere,
+    .pressure-section--space {
+        grid-template-columns: 1fr;
+    }
+
+    .pressure-units-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pressure-atmosphere__visual {
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 720px) {
+    .pressure-concept-grid,
+    .pressure-si-grid,
+    .pressure-depth {
+        grid-template-columns: 1fr;
+    }
+
+    .pressure-converter {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .pressure-converter a {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .pressure-hero,
+    .pressure-section,
+    .pressure-converter {
+        border-radius: 22px;
+    }
+
+    .pressure-units-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pressure-hero {
+        padding: 2rem 1.3rem;
+    }
+
+    .pressure-section {
+        padding: 1.5rem 1.2rem;
+    }
+}

@@ -1,0 +1,504 @@
+<!--
+    File: speed.html
+
+    Responsibility:
+        - Presentar el contenido educativo estático de Velocidad.
+        - Explicar rapidez, velocidad, unidades y equivalencias.
+        - Incorporar ejemplos cotidianos, atmosféricos y espaciales.
+        - Mostrar cómo UConversor expresa una velocidad en otras unidades.
+
+    Receives:
+        TutorialViewModel validado por handleTutorial().
+        No recibe valores científicos dinámicos.
+
+    Produces:
+        Hero y diez bloques educativos sobre Velocidad.
+
+    Previous logical stage:
+        tutorial.html selecciona esta plantilla mediante "speed".
+
+    Next logical stage:
+        tutorial.css proporciona la estructura común y
+        speed.css define la identidad visual.
+
+    Important restrictions:
+        - No realiza conversiones dinámicas.
+        - No llama a App.Convert().
+        - No consulta Parser, Registry, Validator, Engine ni Catalog.
+        - Las equivalencias son contenido educativo estático.
+        - Las velocidades astronómicas son aproximaciones educativas.
+        - No implementa cálculos orbitales ni relativistas.
+        - La estructura debe permanecer simple y responsiva.
+-->
+
+{{define "tutorial-speed"}}
+
+<article class="tutorial tutorial-speed">
+
+    <!-- HERO -->
+
+    <section class="speed-hero">
+
+        <div class="speed-hero__content">
+
+            <span class="speed-hero__eyebrow">
+                Aprendizaje · Velocidad
+            </span>
+
+            <h1 class="speed-hero__title">
+                Velocidad
+            </h1>
+
+            <h2 class="speed-hero__subtitle">
+                Del movimiento cotidiano a las escalas cósmicas
+            </h2>
+
+            <p class="speed-hero__description">
+                La velocidad permite relacionar el desplazamiento
+                de un objeto con el tiempo empleado. La utilizamos
+                para describir vehículos, fenómenos naturales,
+                órbitas planetarias y la propagación de la luz.
+            </p>
+
+            <div class="speed-hero__tags">
+                <span>Movimiento</span>
+                <span>Transporte</span>
+                <span>Atmósfera</span>
+                <span>Espacio</span>
+            </div>
+
+        </div>
+
+        <div class="speed-hero__visual" aria-hidden="true">
+
+            <div class="speed-gauge">
+                <span class="speed-gauge__arc"></span>
+                <span class="speed-gauge__needle"></span>
+                <span class="speed-gauge__center"></span>
+                <strong>km/h</strong>
+            </div>
+
+            <div class="speed-motion-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 01 · 02 · 03 -->
+
+    <div class="speed-grid speed-grid--three">
+
+        <section class="learning-card speed-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">01</span>
+                <h2>¿Qué representa?</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <p>
+                    En su forma más sencilla, la rapidez relaciona
+                    una distancia recorrida con el tiempo empleado.
+                </p>
+
+                <div class="speed-relation">
+                    <span>distancia</span>
+                    <strong>÷</strong>
+                    <span>tiempo</span>
+                    <strong>=</strong>
+                    <span>rapidez</span>
+                </div>
+
+                <div class="speed-info">
+                    <span class="speed-info__icon">i</span>
+
+                    <p>
+                        Recorrer más distancia durante el mismo
+                        intervalo significa desplazarse con mayor
+                        rapidez.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card speed-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">02</span>
+                <h2>La unidad del SI</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <p>
+                    En el Sistema Internacional la velocidad se
+                    expresa mediante metros por segundo.
+                </p>
+
+                <div class="speed-si-unit">
+                    <strong>m/s</strong>
+                    <span>metro por segundo</span>
+                    <small>Longitud dividida entre tiempo</small>
+                </div>
+
+                <p>
+                    Un valor de 1 m/s describe un recorrido de un
+                    metro durante un segundo.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card speed-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">03</span>
+                <h2>Rapidez y velocidad</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <div class="speed-concepts">
+
+                    <div>
+                        <strong>Rapidez</strong>
+                        <span>Indica qué tan rápido se mueve algo.</span>
+                    </div>
+
+                    <div>
+                        <strong>Velocidad</strong>
+                        <span>
+                            En física también incluye la dirección
+                            del movimiento.
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="speed-info">
+                    <span class="speed-info__icon">i</span>
+
+                    <p>
+                        UConversor transforma valores entre unidades.
+                        No determina la dirección ni reconstruye
+                        trayectorias.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 04 · 05 · 06 -->
+
+    <div class="speed-grid speed-grid--second">
+
+        <section class="learning-card speed-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">04</span>
+                <h2>Unidades frecuentes</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <div class="speed-units">
+
+                    <div>
+                        <strong>m/s</strong>
+                        <span>Metro por segundo</span>
+                    </div>
+
+                    <div>
+                        <strong>km/h</strong>
+                        <span>Kilómetro por hora</span>
+                    </div>
+
+                    <div>
+                        <strong>mph</strong>
+                        <span>Milla por hora</span>
+                    </div>
+
+                    <div>
+                        <strong>kn</strong>
+                        <span>Nudo</span>
+                    </div>
+
+                    <div>
+                        <strong>km/s</strong>
+                        <span>Kilómetro por segundo</span>
+                    </div>
+
+                </div>
+
+                <p>
+                    Cada unidad resulta útil en contextos distintos:
+                    carreteras, navegación, meteorología o astronomía.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card speed-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">05</span>
+                <h2>Una misma velocidad</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <p>
+                    Una velocidad puede expresarse con números
+                    diferentes sin cambiar el movimiento representado.
+                </p>
+
+                <div class="speed-equivalence">
+
+                    <div>
+                        <strong>72 km/h</strong>
+                        <span>carretera</span>
+                    </div>
+
+                    <span class="speed-equivalence__equals">=</span>
+
+                    <div>
+                        <strong>20 m/s</strong>
+                        <span>Sistema Internacional</span>
+                    </div>
+
+                </div>
+
+                <p>
+                    La unidad cambia, pero la velocidad física
+                    continúa siendo la misma.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card speed-card">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">06</span>
+                <h2>La velocidad del sonido</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <div class="speed-sound">
+                    <span class="speed-sound__source"></span>
+                    <span class="speed-sound__wave"></span>
+                    <span class="speed-sound__wave"></span>
+                    <span class="speed-sound__wave"></span>
+                </div>
+
+                <strong class="speed-highlight">
+                    ≈ 343 m/s
+                </strong>
+
+                <p>
+                    Es una referencia aproximada para el sonido en
+                    aire seco cerca de 20 °C.
+                </p>
+
+                <div class="speed-info">
+                    <span class="speed-info__icon">i</span>
+
+                    <p>
+                        La velocidad del sonido cambia con el medio,
+                        la temperatura y otras condiciones físicas.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 07 · VELOCIDAD DE ESCAPE -->
+
+    <div class="speed-grid speed-grid--space">
+
+        <section class="learning-card speed-card speed-card--escape">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">07</span>
+                <h2>Velocidad de escape de la Tierra</h2>
+            </header>
+
+            <div class="speed-escape">
+
+                <div class="speed-escape__content">
+
+                    <p>
+                        Un objeto necesita suficiente velocidad y
+                        energía para alejarse de la Tierra sin volver
+                        a caer por efecto de su gravedad.
+                    </p>
+
+                    <strong>≈ 11.2 km/s</strong>
+
+                    <p>
+                        Esta cifra funciona como referencia idealizada.
+                        Una misión real depende de trayectoria, altura,
+                        atmósfera, propulsión y otros factores.
+                    </p>
+
+                </div>
+
+                <div class="speed-escape__scene" aria-hidden="true">
+                    <span class="speed-earth"></span>
+                    <span class="speed-ship">›</span>
+                    <span class="speed-route"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 08 · 09 -->
+
+    <div class="speed-grid speed-grid--final">
+
+        <section class="learning-card speed-card speed-card--orbit">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">08</span>
+                <h2>La Tierra también se mueve</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <p>
+                    Aunque desde la superficie parezca inmóvil,
+                    la Tierra recorre su órbita alrededor del Sol.
+                </p>
+
+                <div class="speed-orbit" aria-hidden="true">
+                    <span class="speed-orbit__sun"></span>
+                    <span class="speed-orbit__path"></span>
+                    <span class="speed-orbit__earth"></span>
+                </div>
+
+                <strong class="speed-highlight">
+                    ≈ 30 km/s
+                </strong>
+
+                <p>
+                    Es la velocidad orbital aproximada de la Tierra
+                    alrededor del Sol.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="learning-card speed-card speed-card--light">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">09</span>
+                <h2>La velocidad de la luz</h2>
+            </header>
+
+            <div class="speed-card__body">
+
+                <div class="speed-light-value">
+                    <strong>299 792 458 m/s</strong>
+                    <span>En el vacío</span>
+                </div>
+
+                <p>
+                    La velocidad de la luz en el vacío se representa
+                    mediante la constante <strong>c</strong>.
+                </p>
+
+                <div class="speed-info">
+                    <span class="speed-info__icon">i</span>
+
+                    <p>
+                        Según la relatividad, un objeto con masa no
+                        puede acelerarse hasta alcanzar o superar
+                        esta velocidad.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- 10 · CONVERSOR -->
+
+    <div class="speed-grid speed-grid--converter">
+
+        <section class="learning-card speed-card speed-card--converter">
+
+            <header class="learning-card__header">
+                <span class="learning-card__number">10</span>
+                <h2>Explora velocidades con UConversor</h2>
+            </header>
+
+            <div class="speed-card__body speed-converter">
+
+                <div class="speed-converter__mark" aria-hidden="true">
+                    m/s
+                    <span>→</span>
+                    km/h
+                    <span>→</span>
+                    mph
+                </div>
+
+                <div>
+
+                    <p>
+                        Introduce una velocidad para expresarla en
+                        las unidades disponibles dentro del catálogo.
+                    </p>
+
+                    <a class="speed-converter__button" href="/">
+                        Ir al conversor
+                    </a>
+
+                    <small>
+                        Esta tutoría explica los conceptos. El núcleo
+                        de UConversor realiza las conversiones.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</article>
+
+{{end}}

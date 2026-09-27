@@ -15,6 +15,10 @@
         {{if eq .Tutorial "mass"}}Masa y medición{{end}}
         {{if eq .Tutorial "time"}}Tiempo{{end}}
         {{if eq .Tutorial "temperature"}}Temperatura{{end}}
+        {{if eq .Tutorial "speed"}}Velocidad{{end}}
+        {{if eq .Tutorial "energy"}}Energía{{end}}
+        {{if eq .Tutorial "pressure"}}Presión{{end}}
+        {{if eq .Tutorial "storage"}}Almacenamiento de datos{{end}}
          · Aprendizaje · UConversor
 </title>  <!--
         Global styles shared by the UConversor Web interface.
@@ -50,6 +54,16 @@
 <link rel="stylesheet" href="/static/css/learning/tutorials/time.css">
 
 <link rel="stylesheet" href="/static/css/learning/tutorials/temperature.css">
+
+<link rel="stylesheet" href="/static/css/learning/tutorials/speed.css">
+
+<link rel="stylesheet" href="/static/css/learning/tutorials/energy.css">
+
+<link rel="stylesheet" href="/static/css/learning/tutorials/pressure.css">
+
+<link rel="stylesheet" href="/static/css/learning/tutorials/storage.css">
+
+
 
 
 
@@ -123,6 +137,33 @@
     {{template "tutorial-temperature" .}}
 
 {{end}}
+
+{{if eq .Tutorial "speed"}}
+
+    {{template "tutorial-speed" .}}
+
+{{end}}
+
+{{if eq .Tutorial "energy"}}
+
+    {{template "tutorial-energy" .}}
+
+{{end}}
+
+
+{{if eq .Tutorial "pressure"}}
+
+    {{template "tutorial-pressure" .}}
+
+{{end}}
+
+
+{{if eq .Tutorial "storage"}}
+
+    {{template "tutorial-storage" .}}
+
+{{end}}
+
 
         </div>
 
